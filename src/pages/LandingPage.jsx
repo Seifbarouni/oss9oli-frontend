@@ -1,6 +1,6 @@
 import React from 'react'
 import { Hero } from '../components/Hero'
-import { Navbar } from '../components/Navbar'
+import { Navbar } from '../components/nav/NavbarLandingPage'
 import { Seperator } from '../components/Seperator'
 import { JoinButton } from '../components/buttons/JoinButton'
 import { InfoCard } from '../components/cards/InfoCard'
@@ -106,7 +106,7 @@ export const LandingPage = () => {
                 </div>
             </div>
 
-            <div className="flex mt-28 justify-center space-x-6 w-full 2xl:px-96 md:px-12 relative">
+            <div className="flex mt-28 justify-between w-full 2xl:px-96 md:px-12 relative">
                 <div className='absolute right-0 -top-96 xl:flex hidden'>
                     <GoldenArrow w={950} h={750} />
                 </div>
@@ -137,7 +137,7 @@ export const LandingPage = () => {
                         />
                     </div>
                 </div>
-                <div className="relative rounded-3xl w-2/3">
+                <div className="relative rounded-3xl w-2/3 ml-4">
                     <div
                         className="bg-fit rounded-3xl w-full h-full -z-50 opacity-70"
                         style={{
