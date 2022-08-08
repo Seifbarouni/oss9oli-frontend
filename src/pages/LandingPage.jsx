@@ -9,6 +9,7 @@ import { Values } from '../components/Values'
 import { Contributors } from '../components/Contributors'
 import { Footer } from '../components/Footer'
 import { GoldenArrow } from '../components/GoldenArrow'
+import { Link } from 'react-router-dom'
 
 import bg from '../assets/svgs/group.svg'
 import green_blob from '../assets/svgs/green_blob.svg'
@@ -134,6 +135,7 @@ export const LandingPage = () => {
                             cd3={"border border-black rounded-full py-2 px-5 absolute right-1 top-1 bg-white -z-10 w-full"}
                             data={"En-apprendre plus"
                             }
+                            to={"/packs"}
                         />
                     </div>
                 </div>
@@ -154,6 +156,7 @@ export const LandingPage = () => {
                             cd2={"text-white font-bold bg-orng rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
                             cd3={"border border-black rounded-full  px-6 absolute right-1 top-1 -z-10 w-full"}
                             data={"JE REJOINS LA COMMUNAUTE"}
+                            to={"/auth"}
                         />
                     </div>
                 </div>
@@ -193,9 +196,11 @@ export const LandingPage = () => {
                         <span className="">Ou bien commencez à écoutez nos podcasts</span>
                         <span className="text-2xl font-bold">GRATUITEMENT!</span>
                     </div>
-                    <div className="">
-                        <PlayButton h={200} w={200} />
-                    </div>
+                    <Link to={'auth'}>
+                        <div className='transition ease-in-out hover:scale-110 duration-150 delay-75'>
+                            <PlayButton h={200} w={200} />
+                        </div>
+                    </Link>
                 </div>
             </div>
 

@@ -26,6 +26,7 @@ export const Pack = ({ children, color, price, buttonText, title, desc, more }) 
                         cd2={`text-white bg-${color} rounded-full py-2 px-12 text-center cursor-pointer border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 text-3xl -z-20`}
                         cd3={"border border-black rounded-full py-3.5 px-12 absolute right-1 top-1 -z-30 w-full"}
                         data={buttonText}
+                        to={'/auth'}
                     />
                 </div>
             </div>

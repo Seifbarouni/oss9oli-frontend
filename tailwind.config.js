@@ -14,6 +14,7 @@ module.exports = {
         asfer: "#FFC62D",
         asfer2: "#F8962F",
         ak7el: "#000000",
+        ka7ouli: "#3C3C3C",
       },
     },
   },
