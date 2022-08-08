@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 export const AuthenticatedNavbar = () => {
     return (
-        <nav className="flex items-center justify-evenly p-3 z-50 w-full lg:px-44 px-12">
+        <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-32 px-12">
             <div className='flex items-center w-full'>
                 <Hamburger />
                 <div className='pl-8 md:flex hidden'>

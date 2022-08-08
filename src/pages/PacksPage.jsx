@@ -31,7 +31,7 @@ export const PacksPage = () => {
                     <img src={orange_star} alt="" />
                 </div> */}
             </div>
-            <div className='mt-16 flex lg:flex-row flex-col w-full lg:px-44 px-12 lg:space-x-8 lg:space-y-0 space-y-4 justify-center items-center z-50'>
+            <div className='mt-16 flex xl:flex-row flex-col w-full xl:px-44 px-12 xl:space-x-8 xl:space-y-0 space-y-4 justify-center items-center z-50'>
                 <div className='relative'>
                     <div className='absolute -left-8 -top-14'>
                         <img src={headphones} alt="" />

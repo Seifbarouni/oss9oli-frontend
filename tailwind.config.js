@@ -11,6 +11,7 @@ module.exports = {
         azreg: "#17214E",
         ahmer: "#F1483B",
         akhdher: "#3FA692",
+        akhdher2: "#086562",
         asfer: "#FFC62D",
         asfer2: "#F8962F",
         ak7el: "#000000",
