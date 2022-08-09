@@ -10,10 +10,13 @@ export const Auth = () => {
     return (
         <div className='relative flex justify-center'>
             <div className='p-12 bg-white rounded-[50px] border border-black flex flex-col justify-center items-center relative'>
-                <div className='absolute -top-20 -left-20'>
+                <div className='absolute -top-20 -left-20 md:flex hidden'>
                     <img src={welcome} alt="" />
                 </div>
-                <div className='absolute -top-44 -right-32'>
+                <div className='absolute -top-44 left-20 md:hidden flex'>
+                    <img src={welcome} alt="" />
+                </div>
+                <div className='absolute -top-44 -right-32 md:flex hidden'>
                     <img src={mouth} alt="" />
                 </div>
                 <div className='absolute -bottom-0 -left-16 h-32 w-32 '>
@@ -22,7 +25,7 @@ export const Auth = () => {
                 <div className='absolute -left-16 top-56'>
                     <img src={orange_star} alt="" />
                 </div>
-                <div className='header text-5xl text-ka7ouli mt-12'>
+                <div className='header md:text-5xl text-4xl text-ka7ouli mt-12'>
                     Rejoignez-nous!
                 </div>
                 <div className='mt-28 flex space-x-4'>
@@ -31,7 +34,7 @@ export const Auth = () => {
                 </div>
             </div>
             <div className='absolute bg-asfer p-12 rounded-[50px] border border-black flex flex-col justify-center items-center -z-10 top-1  -left-1'>
-                <div className='header text-5xl text-ka7ouli mt-12 invisible'>
+                <div className='header md:text-5xl text-4xl text-ka7ouli mt-12 invisible'>
                     Rejoignez-nous!
                 </div>
                 <div className='mt-28 flex space-x-4 invisible'>

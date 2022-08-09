@@ -28,10 +28,10 @@ import lp from '../assets/images/lp.png'
 export const LandingPage = () => {
     return (
         <div
-            className='flex flex-col'
+            className='flex flex-col '
         >
             <div className="flex flex-col realtive">
-                <div className="absolute lg:left-72 md:top-0 top-1/3">
+                <div className="absolute md:left-72 top-0 ">
                     <img src={bg} alt="" srcSet="" />
                 </div>
                 <Navbar />
@@ -66,7 +66,7 @@ export const LandingPage = () => {
             </div>
 
             <div
-                className="relative items-center justify-evenly mt-28 z-50 flex md:flex-row flex-col"
+                className="relative items-center justify-evenly mt-28 z-50 flex md:flex-row flex-col "
             >
                 <div className="absolute -z-50 left-0">
                     <img src={orange_blob} alt="" />
@@ -92,7 +92,7 @@ export const LandingPage = () => {
             </div>
             <Seperator mt="28" />
 
-            <div className="flex justify-center mt-28">
+            <div className="flex justify-center mt-28 ">
 
                 <div className="relative">
                     <div
@@ -107,13 +107,13 @@ export const LandingPage = () => {
                 </div>
             </div>
 
-            <div className="flex mt-28 justify-between w-full 2xl:px-96 md:px-12 relative">
+            <div className="flex md:flex-row flex-col mt-28 justify-between w-full 2xl:px-96 md:px-12 relative">
                 <div className='absolute right-0 -top-96 xl:flex hidden'>
                     <GoldenArrow w={950} h={750} />
                 </div>
                 <div className="relative z-50">
                     <div
-                        className="bg-white rounded-3xl w-96 h-72 p-6 border border-black absolute right-1 top-1 -z-30"
+                        className="bg-white rounded-3xl md:w-96 w-full md:flex hidden h-72 p-6 border border-black absolute right-1 top-1 -z-30"
                     >
                         <span className="invisible text-lg">
                             Oss9oli est la première plateforme de podcast à contribution en
@@ -122,7 +122,7 @@ export const LandingPage = () => {
                         </span>
                     </div>
                     <div
-                        className="bg-white rounded-3xl w-96 h-72 p-6 border border-black flex flex-col items-start -z-40"
+                        className="bg-white rounded-3xl md:w-96 w-full h-72 p-6 border border-black flex flex-col items-start -z-40"
                     >
                         <div className="text-lg">
                             Oss9oli est la première plateforme de podcast à contribution en
@@ -139,25 +139,26 @@ export const LandingPage = () => {
                         />
                     </div>
                 </div>
-                <div className="relative rounded-3xl w-2/3 ml-4">
+                <div className="rounded-3xl md:w-2/3 w-full md:ml-4 md:mt-0 mt-2 h-72 z-50 ">
                     <div
-                        className="bg-fit rounded-3xl w-full h-full -z-50 opacity-70"
+                        className="bg-fit rounded-3xl w-full h-full -z-50 opacity-70 flex flex-col justify-between"
                         style={{
                             backgroundImage: `url(${people})`
                         }}
-                    ></div>
-                    <div className="absolute text-white top-0 p-6 text-2xl font-bold z-20">
-                        Ecoutez, contribuez dans nos podcasts ou publiez vos propres créations
-                        sonores!
-                    </div>
-                    <div className="absolute bottom-9 left-8 text-white z-50">
-                        <JoinButton
-                            cd1={"relative"}
-                            cd2={"text-white font-bold bg-orng rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
-                            cd3={"border border-black rounded-full  px-6 absolute right-1 top-1 -z-10 w-full"}
-                            data={"JE REJOINS LA COMMUNAUTE"}
-                            to={"/auth"}
-                        />
+                    >
+                        <div className=" text-white top-0 p-6 lg:text-3xl text-xl font-bold z-20">
+                            Ecoutez, contribuez dans nos podcasts ou publiez vos propres créations
+                            sonores!
+                        </div>
+                        <div className=" text-white lg:w-1/2 w-4/5 sm:ml-8 pb-8 ml-6">
+                            <JoinButton
+                                cd1={"relative "}
+                                cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 "}
+                                cd3={"border border-black rounded-full py-3 px-6 absolute right-1 top-1 -z-10 w-full"}
+                                data={"JE REJOINS LA COMMUNAUTE"}
+                                to={"/auth"}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,10 +209,10 @@ export const LandingPage = () => {
 
             <div className="flex flex-col mt-28 lg:px-32 items-center">
                 <div className="relative">
-                    <div className="absolute bottom-5 -right-9">
+                    <div className="absolute bottom-5 -right-9 sm:flex hidden">
                         <img src={spark2} alt="" />
                     </div>
-                    <div className="header md:text-5xl sm:text-4xl text-3xl text-start">
+                    <div className="header md:text-5xl sm:text-4xl text-3xl sm:text-start text-center">
                         Nos meilleurs contributeurs
                     </div>
                 </div>

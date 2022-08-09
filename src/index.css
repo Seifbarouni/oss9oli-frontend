@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Gotham";
+    src: local("Gotham"), url(../src/assets/fonts/Gotham-Font/GothamMedium.ttf) format("woff");
+}

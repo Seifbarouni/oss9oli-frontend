@@ -8,6 +8,7 @@ module.exports = {
         gris2: "#F3F1F0",
         orng: "#F8962F",
         orng2: "#EF4423",
+        orng3: "#F8962A",
         azreg: "#17214E",
         ahmer: "#F1483B",
         akhdher: "#3FA692",

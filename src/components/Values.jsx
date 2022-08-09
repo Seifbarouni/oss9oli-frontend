@@ -10,10 +10,10 @@ export const Values = () => {
                 <div className="absolute bottom-1 -left-11">
                     <img src={spark} alt="" />
                 </div>
-                <div className="absolute h-96 w-96 mt-96 left-1/3">
+                <div className="absolute h-full w-full mt-96 left-1/3">
                     <img src={green_blob} alt="" />
                 </div>
-                <div className="header text-5xl">Nos valeurs</div>
+                <div className="header md:text-5xl sm:text-4xl text-3xl">Nos valeurs</div>
             </div>
             <div className="mt-12">
                 <img src={valeurs} alt="" />

@@ -11,7 +11,7 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="bg-gris2 -z-50">
+            <div className="bg-gris2 -z-50 md:px-0 px-0.5">
               <LandingPage />
             </div>
           }

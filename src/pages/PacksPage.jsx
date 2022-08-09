@@ -73,7 +73,10 @@ export const PacksPage = () => {
                     </Pack>
                 </div>
                 <div className='relative'>
-                    <div className='absolute -right-10 top-20 -mt-0.5'>
+                    <div className='absolute -right-10 top-20 -mt-0.5 sm:flex hidden'>
+                        <img src={micro} alt="" />
+                    </div>
+                    <div className='absolute -right-0 top-44 -mt-0.5 sm:hidden flex'>
                         <img src={micro} alt="" />
                     </div>
                     <Pack
