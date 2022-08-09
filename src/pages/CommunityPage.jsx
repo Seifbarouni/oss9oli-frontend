@@ -2,8 +2,10 @@ import React from 'react'
 import { Events } from '../components/Events'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
+import { Post } from '../components/Post'
 import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
+import { Vote } from '../components/Vote'
 
 export const CommunityPage = () => {
     return (
@@ -11,7 +13,7 @@ export const CommunityPage = () => {
             <AuthenticatedNavbar />
             <Seperator mt={0} />
             <div className='flex gap-4'>
-                <div className='md:flex hidden'>
+                <div className='lg:flex hidden'>
                     <Sidebar />
                 </div>
                 <div className='p-16  flex-grow flex flex-col'>
@@ -34,7 +36,11 @@ export const CommunityPage = () => {
                     </div>
                     <div className='border-b border-black mt-12'></div>
                     <div className='mt-12'>
-                        {/* post */}
+                        <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
+                    </div>
+                    <div className='border-b border-black mt-12'></div>
+                    <div className='mt-12'>
+                        <Post name={"Kais Saied"} data={"يضيف رمزي، “جميع أشقائي زوجاتهم لا يعملن، فكيف تعمل زوجتي في المستقبل!؟، مهمة العمل تقتصر على الزوج، ومن الناحية الاقتصادية ومساهمة الزوجة في متطلبات الحياة المتعددة، فهذا واجب الزوج وعليه التفكير به جيدا قبل عقد قرانه”. وتواجه العديد من الفتيات مشكلة في تفكير الشباب المقبلين على الزواج، فتراه ناضجا.. متعلما.. مثقفا… لكنه لا يؤيد فكرة عمل الفتاة المتزوجة، يعتقد بأن “شهادة الفتاة شكلية”، معللا ذلك بدورها الأهم في تربية الأبناء وتنشئتهم، وإدارتها لشؤون المنزل، وغيرها من الأسباب التي تقف حجر عثرة في إتمام الزواج أحيانا. وتفكر حينها الفتاة: هل أتنازل عن كل تعبي في سبيل الحصول على “الشهادة” وطموحي وأمنياتي المستقبلية في العمل وفقا لدراستي؟ أم ارضخ لرغبات الشريك وتفكيره في ترك العمل؟."} />
                     </div>
                 </div>
             </div>

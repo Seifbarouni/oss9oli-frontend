@@ -32,9 +32,9 @@ export const Events = () => {
                         </div>
                     </div>
                 </div>
-                <div className='lg:w-1/2'>
+                <div className='lg:w-1/2 lg:mt-0 mt-6'>
                     <div
-                        className="bg-cover rounded-[40px] w-full h-2/3 -z-50 opacity-70 flex border border-black"
+                        className="bg-cover rounded-[40px] w-full lg:h-2/3 h-44 -z-50 opacity-70 flex border border-black"
                         style={{
                             backgroundImage: `url(${dj})`
                         }}
@@ -77,9 +77,9 @@ export const Events = () => {
                         </div>
                     </div>
                 </div>
-                <div className='lg:w-1/2 invisible'>
+                <div className='lg:w-1/2 lg:mt-0 mt-6  invisible'>
                     <div
-                        className="bg-cover rounded-3xl w-full h-2/3 -z-50 opacity-70 flex"
+                        className="bg-cover rounded-3xl w-full lg:h-2/3 h-44 -z-50 opacity-70 flex"
                         style={{
                             backgroundImage: `url(${dj})`
                         }}
