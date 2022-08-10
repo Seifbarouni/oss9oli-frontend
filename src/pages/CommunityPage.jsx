@@ -14,7 +14,7 @@ export const CommunityPage = () => {
             <Seperator mt={0} />
             <div className='flex gap-4'>
                 <div className='lg:flex hidden'>
-                    <Sidebar />
+                    <Sidebar selected={"community"} />
                 </div>
                 <div className='p-16  flex-grow flex flex-col'>
                     <div className='flex flex-col space-y-2'>

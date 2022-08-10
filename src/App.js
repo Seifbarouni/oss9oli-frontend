@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthPage } from "./pages/AuthPage";
+import { CommunityPage } from "./pages/CommunityPage";
 import { LandingPage } from "./pages/LandingPage";
 import { PacksPage } from "./pages/PacksPage";
-import { CommunityPage } from "./pages/CommunityPage";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -37,6 +38,14 @@ function App() {
           element={
             <div className="bg-gris2 -z-50">
               <CommunityPage />
+            </div>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <div className="bg-gris2 -z-50">
+              <ProfilePage />
             </div>
           }
         />

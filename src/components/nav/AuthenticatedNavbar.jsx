@@ -2,8 +2,8 @@ import React from 'react'
 import { Hamburger } from '../buttons/Hamburger'
 import { JoinButton } from '../buttons/JoinButton'
 
-import black_logo from '../../assets/svgs/black_logo.svg'
 import { Link } from 'react-router-dom'
+import black_logo from '../../assets/svgs/black_logo.svg'
 
 export const AuthenticatedNavbar = () => {
     return (
@@ -26,7 +26,11 @@ export const AuthenticatedNavbar = () => {
                 </Link>
             </div>
             <div className='w-full flex justify-end'>
-                <div className='h-16 w-16 border border-black rounded-full bg-white'></div>
+                <Link to={"/profile"}>
+                    <div className='h-16 w-16 border border-black rounded-full bg-white'>
+                        <img src="https://avatars.dicebear.com/api/croodles/me.svg" alt="" />
+                    </div>
+                </Link>
             </div>
         </nav>
     )
