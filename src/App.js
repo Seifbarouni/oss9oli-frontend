@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import green_blob2 from "./assets/svgs/green_blob2.svg";
 import { AuthPage } from "./pages/AuthPage";
 import { CommunityPage } from "./pages/CommunityPage";
 import { LandingPage } from "./pages/LandingPage";
@@ -44,7 +45,10 @@ function App() {
         <Route
           path="/profile"
           element={
-            <div className="bg-gris2 -z-50">
+            <div className="bg-gris2  relative">
+              <div className="absolute  bottom-0 left-0">
+                <img src={green_blob2} alt="" className="" />
+              </div>
               <ProfilePage />
             </div>
           }

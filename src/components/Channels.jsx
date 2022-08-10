@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Channels = () => {
     return (
-        <div className='z-50 lg:w-1/2 w-full relative'>
+        <div className='z-50 xl:w-1/2 w-full relative'>
             <div className='border border-black bg-white p-6 flex flex-col rounded-3xl h-96 w-full relative'>
                 <div className='absolute bottom-4 right-8'>
                     <span className='text-xl text-gray-400 underline underline-offset-8 hover:text-gray-600 cursor-pointer'>Voir d'autres chaines {'>'}  </span>

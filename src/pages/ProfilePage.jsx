@@ -1,27 +1,30 @@
 import React from 'react'
 import img1 from '../assets/images/1.png'
 import img2 from '../assets/images/2.png'
-import green_blob2 from '../assets/svgs/green_blob2.svg'
+import img3 from '../assets/images/3.png'
+import img4 from '../assets/images/4.png'
+import img5 from '../assets/images/5.png'
+import img6 from '../assets/images/6.png'
 import red_blob from '../assets/svgs/red_blob.svg'
+import two_green_stars from '../assets/svgs/two_green_stars.svg'
 import { Channels } from '../components/Channels'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { Podcast } from '../components/Podcast'
 import { ProfileBanner } from '../components/ProfileBanner'
 import { Seperator } from '../components/Seperator'
+import { SmallPost } from '../components/SmallPost'
 import { Tags } from '../components/Tags'
 
 export const ProfilePage = () => {
     return (
-        <div className='flex flex-col realtive '>
+        <div className='flex flex-col realtive z-50'>
             <AuthenticatedNavbar />
             <Seperator mt={0} />
             <div className='absolute right-0 top-44  '>
                 <img src={red_blob} alt="" className='' />
             </div>
-            <div className='absolute  top-64  h-full w-full '>
-                <img src={green_blob2} alt="" className='' />
-            </div>
+
             <div className='flex z-50'>
                 <div className='lg:flex hidden'>
                     <Sidebar selected={"profile"} />
@@ -43,10 +46,35 @@ export const ProfilePage = () => {
                         <Tags />
                         <Channels />
                     </div>
-                    <div className='mt-16 flex xl:space-x-8 space-x-0
-                        xl:space-y-0 space-y-4  xl:flex-row flex-col p-6'>
-                        <Tags />
-                        <Channels />
+                    <div className='mt-16 flex space-x-8  lg:text-2xl text-lg lg:justify-evenly justify-center px-6 relative'>
+                        <div className='absolute -top-6 right-6 md:flex hidden'>
+                            <img src={two_green_stars} alt="" />
+                        </div>
+                        <span className='underline underline-offset-8'>PODCASTS ADORES</span>
+                        <span>CONTINUER L'ECOUTE</span>
+                        <span>A ECOUTER PLUS TARD</span>
+                    </div>
+                    <div className='mt-16 flex xl:flex-row flex-col p-6 flex-wrap justify-center items-center'>
+                        <div className='p-5'>
+                            <SmallPost
+                                img={img3} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"}
+                            />
+                        </div>
+                        <div className='p-5'>
+                            <SmallPost
+                                img={img4} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"}
+                            />
+                        </div>
+                        <div className='p-5'>
+                            <SmallPost
+                                img={img5} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"}
+                            />
+                        </div>
+                        <div className='p-5'>
+                            <SmallPost
+                                img={img6} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
