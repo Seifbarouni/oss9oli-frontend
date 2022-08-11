@@ -4,12 +4,16 @@ import { JoinButton } from '../buttons/JoinButton'
 
 import { Link } from 'react-router-dom'
 import black_logo from '../../assets/svgs/black_logo.svg'
+import { useOpen } from '../../store/store'
 
 export const AuthenticatedNavbar = () => {
+    const setOpen = useOpen((state) => state.setOpen)
     return (
         <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-32 sm:px-12">
             <div className='flex items-center w-full'>
-                <Hamburger />
+                <div onClick={() => setOpen()}>
+                    <Hamburger />
+                </div>
                 <div className='pl-8 md:flex hidden'>
                     <JoinButton
                         cd1={"relative z-20"}

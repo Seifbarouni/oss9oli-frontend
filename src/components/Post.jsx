@@ -23,7 +23,7 @@ export const Post = ({ name, data }) => {
                         {data}
                     </span>
                 </span>
-                <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2 mx-3'>
+                <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
                     <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
                         <img src="https://avatars.dicebear.com/api/croodles/yo.svg" alt="" />
                     </div>

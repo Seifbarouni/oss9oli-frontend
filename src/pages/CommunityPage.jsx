@@ -2,21 +2,29 @@ import React from 'react'
 import { Events } from '../components/Events'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
+import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Post } from '../components/Post'
 import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
 import { Vote } from '../components/Vote'
+import { useOpen } from '../store/store'
 
 export const CommunityPage = () => {
+    const open = useOpen((state) => state.open)
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
             <Seperator mt={0} />
             <div className='flex gap-4'>
-                <div className='lg:flex hidden'>
+                {open && <div className='lg:flex hidden'>
                     <Sidebar selected={"community"} />
-                </div>
-                <div className='p-16  flex-grow flex flex-col'>
+                </div>}
+                {open && <div className='flex lg:hidden absolute top-0 z-50'>
+                    <div className='sticky'>
+                        <SmallScreenNav selected={"community"} />
+                    </div>
+                </div>}
+                <div className='pt-16 pl-16  flex-grow flex flex-col z-40'>
                     <div className='flex flex-col space-y-2'>
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>Minassa lab</span>

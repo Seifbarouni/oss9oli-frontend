@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import green_blob2 from "./assets/svgs/green_blob2.svg";
 import { AuthPage } from "./pages/AuthPage";
@@ -5,8 +6,16 @@ import { CommunityPage } from "./pages/CommunityPage";
 import { LandingPage } from "./pages/LandingPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { useOpen } from "./store/store";
 
 function App() {
+  const close = useOpen((state) => state.close);
+  useEffect(() => {
+    // If screen is medium or smaller, open the menu.
+    if (window.innerWidth <= 1250) {
+      close();
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>

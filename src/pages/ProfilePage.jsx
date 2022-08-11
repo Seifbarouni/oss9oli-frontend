@@ -10,13 +10,16 @@ import two_green_stars from '../assets/svgs/two_green_stars.svg'
 import { Channels } from '../components/Channels'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
+import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Podcast } from '../components/Podcast'
 import { ProfileBanner } from '../components/ProfileBanner'
 import { Seperator } from '../components/Seperator'
 import { SmallPost } from '../components/SmallPost'
 import { Tags } from '../components/Tags'
+import { useOpen } from '../store/store'
 
 export const ProfilePage = () => {
+    const open = useOpen((state) => state.open)
     return (
         <div className='flex flex-col realtive z-50'>
             <AuthenticatedNavbar />
@@ -26,10 +29,13 @@ export const ProfilePage = () => {
             </div>
 
             <div className='flex z-50'>
-                <div className='lg:flex hidden'>
+                {open && <div className='lg:flex hidden'>
                     <Sidebar selected={"profile"} />
-                </div>
-                <div className='flex flex-col flex-grow'>
+                </div>}
+                {open && <div className='flex lg:hidden absolute top-0 z-50'>
+                    <SmallScreenNav selected={"profile"} />
+                </div>}
+                <div className='flex flex-col flex-grow z-40'>
                     <div className=' flex flex-col '>
                         <ProfileBanner episodes={13} shows={5} name={"Rana Jollanar Ben Hassine"} />
                     </div>
