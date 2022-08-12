@@ -38,7 +38,22 @@ export const PacksPage = () => {
                     <img src={orange_star} alt="" />
                 </div> */}
             </div>
-            <div className='mt-16 flex xl:flex-row flex-col w-full xl:px-44 px-12 xl:space-x-8 xl:space-y-0 space-y-4 justify-center items-center z-50'>
+            <div className='mt-16 flex 2xl:flex-row flex-col w-full  2xl:space-x-8 2xl:space-y-0 space-y-4 justify-center items-center z-50'>
+
+                {/* <div className=''>
+                    <Pack
+                        color={"azreg"}
+                        price={0}
+                        buttonText={"Essayer"}
+                        title={"Normal"}
+                        pack={"free"}
+                        desc={"Testez la plateforme sans engagements"}
+                    >
+                        <span className='sm:text-lg'>1 heure d'écoute</span>
+                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <span className='sm:text-lg'>Naviguer dans certaines sections de la plateforme</span>
+                    </Pack>
+                </div> */}
                 <div className='relative'>
                     <div className='absolute -left-8 -top-14'>
                         <img src={headphones} alt="" />
@@ -48,6 +63,7 @@ export const PacksPage = () => {
                         price={3.9}
                         buttonText={"S'inscrire"}
                         title={"Auditeur"}
+                        pack={"auditeur"}
                         desc={"Devenez auditeur fidèle et naviguez dans la plateforme en toute liberté"}
                     >
                         <span className='sm:text-lg'>Ecouter tous nos podcasts en <span className='font-bold'>illimité</span></span>
@@ -68,6 +84,7 @@ export const PacksPage = () => {
                         price={29.9}
                         buttonText={"Rejoindre"}
                         title={"COMMUNITY PACK"}
+                        pack={"community"}
                         desc={"Appartenez à une communauté qui fait écho"}
                     >
                         <span className='sm:text-lg'>Echangez avec d'autres membres de la communauté</span>
@@ -80,7 +97,7 @@ export const PacksPage = () => {
                     </Pack>
                 </div>
                 <div className='relative'>
-                    <div className='absolute -right-10 top-20 -mt-0.5 sm:flex hidden'>
+                    <div className='absolute sm:-right-10 sm:top-20 -mt-0.5 sm:flex hidden'>
                         <img src={micro} alt="" />
                     </div>
                     <div className='absolute -right-0 top-44 -mt-0.5 sm:hidden flex'>
@@ -91,6 +108,7 @@ export const PacksPage = () => {
                         price={49.9}
                         buttonText={"Commencez"}
                         title={"Creator"}
+                        pack={"creator"}
                         desc={"Hebergez vos podcasts et fidélisez votre propre audience"}
                         more={"*Vous pourriez personnaliser votre pack."}
                     >
@@ -103,6 +121,20 @@ export const PacksPage = () => {
                         <span className='sm:text-lg'>Poster jusqu'à 5 podcasts/mois</span>
                     </Pack>
                 </div>
+            </div>
+            <div className='mt-4 flex  justify-center items-center z-50'>
+                <Pack
+                    color={"azreg"}
+                    price={0}
+                    buttonText={"Essayer"}
+                    title={"Normal"}
+                    pack={"free"}
+                    desc={"Testez la plateforme sans engagements"}
+                >
+                    <span className='sm:text-lg'>1 heure d'écoute</span>
+                    <div className='border-b-2 border-azreg opacity-30'></div>
+                    <span className='sm:text-lg'>Naviguer dans certaines sections de la plateforme</span>
+                </Pack>
             </div>
             <div className='flex flex-col items-center mt-12 pb-12 z-20 justify-center'>
                 <span>
