@@ -43,7 +43,7 @@ export const ProfilePage = () => {
                         Podcasts publiés
                     </div>
                     <div className='flex xl:space-x-8 space-x-0 
-                        xl:space-y-0 space-y-2  xl:flex-row flex-col pl-6'>
+                        xl:space-y-0 space-y-2  xl:flex-row flex-col sm:pl-6 sm:p-0 p-6'>
                         <Podcast img={img1} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"36:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} />
                         <Podcast img={img2} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} />
                     </div>
@@ -52,7 +52,7 @@ export const ProfilePage = () => {
                         <Tags />
                         <Channels />
                     </div>
-                    <div className='mt-16 flex space-x-8  lg:text-2xl text-lg lg:justify-evenly justify-center px-6 relative'>
+                    <div className='mt-16 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
                         <div className='absolute -top-6 right-6 md:flex hidden'>
                             <img src={two_green_stars} alt="" />
                         </div>

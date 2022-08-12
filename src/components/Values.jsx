@@ -1,11 +1,11 @@
 import React from 'react'
-import spark from '../assets/svgs/spark.svg'
-import green_blob from '../assets/svgs/green_blob.svg'
 import valeurs from '../assets/images/valeurs.png'
+import green_blob from '../assets/svgs/green_blob.svg'
+import spark from '../assets/svgs/spark.svg'
 
 export const Values = () => {
     return (
-        <div className="flex flex-col mt-28 px-12 items-center">
+        <div className="flex flex-col mt-28  items-center">
             <div className="relative">
                 <div className="absolute bottom-1 -left-11">
                     <img src={spark} alt="" />

@@ -9,7 +9,7 @@ import { useOpen } from '../../store/store'
 export const AuthenticatedNavbar = () => {
     const setOpen = useOpen((state) => state.setOpen)
     return (
-        <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-32 sm:px-12">
+        <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-12 ">
             <div className='flex items-center w-full'>
                 <div onClick={() => setOpen()}>
                     <Hamburger />

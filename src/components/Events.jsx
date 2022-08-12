@@ -1,22 +1,22 @@
 import React from 'react'
-import star from '../assets/svgs/star.svg'
 import dj from '../assets/images/dj.png'
+import star from '../assets/svgs/star.svg'
 import { JoinButton } from './buttons/JoinButton'
 
 export const Events = () => {
     return (
-        <div className='relative xl:w-2/3 z-50'>
-            <div className='bg-white border border-black p-8 flex lg:flex-row flex-col rounded-[40px] z-50'>
+        <div className='relative lg:w-2/3 z-50'>
+            <div className='bg-white border border-black sm:p-8 p-4 flex lg:flex-row flex-col rounded-[40px] z-50'>
                 <div className='flex flex-col lg:w-1/2 relative'>
-                    <div className='absolute -top-6 -left-4'>
+                    <div className='absolute sm:-top-6 sm:-left-4 -top-2'>
                         <img src={star} alt="" />
                     </div>
-                    <span className='text-3xl mt-8 font-bold'>Atelier transcription</span>
-                    <div className='flex items-center'>
+                    <span className='sm:text-3xl text-lg mt-8 font-bold'>Atelier transcription</span>
+                    <div className='flex items-center '>
                         <span>anime par : </span>
                         <span className='text-asfer2 ml-1'>Mohamed Mohamed</span>
                     </div>
-                    <div className='mt-4 leading-tight'>
+                    <div className='mt-4 leading-tight flex'>
                         Boostez le référencement, favorisez l'accessibilité pour l'ensemble de votre public et obtenez une précision de premier ordre.
                     </div>
                     <div className='flex mt-8 space-x-12'>
@@ -27,14 +27,14 @@ export const Events = () => {
                             <span className='h-16 w-16 bg-white border border-black rounded-full'></span>
                         </div>
                         <div className='flex flex-col'>
-                            <span className='font-bold text-3xl'>+20</span>
+                            <span className='font-bold sm:text-3xl text-xl'>+20</span>
                             <span className='text-gray-400'>y participent</span>
                         </div>
                     </div>
                 </div>
-                <div className='lg:w-1/2 lg:mt-0 mt-6'>
+                <div className='lg:w-1/2 lg:mt-0 mt-6 '>
                     <div
-                        className="bg-cover rounded-[40px] w-full lg:h-2/3 h-44 -z-50 opacity-70 flex border border-black"
+                        className="bg-cover rounded-[40px] sm:w-full lg:h-2/3 h-44 -z-50 opacity-70 flex border border-black"
                         style={{
                             backgroundImage: `url(${dj})`
                         }}
@@ -51,12 +51,12 @@ export const Events = () => {
                     </div>
                 </div>
             </div>
-            <div className='absolute border border-black p-8 flex lg:flex-row flex-col rounded-[40px] top-2 -left-2 -z-10 w-full'>
+            <div className='absolute border border-black sm:p-8 p-4 flex lg:flex-row flex-col rounded-[40px] top-2 -left-2 -z-10 w-full'>
                 <div className='flex flex-col lg:w-1/2 relative invisible'>
-                    <div className='absolute -top-6 -left-4'>
+                    <div className='absolute sm:-top-6 sm:-left-4 -top-2'>
                         <img src={star} alt="" />
                     </div>
-                    <span className='text-3xl mt-8 font-bold'>Atelier transcription</span>
+                    <span className='sm:text-3xl text-lg mt-8 font-bold'>Atelier transcription</span>
                     <div className='flex items-center'>
                         <span>anime par : </span>
                         <span className='text-asfer2 ml-1'>Mohamed Mohamed</span>

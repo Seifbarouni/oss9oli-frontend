@@ -4,14 +4,14 @@ import hrt from '../assets/svgs/heart.svg'
 
 export const Contributors = ({ bg, children, type, data, img, heart }) => {
     return (
-        <div className="relative lg:w-96 w-7/12 z-40">
+        <div className="relative lg:w-96 md:w-7/12 w-11/12 z-40">
             {heart && <div className='absolute -left-10 -top-10 z-50'>
                 <img src={hrt} alt="" />
             </div>}
             <div
                 className={`flex flex-col justify-between h-96 border border-black ${bg} text-black rounded-3xl p-6 w-full z-50`}
             >
-                <div className="text-3xl font-bold mt-4">
+                <div className="sm:text-3xl text-2xl font-bold mt-4">
                     {children}
                 </div>
                 <div className="flex sm:flex-row flex-col items-start w-full">

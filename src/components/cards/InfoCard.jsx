@@ -8,7 +8,7 @@ export const InfoCard = ({ bg, img, children }) => {
             <div className="w-1/4 flex justify-center">
                 <img src={img} alt="" />
             </div>
-            <div className="text-white text-xl ml-12 font-bold w-3/4">
+            <div className="text-white lg:text-xl ml-12 font-bold w-3/4">
                 {children}
             </div>
         </div>

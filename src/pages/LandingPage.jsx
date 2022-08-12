@@ -1,29 +1,29 @@
 import React from 'react'
-import { Hero } from '../components/Hero'
-import { Navbar } from '../components/nav/NavbarLandingPage'
-import { Seperator } from '../components/Seperator'
+import { Link } from 'react-router-dom'
 import { JoinButton } from '../components/buttons/JoinButton'
-import { InfoCard } from '../components/cards/InfoCard'
 import { PlayButton } from '../components/buttons/PlayButton'
-import { Values } from '../components/Values'
+import { InfoCard } from '../components/cards/InfoCard'
 import { Contributors } from '../components/Contributors'
 import { Footer } from '../components/Footer'
 import { GoldenArrow } from '../components/GoldenArrow'
-import { Link } from 'react-router-dom'
+import { Hero } from '../components/Hero'
+import { Navbar } from '../components/nav/NavbarLandingPage'
+import { Seperator } from '../components/Seperator'
+import { Values } from '../components/Values'
 
-import bg from '../assets/svgs/group.svg'
-import green_blob from '../assets/svgs/green_blob.svg'
-import orange_blob from '../assets/svgs/orange_blob.svg'
-import yezzin3ad from '../assets/svgs/yezzin3ad.svg'
-import shh from '../assets/images/shh.png'
 import koli from '../assets/images/9oli.png'
-import stars from '../assets/svgs/stars.svg'
+import lp from '../assets/images/lp.png'
 import people from '../assets/images/people.png'
-import gr120 from '../assets/svgs/Group 122.svg'
+import shh from '../assets/images/shh.png'
+import green_blob from '../assets/svgs/green_blob.svg'
 import gr122 from '../assets/svgs/Group 120.svg'
 import gr121 from '../assets/svgs/Group 121.svg'
+import gr120 from '../assets/svgs/Group 122.svg'
+import bg from '../assets/svgs/group.svg'
+import orange_blob from '../assets/svgs/orange_blob.svg'
 import spark2 from '../assets/svgs/spark2.svg'
-import lp from '../assets/images/lp.png'
+import stars from '../assets/svgs/stars.svg'
+import yezzin3ad from '../assets/svgs/yezzin3ad.svg'
 
 export const LandingPage = () => {
     return (
@@ -31,7 +31,7 @@ export const LandingPage = () => {
             className='flex flex-col '
         >
             <div className="flex flex-col realtive">
-                <div className="absolute md:left-72 top-0 ">
+                <div className="absolute md:left-72 top-0">
                     <img src={bg} alt="" srcSet="" />
                 </div>
                 <Navbar />
@@ -48,14 +48,14 @@ export const LandingPage = () => {
                 <div>
                     <img src={shh} alt="" srcSet="" />
                 </div>
-                <div className="w-96 flex flex-col relative">
+                <div className="sm:w-96 flex flex-col relative sm:px-0 px-16">
                     <div className="absolute -left-12 -top-16">
                         <img src={yezzin3ad} alt="" />
                     </div>
-                    <span className="header text-2xl">
+                    <span className="header sm:text-2xl">
                         Avez-vous déjà été réduit au silence?
                     </span>
-                    <span className="text-lg mt-2">
+                    <span className="sm:text-lg mt-2">
                         Vous a-t-on dit de vous taire ? que votre avis n'avait pas
                         d'importance ? ou votre voix ne sonne pas aussi fort? que votre
                         histoire ne valait pas la peine d'être racontée ? ou que votre point
@@ -68,25 +68,28 @@ export const LandingPage = () => {
             <div
                 className="relative items-center justify-evenly mt-28 z-50 flex md:flex-row flex-col "
             >
+
                 <div className="absolute -z-50 left-0">
                     <img src={orange_blob} alt="" />
                 </div>
-
-                <div className="w-96 flex flex-col md:ml-12">
-                    <span className="text-lg mt-2">
+                <div className="md:hidden flex">
+                    <img src={koli} alt="" srcSet="" />
+                </div>
+                <div className="sm:w-96 flex flex-col md:ml-12 sm:px-0 px-16">
+                    <span className="sm:text-lg mt-2">
                         Ces mêmes personnes sont les premières à s'aligner pour entendre votre
                         histoire !
                     </span>
 
-                    <span className="header text-2xl mt-2"> Faites entendre votre voix ! </span>
-                    <span className="text-lg mt-2">
+                    <span className="header sm:text-2xl mt-2"> Faites entendre votre voix ! </span>
+                    <span className="tsm:ext-lg mt-2">
                         Nous avons besoin de votre histoire ! le monde a besoin que votre
                         histoire soit racontée à haute voix ! Rejoignez notre communauté et
                         plongez dans le paradoxe de la société tunisienne ! écoutez comme
                         c'est beau, comme c'est beau d'être différent.
                     </span>
                 </div>
-                <div className="">
+                <div className="md:flex hidden">
                     <img src={koli} alt="" srcSet="" />
                 </div>
             </div>
@@ -115,7 +118,7 @@ export const LandingPage = () => {
                     <div
                         className="bg-white rounded-3xl md:w-96 w-full md:flex hidden h-72 p-6 border border-black absolute right-1 top-1 -z-30"
                     >
-                        <span className="invisible text-lg">
+                        <span className="invisible sm:text-lg">
                             Oss9oli est la première plateforme de podcast à contribution en
                             Tunisie. C'est l'espace qui réunit les créateurs de contenus
                             créatifs et les auditeurs concients...
@@ -124,18 +127,18 @@ export const LandingPage = () => {
                     <div
                         className="bg-white rounded-3xl md:w-96 w-full h-72 p-6 border border-black flex flex-col items-start -z-40"
                     >
-                        <div className="text-lg">
+                        <div className="sm:text-lg">
                             Oss9oli est la première plateforme de podcast à contribution en
                             Tunisie. C'est l'espace qui réunit les créateurs de contenus
                             créatifs et les auditeurs concients...
                         </div>
                         <JoinButton
                             cd1={"mt-12 relative z-20"}
-                            cd2={"bg-gris2 rounded-full py-2 px-5 text-center cursor-pointer border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 text-black w-full"}
-                            cd3={"border border-black rounded-full py-2 px-5 absolute right-1 top-1 bg-white -z-10 w-full"}
+                            cd2={"bg-gris2 rounded-full py-2 px-5 text-center cursor-pointer border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 text-black w-full sm:text-base text-sm"}
+                            cd3={"border border-black rounded-full py-2 px-5 absolute right-1 top-1 bg-white -z-10 w-full sm:text-base text-sm"}
                             data={"En-apprendre plus"
                             }
-                            to={"/packs"}
+                            to={"/packs?auth=false"}
                         />
                     </div>
                 </div>
@@ -146,15 +149,15 @@ export const LandingPage = () => {
                             backgroundImage: `url(${people})`
                         }}
                     >
-                        <div className=" text-white top-0 p-6 lg:text-3xl text-xl font-bold z-20">
+                        <div className=" text-white top-0 p-6 lg:text-2xl md:text-xl text-lg font-bold z-20">
                             Ecoutez, contribuez dans nos podcasts ou publiez vos propres créations
                             sonores!
                         </div>
                         <div className=" text-white lg:w-1/2 w-4/5 sm:ml-8 pb-8 ml-6">
                             <JoinButton
                                 cd1={"relative "}
-                                cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 "}
-                                cd3={"border border-black rounded-full py-3 px-6 absolute right-1 top-1 -z-10 w-full"}
+                                cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 lg:text-base sm:text-sm text-xs"}
+                                cd3={"border border-black rounded-full py-3 px-6 absolute right-1 top-1 -z-10 w-full lg:text-base sm:text-sm text-xs"}
                                 data={"JE REJOINS LA COMMUNAUTE"}
                                 to={"/auth"}
                             />

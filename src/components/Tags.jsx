@@ -5,7 +5,7 @@ export const Tags = () => {
     return (
         <div className='z-50 xl:w-1/2 w-full relative'>
             <div className='border border-black bg-white p-6 flex flex-col rounded-3xl h-96 w-full relative'>
-                <div className='absolute -top-12 -right-6'>
+                <div className='absolute -top-12 sm:-right-6 -right-2'>
                     <img src={red_heart} alt="" />
                 </div>
                 <div className='absolute bottom-4 right-8'>

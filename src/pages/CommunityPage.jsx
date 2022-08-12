@@ -15,7 +15,7 @@ export const CommunityPage = () => {
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
             <Seperator mt={0} />
-            <div className='flex gap-4'>
+            <div className='flex'>
                 {open && <div className='lg:flex hidden'>
                     <Sidebar selected={"community"} />
                 </div>}
@@ -24,14 +24,14 @@ export const CommunityPage = () => {
                         <SmallScreenNav selected={"community"} />
                     </div>
                 </div>}
-                <div className='pt-16 pl-16  flex-grow flex flex-col z-40'>
+                <div className='sm:pt-16 sm:pl-16 pt-1 pl-1  flex-grow flex flex-col z-40'>
                     <div className='flex flex-col space-y-2'>
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>Minassa lab</span>
                     </div>
                     <div className='flex flex-col mt-24'>
                         <span className='text-3xl font-semibold'>Evènements à venir</span>
-                        <div className='mt-4'>
+                        <div className='mt-4 flex w-full'>
                             <Events />
                         </div>
                     </div>

@@ -11,14 +11,14 @@ export const Post = ({ name, data }) => {
 
                 </div>
             </div>
-            <div className='flex flex-col w-full pl-8'>
+            <div className='flex flex-col w-full pl-5'>
                 <span className='leading-tight'>
                     {name} <br />
                     <span className='text-gray-500 text-sm'>
                         a publié une pensée
                     </span>
                 </span>
-                <span className='lg:text-xl text-lg p-6 flex justify-center h-44 overflow-y-scroll'>
+                <span className='lg:text-xl text-lg p-4 flex justify-center h-44 overflow-y-scroll'>
                     <span>
                         {data}
                     </span>

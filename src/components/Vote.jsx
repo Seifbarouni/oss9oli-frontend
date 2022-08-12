@@ -12,30 +12,30 @@ export const Vote = ({ name, vote_data }) => {
 
                 </div>
             </div>
-            <div className='flex flex-col w-full pl-8'>
+            <div className='flex flex-col w-full pl-5'>
                 <span className='leading-tight'>
                     {name} <br />
                     <span className='text-gray-500 text-sm'>
                         a publié un vote
                     </span>
                 </span>
-                <span className='lg:text-4xl text-xl p-6 flex justify-center'>
+                <span className='lg:text-4xl sm:text-xl text-lg p-4 flex justify-center'>
                     <span>
                         {vote_data}
                     </span>
                 </span>
-                <div className='flex justify-center items-center space-x-4'>
+                <div className='flex sm:flex-row flex-col justify-center items-center sm:space-x-4 space-x-0 sm:space-y-0 space-y-4'>
                     <div>
                         <JoinButton
                             cd1={"relative z-50"}
-                            cd2={"text-white text-2xl bg-gris rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
-                            cd3={"border border-black rounded-full  py-3 px-16 absolute right-1 top-1 -z-20 w-full text-2xl"}
+                            cd2={"text-white sm:text-2xl text-lg bg-gris rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
+                            cd3={"border border-black rounded-full  py-3 px-16 absolute right-1 top-1 -z-20 w-full sm:text-2xl text-lg"}
                             data={"OUI"}
                             to={"/auth"}
                         />
                     </div>
                     <div>
-                        <div className='text-white text-2xl bg-akhdher rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40'>
+                        <div className='text-white sm:text-2xl text-lgl bg-akhdher rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40'>
                             NON
                         </div>
                     </div>
