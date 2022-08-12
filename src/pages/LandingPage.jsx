@@ -95,7 +95,7 @@ export const LandingPage = () => {
             </div>
             <Seperator mt="28" />
 
-            <div className="flex justify-center mt-28 ">
+            <div className="flex justify-center mt-28 " id='join'>
 
                 <div className="relative">
                     <div

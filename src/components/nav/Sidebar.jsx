@@ -10,7 +10,7 @@ export const Sidebar = ({ selected }) => {
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
                     </Link>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "pods" ? " underline" : ""}`}>TOUS NOS PODCATS</span>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "post" ? " underline" : ""}`}>PUBLIER PODCAST</span>
+                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "post" ? " underline" : ""}`}>MES PODCASTS</span>
                     <Link to={"/community"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
                     </Link>

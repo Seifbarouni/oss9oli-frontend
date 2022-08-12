@@ -5,7 +5,7 @@ import spark from '../assets/svgs/spark.svg'
 
 export const Values = () => {
     return (
-        <div className="flex flex-col mt-28  items-center">
+        <div className="flex flex-col mt-28  items-center" id='values'>
             <div className="relative">
                 <div className="absolute bottom-1 -left-11">
                     <img src={spark} alt="" />
