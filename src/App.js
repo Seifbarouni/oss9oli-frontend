@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import green_blob2 from "./assets/svgs/green_blob2.svg";
 import { AuthPage } from "./pages/AuthPage";
 import { CommunityPage } from "./pages/CommunityPage";
+import { HomePage } from "./pages/HomePage";
 import { LandingPage } from "./pages/LandingPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -15,7 +16,7 @@ function App() {
     if (window.innerWidth <= 1250) {
       close();
     }
-  }, []);
+  }, [close]);
   return (
     <BrowserRouter>
       <Routes>
@@ -59,6 +60,14 @@ function App() {
                 <img src={green_blob2} alt="" className="" />
               </div>
               <ProfilePage />
+            </div>
+          }
+        />
+        <Route
+          path="/accueil"
+          element={
+            <div className="bg-gris2  relative">
+              <HomePage />
             </div>
           }
         />
