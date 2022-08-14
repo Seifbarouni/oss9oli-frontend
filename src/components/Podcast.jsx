@@ -1,9 +1,9 @@
 import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
 
-export const Podcast = ({ img, title, creator, duration, description }) => {
+export const Podcast = ({ img, title, creator, duration, description, w, h }) => {
     return (
-        <div className='flex bg-white rounded-3xl border border-black justify-between lg:w-4/5 w-full'>
+        <div className={`flex bg-white rounded-3xl border border-black justify-between ${w} ${h}`}>
             <div className='w-1/2 rounded-3xl bg-cover'
                 style={
                     {

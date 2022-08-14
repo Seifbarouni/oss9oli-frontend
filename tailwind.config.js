@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         gris: "#D9D9D9",
         gris2: "#F3F1F0",
+        gris3: "#7B7B7B",
         orng: "#F8962F",
         orng2: "#EF4423",
         orng3: "#F8962A",

@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import green_blob2 from "./assets/svgs/green_blob2.svg";
+import g_acc from "./assets/svgs/g_acc.svg";
+import o_acc from "./assets/svgs/o_acc.svg";
+import y_acc from "./assets/svgs/y_acc.svg";
 import { AuthPage } from "./pages/AuthPage";
 import { CommunityPage } from "./pages/CommunityPage";
 import { EditChannelPage } from "./pages/EditChannelPage";
@@ -69,6 +72,15 @@ function App() {
           path="/accueil"
           element={
             <div className="bg-gris2  relative">
+              <div className="absolute  top-0 right-0">
+                <img src={g_acc} alt="" className="" />
+              </div>
+              <div className="absolute  bottom-0 left-0">
+                <img src={o_acc} alt="" className="" />
+              </div>
+              <div className="absolute  bottom-0 right-0">
+                <img src={y_acc} alt="" className="" />
+              </div>
               <HomePage />
             </div>
           }
