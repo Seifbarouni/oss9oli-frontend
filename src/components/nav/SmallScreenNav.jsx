@@ -10,14 +10,18 @@ export const SmallScreenNav = ({ selected }) => {
             <div className='bg-akhdher2 border border-black relative'>
                 <XIcon className='absolute top-6 left-2 cursor-pointer text-white h-12 w-12' onClick={() => setOpen()} />
                 <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12 items-center justify-center'>
-                    <Link to={"/home"} onClick={() => setOpen()}>
+                    <Link to={"/accueil"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
                     </Link>
-                    <Link to={"/community"} onClick={() => setOpen()}>
+                    <Link to={"/community"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
                     </Link>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
+                    <Link to={"/mypods"}>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
+                    </Link>
+                    <Link to={"/edit"}>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
+                    </Link>
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>

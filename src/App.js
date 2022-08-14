@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import green_blob2 from "./assets/svgs/green_blob2.svg";
 import { AuthPage } from "./pages/AuthPage";
 import { CommunityPage } from "./pages/CommunityPage";
+import { EditChannelPage } from "./pages/EditChannelPage";
 import { HomePage } from "./pages/HomePage";
 import { LandingPage } from "./pages/LandingPage";
+import { MyChannelPage } from "./pages/MyChannelPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { useOpen } from "./store/store";
@@ -68,6 +70,22 @@ function App() {
           element={
             <div className="bg-gris2  relative">
               <HomePage />
+            </div>
+          }
+        />
+        <Route
+          path="/mypods"
+          element={
+            <div className="bg-gris2  relative">
+              <MyChannelPage />
+            </div>
+          }
+        />
+        <Route
+          path="/edit"
+          element={
+            <div className="bg-gris2  relative">
+              <EditChannelPage />
             </div>
           }
         />
