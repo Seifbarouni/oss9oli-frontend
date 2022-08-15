@@ -12,7 +12,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
                 }
             >
             </div>
-            <div className='w-full flex flex-col p-4 justify-center'>
+            <div className='w-full flex flex-col p-4 mt-4'>
                 <div className='xl:text-3xl text-xl'>{title}</div>
                 <div className='flex sm:flex-row flex-col justify-between items-center'>
                     <div>Par <span className='text-orange-300'>{creator}</span></div>

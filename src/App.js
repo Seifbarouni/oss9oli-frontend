@@ -4,6 +4,7 @@ import green_blob2 from "./assets/svgs/green_blob2.svg";
 import g_acc from "./assets/svgs/g_acc.svg";
 import o_acc from "./assets/svgs/o_acc.svg";
 import y_acc from "./assets/svgs/y_acc.svg";
+import g_form from "./assets/svgs/g_form.svg";
 import { AuthPage } from "./pages/AuthPage";
 import { CommunityPage } from "./pages/CommunityPage";
 import { EditChannelPage } from "./pages/EditChannelPage";
@@ -12,6 +13,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { MyChannelPage } from "./pages/MyChannelPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { AddPodcastPage } from "./pages/AddPodcastPage";
 import { useOpen } from "./store/store";
 
 function App() {
@@ -90,6 +92,17 @@ function App() {
           element={
             <div className="bg-gris2  relative">
               <MyChannelPage />
+            </div>
+          }
+        />
+        <Route
+          path="/addpod"
+          element={
+            <div className="bg-gris2  relative">
+              <div className="absolute  top-0 left-0 z-10 ">
+                <img src={g_form} alt="" className="" />
+              </div>
+              <AddPodcastPage />
             </div>
           }
         />
