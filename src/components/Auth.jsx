@@ -29,8 +29,12 @@ export const Auth = () => {
                     Rejoignez-nous!
                 </div>
                 <div className='mt-28 flex space-x-4'>
-                    <img src={google} alt="" className='transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer' />
-                    <img src={facebook} alt="" className='transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer' />
+                    <a href={`https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?access_type=offline&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URL}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email`}>
+                        <img src={google} alt="" className='transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer' />
+                    </a>
+                    <a href={`https://www.facebook.com/v14.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_FACEBOOK_REDIRECT_URL}&state=state-param&scope=email`}>
+                        <img src={facebook} alt="" className='transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer' />
+                    </a>
                 </div>
             </div>
             <div className='absolute bg-asfer p-12 rounded-[50px] border border-black flex flex-col justify-center items-center -z-10 top-1  -left-1'>
