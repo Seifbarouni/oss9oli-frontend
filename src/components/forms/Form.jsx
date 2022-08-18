@@ -19,6 +19,7 @@ export const Form = () => {
         formData.append("title", name)
         formData.append("description", description)
         const tagArray = tags.split("#")
+        console.log(tagArray)
         formData.append("tags", tagArray)
 
         formData.append("type", type)
@@ -37,14 +38,14 @@ export const Form = () => {
 
         } else {
             axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/podcasts`, formData, config).then(res => {
-                console.log(res)
+                window.location.href = "/mypods"
             }
             ).catch(err => {
-                console.log(err)
+                alert(err)
+                setLoading(false)
             }
             )
         }
-        setLoading(false)
     }
     return (
         <>
@@ -139,7 +140,7 @@ export const Form = () => {
                 </form>
             </div>
             }
-            {loading && <div>Loading...</div>}
+            {loading && <div className='pb-[1500px]'>Loading...</div>}
         </>
     )
 }
