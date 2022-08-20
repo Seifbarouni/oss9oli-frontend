@@ -1,5 +1,5 @@
 import { PlusIcon } from '@heroicons/react/outline'
-import React from 'react'
+import React, { useState } from 'react'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
@@ -8,9 +8,22 @@ import { useOpen } from '../store/store'
 import img1 from '../assets/images/1.png'
 import { Podcast } from '../components/Podcast'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import axios from "axios"
+import { useCookies } from 'react-cookie';
 
 export const MyChannelPage = () => {
     const open = useOpen((state) => state.open)
+    const [cookies] = useCookies(['oss9oli']);
+    const [myPodcasts, setMyPodcasts] = useState([])
+    const [myChannel, setMyChannel] = useState({})
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`, 
+        {headers: { Authorization: `Bearer ${cookies.oss9oli}` }}).then(res=>{
+            setMyPodcasts(res.data.data.pods)
+            setMyChannel(res.data.data.channel)
+        }).catch(err=> console.log(err))
+    }, [])
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
@@ -34,12 +47,11 @@ export const MyChannelPage = () => {
                         </span>
 
                     </div>
-                    <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                        <Podcast img={img1} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"36:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} w={"w-full"} h={"sm:h-96"} />
-                    </div>
-                    <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                        <Podcast img={img1} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"36:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} w={"w-full"} h={"sm:h-96"} />
-                    </div>
+                    {myPodcasts.map((podcast)=>(
+                        <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
+                            <Podcast img={myChannel.imageUrl} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

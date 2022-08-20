@@ -2,6 +2,13 @@ import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
 
 export const Podcast = ({ img, title, creator, duration, description, w, h }) => {
+    const convertDurationToString = ()=>{
+        let quotient = Math.floor(duration/60)>10? Math.floor(duration/60) :"0"+Math.floor(duration/60);
+
+        let remainder = duration%60>10? duration%60 :"0"+duration%60;
+
+        return quotient+":"+remainder
+    }
     return (
         <div className={`flex bg-white rounded-3xl border border-black justify-between ${w} ${h}`}>
             <div className='w-1/2 rounded-3xl bg-cover'
@@ -20,7 +27,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
                         <div
                             className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >
-                            <span>{duration}</span>
+                            <span>{convertDurationToString()}</span>
                             <span>
                                 <img src={play_2} alt="" />
                             </span>
@@ -28,7 +35,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
                         <div
                             className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
                         >
-                            <span className="invisible"> {duration} </span>
+                            <span className="invisible"> {convertDurationToString()} </span>
                         </div>
                     </div>
                 </div>
