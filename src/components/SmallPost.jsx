@@ -1,7 +1,23 @@
 import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
+import { useAudio } from '../store/store'
 
 export const SmallPost = ({ img, duration, title, creator, description }) => {
+    const setAudioData = useAudio((state) => state.setAudioData)
+    const openAudio = useAudio((state) => state.openAudio)
+    const id = '1'
+    const newAudio = () => {
+        openAudio()
+        setAudioData(
+            {
+                title,
+                img,
+                creator,
+                duration,
+                id
+            }
+        )
+    }
     return (
         <div className=' flex-col bg-white rounded-3xl border border-black justify-between h-[400px] w-72 p-1'>
             <div className='h-1/2 w-full rounded-3xl bg-cover border border-black'
@@ -16,7 +32,7 @@ export const SmallPost = ({ img, duration, title, creator, description }) => {
                 <div className=''>{title}</div>
                 <div className='flex justify-between items-center mt-2 text-sm'>
                     <div>Par <span className='text-orange-300'>{creator}</span></div>
-                    <div className="z-50 relative">
+                    <div className="z-50 relative" onClick={() => newAudio()}>
                         <div
                             className="text-white text-sm bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >

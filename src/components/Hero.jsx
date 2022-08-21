@@ -7,7 +7,7 @@ import { Arrow } from './Arrow'
 export const Hero = () => {
     return (
         <div
-            className="z-50 flex lg:flex-row flex-col justify-evenly items-center mt-16  relative"
+            className="z-30 flex lg:flex-row flex-col justify-evenly items-center mt-16  relative"
         >
             <div className="header md:text-[150px] sm:text-8xl text-6xl flex flex-col items-start">
                 <span>Faites</span>
@@ -24,7 +24,7 @@ export const Hero = () => {
                     à travers la création, la contribution et l'hébergement des
                     podcasts.
                 </div>
-                <JoinButton cd1={"lg:w-full w-3/4 mt-4 relative"} cd2={"text-white  bg-orng rounded-full py-3 sm:px-0 px-2 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 font-bold md:text-base text-sm "} cd3={"border border-black rounded-full py-3 absolute w-full right-1 top-1 sm:px-0 px-2 -z-50 md:text-base text-sm "}
+                <JoinButton cd1={"lg:w-full w-3/4 mt-4 relative"} cd2={"text-white  bg-orng rounded-full py-3 sm:px-0 px-2 text-center cursor-pointer border border-black z-30 transition duration-150 hover:-translate-x-1 hover:translate-y-1 font-bold md:text-base text-sm "} cd3={"border border-black rounded-full py-3 absolute w-full right-1 top-1 sm:px-0 px-2 -z-50 md:text-base text-sm "}
                     data={"JE REJOINS LA COMMUNAUTE"}
                     to={"/auth"}
                 />

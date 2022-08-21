@@ -28,14 +28,14 @@ export const ProfilePage = () => {
                 <img src={red_blob} alt="" className='' />
             </div>
 
-            <div className='flex z-50'>
+            <div className='flex z-40'>
                 {open && <div className='lg:flex hidden'>
                     <Sidebar selected={"profile"} />
                 </div>}
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <SmallScreenNav selected={"profile"} />
                 </div>}
-                <div className='flex flex-col flex-grow z-40'>
+                <div className='flex flex-col flex-grow z-30'>
                     <div className=' flex flex-col '>
                         <ProfileBanner episodes={13} shows={5} name={"Rana Jollanar Ben Hassine"} />
                     </div>

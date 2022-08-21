@@ -1,13 +1,28 @@
 import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
+import { useAudio } from '../store/store'
 
-export const Podcast = ({ img, title, creator, duration, description, w, h }) => {
-    const convertDurationToString = ()=>{
-        let quotient = Math.floor(duration/60)>10? Math.floor(duration/60) :"0"+Math.floor(duration/60);
+export const Podcast = ({ podcastId , img, title, creator, duration, description, w, h }) => {
+    const convertDurationToString = () => {
+        let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
-        let remainder = duration%60>10? duration%60 :"0"+duration%60;
+        let remainder = duration % 60 > 10 ? duration % 60 : "0" + duration % 60;
 
-        return quotient+":"+remainder
+        return quotient + ":" + remainder
+    }
+    const setAudioData = useAudio((state) => state.setAudioData)
+    const openAudio = useAudio((state) => state.openAudio)
+    const newAudio = () => {
+        openAudio()
+        setAudioData(
+            {
+                title,
+                img,
+                creator,
+                duration,
+                podcastId
+            }
+        )
     }
     return (
         <div className={`flex bg-white rounded-3xl border border-black justify-between ${w} ${h}`}>
@@ -23,7 +38,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
                 <div className='xl:text-3xl text-xl'>{title}</div>
                 <div className='flex sm:flex-row flex-col justify-between items-center'>
                     <div>Par <span className='text-orange-300'>{creator}</span></div>
-                    <div className="z-50 relative">
+                    <div className="z-50 relative" onClick={() => newAudio()}>
                         <div
                             className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >
