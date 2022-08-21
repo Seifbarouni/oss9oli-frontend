@@ -31,121 +31,116 @@ function App() {
     }
   }, [close]);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="bg-gris2 -z-50 md:px-0 px-0.5">
-              <LandingPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/packs"
-          element={
-            <div className="bg-gris2 -z-50">
-              <PacksPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/auth"
-          element={
-            <div className="bg-gris2 -z-50">
-              <AuthPage />
-            </div>
-          }
-        />
-        <Route
-          path="/community"
-          element={
-            <div className="bg-gris2 -z-50">
-              <CommunityPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <div className="bg-gris2  relative">
-              <div className="absolute  bottom-0 left-0">
-                <img src={green_blob2} alt="" className="" />
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="bg-gris2 -z-50 md:px-0 px-0.5">
+                <LandingPage />
               </div>
-              <ProfilePage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/auth-facebook"
-          element={
-            <div className="bg-gris2 -z-50">
-              <FacebookAuth />
-            </div>
-          }
-        />
-        <Route
-          path="/accueil"
-          element={
-            <div className="bg-gris2  relative">
-              <div className="absolute  top-0 right-0">
-                <img src={g_acc} alt="" className="" />
+            }
+          />
+          <Route
+            path="/packs"
+            element={
+              <div className="bg-gris2 -z-50">
+                <PacksPage />
               </div>
-              <div className="absolute  bottom-0 left-0">
-                <img src={o_acc} alt="" className="" />
+            }
+          />
+          <Route
+            path="/auth"
+            element={
+              <div className="bg-gris2 -z-50">
+                <AuthPage />
               </div>
-              <div className="absolute  bottom-0 right-0">
-                <img src={y_acc} alt="" className="" />
+            }
+          />
+          <Route
+            path="/community"
+            element={
+              <div className="bg-gris2 -z-50">
+                <CommunityPage />
               </div>
-              <HomePage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/mypods"
-          element={
-            <div className="bg-gris2  relative">
-              <MyChannelPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/addpod"
-          element={
-            <div className="bg-gris2  relative">
-              <div className="absolute  top-0 left-0 z-10 ">
-                <img src={g_form} alt="" className="" />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <div className="bg-gris2  relative">
+                <div className="absolute  bottom-0 left-0">
+                  <img src={green_blob2} alt="" className="" />
+                </div>
+                <ProfilePage />
               </div>
-              <AddPodcastPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/edit"
-          element={
-            <div className="bg-gris2  relative">
-              <EditChannelPage />
-              {isAudioBarOpen && <AudioBar />}
-            </div>
-          }
-        />
-        <Route
-          path="/auth-google"
-          element={
-            <div className="bg-gris2 -z-50">
-              <GoogleAuth />
-            </div>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+            }
+          />
+          <Route
+            path="/auth-facebook"
+            element={
+              <div className="bg-gris2 -z-50">
+                <FacebookAuth />
+              </div>
+            }
+          />
+          <Route
+            path="/accueil"
+            element={
+              <div className="bg-gris2  relative">
+                <div className="absolute  top-0 right-0">
+                  <img src={g_acc} alt="" className="" />
+                </div>
+                <div className="absolute  bottom-0 left-0">
+                  <img src={o_acc} alt="" className="" />
+                </div>
+                <div className="absolute  bottom-0 right-0">
+                  <img src={y_acc} alt="" className="" />
+                </div>
+                <HomePage />
+              </div>
+            }
+          />
+          <Route
+            path="/mypods"
+            element={
+              <div className="bg-gris2  relative">
+                <MyChannelPage />
+              </div>
+            }
+          />
+          <Route
+            path="/addpod"
+            element={
+              <div className="bg-gris2  relative">
+                <div className="absolute  top-0 left-0 z-10 ">
+                  <img src={g_form} alt="" className="" />
+                </div>
+                <AddPodcastPage />
+              </div>
+            }
+          />
+          <Route
+            path="/edit"
+            element={
+              <div className="bg-gris2  relative">
+                <EditChannelPage />
+              </div>
+            }
+          />
+          <Route
+            path="/auth-google"
+            element={
+              <div className="bg-gris2 -z-50">
+                <GoogleAuth />
+              </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+      {isAudioBarOpen && <AudioBar />}
+    </div>
   );
 }
 

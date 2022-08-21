@@ -2,7 +2,7 @@ import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
 
-export const Podcast = ({ podcastId , img, title, creator, duration, description, w, h }) => {
+export const Podcast = ({ podcastId, img, title, creator, duration, description, w, h }) => {
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -29,7 +29,7 @@ export const Podcast = ({ podcastId , img, title, creator, duration, description
             <div className='w-1/2 rounded-3xl bg-cover'
                 style={
                     {
-                        backgroundImage: `url(data:${img?.contentType};base64,${img?.data.toString('base64')})`
+                        backgroundImage: `url(data:${img?.contentType};base64,${img?.data?.toString('base64')})`
                     }
                 }
             >

@@ -49,7 +49,7 @@ export const MyChannelPage = () => {
                     </div>
                     {myPodcasts.map((podcast) => (
                         <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                            <Podcast podcastId={podcast._id} img={myChannel.imageUrl} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
+                            <Podcast podcastId={podcast._id} img={myChannel.image} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
                         </div>
                     ))}
                     {myPodcasts.length === 0 &&
