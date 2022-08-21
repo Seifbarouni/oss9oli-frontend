@@ -4,54 +4,42 @@ import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
-import axios from 'axios'
 
-
+var interval = null;
 export const AudioBar = () => {
     const audioData = useAudio((state) => state.audioData)
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [file, setFile] = useState("")
-    const [fileType, setFileType] = useState("")
     const [currentTime, setCurrentTime] = useState("")
     const audioEl = useRef()
     const playPod = () => {
-        setIsPlaying(true)
         audioEl.current.play()
     }
     const pausePod = () => {
-        setIsPlaying(false)
         audioEl.current.pause()
     }
     const convertDurationToString = (duration) => {
         duration = Math.floor(duration)
-        let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
+        let quotient = Math.floor(duration / 60) >= 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
-        let remainder = duration % 60 > 10 ? duration % 60 : "0" + duration % 60;
+        let remainder = duration % 60 >= 10 ? duration % 60 : "0" + duration % 60;
 
         return quotient + ":" + remainder
     }
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`)
-            .then(res => {
-                setFile(res.data.data.audio)
-                setFileType(res.data.data.name.split(".")[1])
-                setTimeout(() => {
-                    audioEl.current.play()
-                }, 100)
-                setIsPlaying(true)
-            }).catch(err => {
-                console.log(err)
-            })
+        setTimeout(() => {
+                audioEl.current.play()
+        }, 1000)
 
-        setInterval(() => {
+        if (interval != null) clearInterval(interval)
+
+        interval = setInterval(() => {
             setCurrentTime(audioEl?.current?.currentTime)
         }, 1000)
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
-            <audio src={`data:audio/${fileType};base64, ${file}`} ref={audioEl} className=" border-2 border-red-500"></audio>
+            <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
             <div className='flex w-1/3 justify-start'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
                     <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data?.toString('base64')}`} alt="" className='rounded-lg' />
@@ -65,9 +53,9 @@ export const AudioBar = () => {
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
                 <span className='cursor-pointer'>
-                    <img src={fastb} alt="" />
+                    <img src={fastb} alt="" onClick={()=>{audioEl.current.currentTime-= 10}}/>
                 </span>
-                {!isPlaying ? <span className='cursor-pointer' onClick={() => playPod()}>
+                {audioEl.current?.paused ? <span className='cursor-pointer' onClick={() => playPod()}>
                     <img src={play} alt="" />
                 </span> :
                     <span className='cursor-pointer' onClick={() => pausePod()}>
@@ -75,7 +63,7 @@ export const AudioBar = () => {
                     </span>
                 }
                 <span className='cursor-pointer'>
-                    <img src={fastf} alt="" />
+                    <img src={fastf} alt="" onClick={()=>{audioEl.current.currentTime+= 10}}/>
                 </span>
             </div>
             <div className='w-1/3 flex justify-end xl:mr-4'>

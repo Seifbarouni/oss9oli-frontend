@@ -28,12 +28,9 @@ export const Form = () => {
         formData.append("file", file)
         const config = {
             headers: {
-                'content-type': 'multipart/form-data'
-            },
-            headers: { 
+                'content-type': 'multipart/form-data',
                 Authorization: `Bearer ${cookies.oss9oli}` 
-            }
-            
+            },
         }
         //check file is bigger than 100MB
 
