@@ -16,6 +16,7 @@ export const MyChannelPage = () => {
     const [cookies] = useCookies(['oss9oli']);
     const [myPodcasts, setMyPodcasts] = useState([])
     const [myChannel, setMyChannel] = useState({})
+    
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
