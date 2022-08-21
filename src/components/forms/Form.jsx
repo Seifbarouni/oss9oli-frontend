@@ -52,14 +52,33 @@ export const Form = () => {
             )
         }
     }
+
+    const getProgress= ()=>{
+        let points = 1
+        if(name) points++;
+        if(description) points++;
+        if(tags) points++;
+        if(file) points++;
+        return points;
+    }
+
     return (
         <>
             {!loading && <div className='w-full flex flex-col pb-[700px]'>
                 <div className='flex flex-col space-y-2'>
                     <span>Avancement</span>
                     <span className='border border-black  w-full flex'>
-                        <span className='w-1/3 bg-orng2 p-1.5'></span>
-                        <span className='w-2/3 bg-white p-1.5'></span>
+                        {
+                            getProgress()<5?
+                            <>
+                                <span className={'w-'+getProgress()+'/5 bg-orng2 p-1.5'}></span>
+                                <span className={'w-'+(5-getProgress())+'/5 bg-white p-1.5'}></span>
+                                </>
+                                :
+                                <span className={'w-full bg-orng2 p-1.5'}></span>
+
+                        }
+                        
                     </span>
                 </div>
                 <form className='rounded-3xl border border-black  bg-white flex flex-col  w-full justify-center items-center p-4 mt-12 relative' onSubmit={onSubmit}>
