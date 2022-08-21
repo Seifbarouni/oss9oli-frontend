@@ -2,7 +2,7 @@ import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
 
-export const Podcast = ({ img, title, creator, duration, description, w, h }) => {
+export const Podcast = ({ podcastId , img, title, creator, duration, description, w, h }) => {
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -12,7 +12,6 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
     }
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
-    const id = '1'
     const newAudio = () => {
         openAudio()
         setAudioData(
@@ -21,7 +20,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
                 img,
                 creator,
                 duration,
-                id
+                podcastId
             }
         )
     }

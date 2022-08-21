@@ -12,9 +12,9 @@ export const AudioBar = () => {
     const [isPlaying, setIsPlaying] = useState(false)
     const [file, setFile] = useState("")
     const [fileType, setFileType] = useState("")
+    const [currentTime, setCurrentTime] = useState("")
     const audioEl = useRef()
     const playPod = () => {
-        console.log(`data:audio/${fileType};base64,${file}`)
         setIsPlaying(true)
         audioEl.current.play()
     }
@@ -22,17 +22,28 @@ export const AudioBar = () => {
         setIsPlaying(false)
         audioEl.current.pause()
     }
+    const convertDurationToString = (duration) => {
+        duration = Math.floor(duration)
+        let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
+
+        let remainder = duration % 60 > 10 ? duration % 60 : "0" + duration % 60;
+
+        return quotient + ":" + remainder
+    }
     useEffect(() => {
         // fetch the audio data using audioData.id
-        axios.get(`http://localhost:5000/api/v1/podcasts/62fe5e103214f0e6573ec463`)
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`)
             .then(res => {
-                console.log(res.data.data)
                 setFile(res.data.data.audio)
                 setFileType(res.data.data.name.split(".")[1])
                 audioEl.current.play()
+                setIsPlaying(true) 
             }).catch(err => {
                 console.log(err)
             })
+        setInterval(()=>{
+            setCurrentTime(audioEl?.current.currentTime)
+        }, 1000)
     }, [audioData.id])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
@@ -49,7 +60,7 @@ export const AudioBar = () => {
                 </div>
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
-                <span className='cursor-pointer'>
+                <span className='cursor-pointer'> 
                     <img src={fastb} alt="" />
                 </span>
                 {!isPlaying ? <span className='cursor-pointer' onClick={() => playPod()}>
@@ -64,7 +75,7 @@ export const AudioBar = () => {
                 </span>
             </div>
             <div className='w-1/3 flex justify-end xl:mr-4'>
-                <span className='xl:text-xl'>00:00/{audioData.duration}</span>
+                <span className='xl:text-xl'>{convertDurationToString(currentTime)}/{convertDurationToString(audioData.duration)}</span>
             </div>
         </div>
     )
