@@ -6,7 +6,6 @@ import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
 import axios from 'axios'
 
-let sm = ""
 
 export const AudioBar = () => {
     const audioData = useAudio((state) => state.audioData)
@@ -14,7 +13,6 @@ export const AudioBar = () => {
     const [file, setFile] = useState("")
     const [fileType, setFileType] = useState("")
     const [currentTime, setCurrentTime] = useState("")
-    const [oldId, setOldId] = useState("")
     const audioEl = useRef()
     const playPod = () => {
         setIsPlaying(true)
@@ -35,7 +33,6 @@ export const AudioBar = () => {
 
 
     useEffect(() => {
-        console.log(audioData)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`)
             .then(res => {
                 setFile(res.data.data.audio)
