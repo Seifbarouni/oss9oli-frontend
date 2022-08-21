@@ -37,22 +37,24 @@ export const AudioBar = () => {
             .then(res => {
                 setFile(res.data.data.audio)
                 setFileType(res.data.data.name.split(".")[1])
-                audioEl.current.play()
-                setIsPlaying(true) 
+                setTimeout(() => {
+                    audioEl.current.play()
+                }, 100)
+                setIsPlaying(true)
             }).catch(err => {
                 console.log(err)
             })
 
-        setInterval(()=>{
-            setCurrentTime(audioEl?.current.currentTime)
+        setInterval(() => {
+            setCurrentTime(audioEl?.current?.currentTime)
         }, 1000)
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
-            <audio src={`data:audio/${fileType};base64, ${file}`} ref={audioEl}></audio>
-            <div className='flex w-1/3 justify-center'>
+            <audio src={`data:audio/${fileType};base64, ${file}`} ref={audioEl} className=" border-2 border-red-500"></audio>
+            <div className='flex w-1/3 justify-start'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
-                    <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data.toString('base64')}`} alt="" className='rounded-lg' />
+                    <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data?.toString('base64')}`} alt="" className='rounded-lg' />
                 </div>
                 <div className='flex flex-col ml-2'>
                     <span className='xl:text-xl font-bold'>{audioData.title}</span>
@@ -62,7 +64,7 @@ export const AudioBar = () => {
                 </div>
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
-                <span className='cursor-pointer'> 
+                <span className='cursor-pointer'>
                     <img src={fastb} alt="" />
                 </span>
                 {!isPlaying ? <span className='cursor-pointer' onClick={() => playPod()}>
