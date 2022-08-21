@@ -1,19 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import fastf from '../assets/svgs/fastf.svg'
 import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
+import axios from 'axios'
 
 
 export const AudioBar = () => {
     const audioData = useAudio((state) => state.audioData)
     const [isPlaying, setIsPlaying] = useState(false)
+    const [file, setFile] = useState("")
+    const [fileType, setFileType] = useState("")
+    const audioEl = useRef()
+    const playPod = () => {
+        console.log(`data:audio/${fileType};base64,${file}`)
+        setIsPlaying(true)
+        audioEl.current.play()
+    }
+    const pausePod = () => {
+        setIsPlaying(false)
+        audioEl.current.pause()
+    }
     useEffect(() => {
         // fetch the audio data using audioData.id
-    }, [])
+        axios.get(`http://localhost:5000/api/v1/podcasts/62fe5e103214f0e6573ec463`)
+            .then(res => {
+                console.log(res.data.data)
+                setFile(res.data.data.audio)
+                setFileType(res.data.data.name.split(".")[1])
+                audioEl.current.play()
+            }).catch(err => {
+                console.log(err)
+            })
+    }, [audioData.id])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
+            <audio src={`data:audio/${fileType};base64, ${file}`} ref={audioEl}></audio>
             <div className='flex w-1/3 justify-center'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
                     <img src={audioData.img} alt="" className='rounded-lg' />
@@ -29,10 +52,10 @@ export const AudioBar = () => {
                 <span className='cursor-pointer'>
                     <img src={fastb} alt="" />
                 </span>
-                {!isPlaying ? <span className='cursor-pointer' onClick={() => setIsPlaying(!isPlaying)}>
+                {!isPlaying ? <span className='cursor-pointer' onClick={() => playPod()}>
                     <img src={play} alt="" />
                 </span> :
-                    <span className='cursor-pointer' onClick={() => setIsPlaying(!isPlaying)}>
+                    <span className='cursor-pointer' onClick={() => pausePod()}>
                         <img src={pause} alt="" />
                     </span>
                 }
