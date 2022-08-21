@@ -5,7 +5,6 @@ import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
-import img1 from '../assets/images/1.png'
 import { Podcast } from '../components/Podcast'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -17,12 +16,12 @@ export const MyChannelPage = () => {
     const [cookies] = useCookies(['oss9oli']);
     const [myPodcasts, setMyPodcasts] = useState([])
     const [myChannel, setMyChannel] = useState({})
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`, 
-        {headers: { Authorization: `Bearer ${cookies.oss9oli}` }}).then(res=>{
-            setMyPodcasts(res.data.data.pods)
-            setMyChannel(res.data.data.channel)
-        }).catch(err=> console.log(err))
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`,
+            { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
+                setMyPodcasts(res.data.data.pods)
+                setMyChannel(res.data.data.channel)
+            }).catch(err => console.log(err))
     }, [])
     return (
         <div className='flex flex-col'>
@@ -47,11 +46,15 @@ export const MyChannelPage = () => {
                         </span>
 
                     </div>
-                    {myPodcasts.map((podcast)=>(
+                    {myPodcasts.map((podcast) => (
                         <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
                             <Podcast img={myChannel.imageUrl} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
                         </div>
                     ))}
+                    {myPodcasts.length === 0 &&
+                        <div className='pb-[665px]'>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

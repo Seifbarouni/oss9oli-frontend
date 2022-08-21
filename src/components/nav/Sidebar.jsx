@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Sidebar = ({ selected }) => {
     return (
-        <div className='h-full z-50 font-semibold sticky w-96'>
+        <div className='h-full z-40 font-semibold sticky w-96'>
             <div className='bg-akhdher2 border border-black rounded-r-3xl'>
                 <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12'>
                     <Link to={"/accueil"}>

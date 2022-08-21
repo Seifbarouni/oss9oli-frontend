@@ -40,7 +40,7 @@ export const LandingPage = () => {
             </div>
 
             <div
-                className="relative items-center justify-evenly mt-28 z-50 flex md:flex-row flex-col"
+                className="relative items-center justify-evenly mt-28 z-30 flex md:flex-row flex-col"
             >
                 <div className="absolute -z-50 left-2/3 -mt-16">
                     <img src={green_blob} alt="" />
@@ -66,7 +66,7 @@ export const LandingPage = () => {
             </div>
 
             <div
-                className="relative items-center justify-evenly mt-28 z-50 flex md:flex-row flex-col "
+                className="relative items-center justify-evenly mt-28 z-30 flex md:flex-row flex-col "
             >
 
                 <div className="absolute -z-50 left-0">
@@ -114,7 +114,7 @@ export const LandingPage = () => {
                 <div className='absolute right-0 -top-96 xl:flex hidden'>
                     <GoldenArrow w={950} h={750} />
                 </div>
-                <div className="relative z-50">
+                <div className="relative z-40">
                     <div
                         className="bg-white rounded-3xl md:w-96 w-full md:flex hidden h-72 p-6 border border-black absolute right-1 top-1 -z-30"
                     >
@@ -142,7 +142,7 @@ export const LandingPage = () => {
                         />
                     </div>
                 </div>
-                <div className="rounded-3xl md:w-2/3 w-full md:ml-4 md:mt-0 mt-2 h-72 z-50 ">
+                <div className="rounded-3xl md:w-2/3 w-full md:ml-4 md:mt-0 mt-2 h-72 z-40 ">
                     <div
                         className="bg-fit rounded-3xl w-full h-full -z-50 opacity-70 flex flex-col justify-between"
                         style={{
@@ -185,7 +185,7 @@ export const LandingPage = () => {
 
                 </div>
                 <div
-                    className="relative md:w-1/3 w-full border border-black rounded-3xl flex flex-col items-center md:mt-0 mt-8 z-50"
+                    className="relative md:w-1/3 w-full border border-black rounded-3xl flex flex-col items-center md:mt-0 mt-8 z-40"
                 >
                     <div
                         className="h-full w-full bg-black opacity-70 -z-40 absolute rounded-3xl"

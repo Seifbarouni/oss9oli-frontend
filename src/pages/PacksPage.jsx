@@ -38,7 +38,7 @@ export const PacksPage = () => {
                     <img src={orange_star} alt="" />
                 </div> */}
             </div>
-            <div className='mt-16 flex 2xl:flex-row flex-col w-full  2xl:space-x-8 2xl:space-y-0 space-y-4 justify-center items-center z-50'>
+            <div className='mt-16 flex 2xl:flex-row flex-col w-full  2xl:space-x-8 2xl:space-y-0 space-y-4 justify-center items-center z-40'>
 
                 {/* <div className=''>
                     <Pack
@@ -122,7 +122,7 @@ export const PacksPage = () => {
                     </Pack>
                 </div>
             </div>
-            <div className='mt-4 flex  justify-center items-center z-50'>
+            <div className='mt-4 flex  justify-center items-center z-40'>
                 <Pack
                     color={"azreg"}
                     price={0}

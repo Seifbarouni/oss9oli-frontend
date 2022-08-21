@@ -15,13 +15,15 @@ import { MyChannelPage } from "./pages/MyChannelPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { AddPodcastPage } from "./pages/AddPodcastPage";
-import { useOpen } from "./store/store";
+import { useAudio, useOpen } from "./store/store";
 
 import { FacebookAuth } from "./pages/FacebookAuth";
 import { GoogleAuth } from "./pages/GoogleAuth";
+import { AudioBar } from "./components/AudioBar";
 
 function App() {
   const close = useOpen((state) => state.close);
+  const isAudioBarOpen = useAudio((state) => state.isOpen);
   useEffect(() => {
     // If screen is medium or smaller, open the menu.
     if (window.innerWidth <= 1250) {
@@ -36,6 +38,7 @@ function App() {
           element={
             <div className="bg-gris2 -z-50 md:px-0 px-0.5">
               <LandingPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -44,6 +47,7 @@ function App() {
           element={
             <div className="bg-gris2 -z-50">
               <PacksPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -60,6 +64,7 @@ function App() {
           element={
             <div className="bg-gris2 -z-50">
               <CommunityPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -71,6 +76,7 @@ function App() {
                 <img src={green_blob2} alt="" className="" />
               </div>
               <ProfilePage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -96,6 +102,7 @@ function App() {
                 <img src={y_acc} alt="" className="" />
               </div>
               <HomePage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -104,6 +111,7 @@ function App() {
           element={
             <div className="bg-gris2  relative">
               <MyChannelPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -115,6 +123,7 @@ function App() {
                 <img src={g_form} alt="" className="" />
               </div>
               <AddPodcastPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
@@ -123,6 +132,7 @@ function App() {
           element={
             <div className="bg-gris2  relative">
               <EditChannelPage />
+              {isAudioBarOpen && <AudioBar />}
             </div>
           }
         />
