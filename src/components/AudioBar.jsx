@@ -6,6 +6,7 @@ import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
 import axios from 'axios'
 
+let sm = ""
 
 export const AudioBar = () => {
     const audioData = useAudio((state) => state.audioData)
@@ -13,6 +14,7 @@ export const AudioBar = () => {
     const [file, setFile] = useState("")
     const [fileType, setFileType] = useState("")
     const [currentTime, setCurrentTime] = useState("")
+    const [oldId, setOldId] = useState("")
     const audioEl = useRef()
     const playPod = () => {
         setIsPlaying(true)
@@ -30,8 +32,10 @@ export const AudioBar = () => {
 
         return quotient + ":" + remainder
     }
+
+
     useEffect(() => {
-        // fetch the audio data using audioData.id
+        console.log(audioData)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`)
             .then(res => {
                 setFile(res.data.data.audio)
@@ -41,16 +45,17 @@ export const AudioBar = () => {
             }).catch(err => {
                 console.log(err)
             })
+
         setInterval(()=>{
             setCurrentTime(audioEl?.current.currentTime)
         }, 1000)
-    }, [audioData.id])
+    }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
             <audio src={`data:audio/${fileType};base64, ${file}`} ref={audioEl}></audio>
             <div className='flex w-1/3 justify-center'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
-                    <img src={audioData.img} alt="" className='rounded-lg' />
+                    <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data.toString('base64')}`} alt="" className='rounded-lg' />
                 </div>
                 <div className='flex flex-col ml-2'>
                     <span className='xl:text-xl font-bold'>{audioData.title}</span>
