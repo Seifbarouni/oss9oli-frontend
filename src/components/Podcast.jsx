@@ -14,7 +14,7 @@ export const Podcast = ({ img, title, creator, duration, description, w, h }) =>
             <div className='w-1/2 rounded-3xl bg-cover'
                 style={
                     {
-                        backgroundImage: `url(${img})`
+                        backgroundImage: `url(data:${img?.contentType};base64,${img?.data.toString('base64')})`
                     }
                 }
             >
