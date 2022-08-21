@@ -4,7 +4,7 @@ import audio from '../../assets/svgs/audio.svg'
 import black_star from '../../assets/svgs/black_star.svg'
 import yellow_star from '../../assets/svgs/yellow_star.svg'
 import axios from 'axios'
-
+import { useCookies } from 'react-cookie'
 export const Form = () => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -12,6 +12,8 @@ export const Form = () => {
     const [type, setType] = useState("Monologue")
     const [file, setFile] = useState("")
     const [loading, setLoading] = useState(false)
+    const [cookies] = useCookies(['oss9oli']);
+
     const onSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -23,12 +25,15 @@ export const Form = () => {
         formData.append("tags", tagArray)
 
         formData.append("type", type)
-        formData.append("channelId", "62fd2fe11f3066f75b3de1a1")
         formData.append("file", file)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
+            },
+            headers: { 
+                Authorization: `Bearer ${cookies.oss9oli}` 
             }
+            
         }
         //check file is bigger than 100MB
 
@@ -37,7 +42,7 @@ export const Form = () => {
             setFile("")
 
         } else {
-            axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/podcasts`, formData, config).then(res => {
+            axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts`, formData, config).then(res => {
                 window.location.href = "/mypods"
             }
             ).catch(err => {

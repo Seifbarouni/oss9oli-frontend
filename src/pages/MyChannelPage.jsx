@@ -22,6 +22,7 @@ export const MyChannelPage = () => {
         {headers: { Authorization: `Bearer ${cookies.oss9oli}` }}).then(res=>{
             setMyPodcasts(res.data.data.pods)
             setMyChannel(res.data.data.channel)
+            console.log(res.data.data.channel)
         }).catch(err=> console.log(err))
     }, [])
     return (
@@ -49,7 +50,7 @@ export const MyChannelPage = () => {
                     </div>
                     {myPodcasts.map((podcast)=>(
                         <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                            <Podcast img={myChannel.imageUrl} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
+                            <Podcast img={myChannel.image} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
                         </div>
                     ))}
                 </div>

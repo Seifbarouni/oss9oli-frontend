@@ -5,9 +5,8 @@ import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
 import axios from 'axios'
-
+import { useCookies } from 'react-cookie'
 export const EditChannelPage = () => {
-    const userId = "62fd2ff21f3066f75b3de1a2"
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [file, setFile] = useState()
@@ -15,10 +14,13 @@ export const EditChannelPage = () => {
     const [preview, setPreview] = useState()
     const [channelId, setChannelId] = useState("")
     const [loading, setLoading] = useState(false)
+    const [cookies] = useCookies(['oss9oli']);
     const open = useOpen((state) => state.open)
     useEffect(() => {
         setLoading(true)
-        axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/channels/${userId}`).then(res => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, {
+            headers: { Authorization: `Bearer ${cookies.oss9oli}` }
+        }).then(res => {
             setName(res.data.data.name)
             setDescription(res.data.data.description)
             setChannelId(res.data.data._id)
@@ -50,9 +52,12 @@ export const EditChannelPage = () => {
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
+            },
+            headers: { 
+                Authorization: `Bearer ${cookies.oss9oli}` 
             }
         }
-        axios.put(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/channels/${channelId}`, formData, config).then(res => {
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, formData, config).then(res => {
             console.log(res)
             window.location.reload()
         }
