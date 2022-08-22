@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Events } from '../components/Events'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
@@ -8,8 +8,24 @@ import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
 import { Vote } from '../components/Vote'
 import { useOpen } from '../store/store'
+import { useNavigate } from 'react-router-dom'
+import { decode } from '../jwt/jwt'
+import { useCookies } from 'react-cookie'
 
 export const CommunityPage = () => {
+    const navigate = useNavigate()
+    const [cookies] = useCookies(['oss9oli']);
+
+    useEffect(() => {
+        if (Object.entries(cookies).length === 0) {
+            navigate("/auth")
+        }
+        const { pack } = decode(cookies.oss9oli)
+        if (pack === "" || pack === "free" || pack === "consumer_pack") {
+            navigate("/accueil")
+        }
+    }, [])
+
     const open = useOpen((state) => state.open)
     return (
         <div className='flex flex-col'>

@@ -6,6 +6,9 @@ import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { decode } from '../jwt/jwt'
+import { useNavigate } from 'react-router-dom'
+
 export const EditChannelPage = () => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -16,7 +19,15 @@ export const EditChannelPage = () => {
     const [loading, setLoading] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
     const open = useOpen((state) => state.open)
+    const navigate = useNavigate()
     useEffect(() => {
+        if (Object.entries(cookies).length === 0) {
+            navigate("/auth")
+        }
+        const { pack } = decode(cookies.oss9oli)
+        if (pack !== "producer_pack") {
+            navigate("/accueil")
+        }
         setLoading(true)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, {
             headers: { Authorization: `Bearer ${cookies.oss9oli}` }
@@ -53,8 +64,8 @@ export const EditChannelPage = () => {
             headers: {
                 'content-type': 'multipart/form-data'
             },
-            headers: { 
-                Authorization: `Bearer ${cookies.oss9oli}` 
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
             }
         }
         axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, formData, config).then(res => {

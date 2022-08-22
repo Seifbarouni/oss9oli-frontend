@@ -2,9 +2,13 @@ import { XIcon } from '@heroicons/react/solid'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useOpen } from '../../store/store'
+import { useCookies } from 'react-cookie'
+import { decode } from '../../jwt/jwt'
 
 export const SmallScreenNav = ({ selected }) => {
     const setOpen = useOpen((state) => state.setOpen)
+    const [cookies] = useCookies(['oss9oli']);
+    const { pack } = decode(cookies.oss9oli)
     return (
         <div className='z-50 w-screen'>
             <div className='bg-akhdher2 border border-black relative'>
@@ -13,15 +17,15 @@ export const SmallScreenNav = ({ selected }) => {
                     <Link to={"/accueil"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
                     </Link>
-                    <Link to={"/community"}>
+                    {pack !== "free" && pack !== "consumer_pack" && <Link to={"/community"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
-                    </Link>
-                    <Link to={"/mypods"}>
+                    </Link>}
+                    {pack === "producer_pack" && <Link to={"/mypods"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
-                    </Link>
-                    <Link to={"/edit"}>
+                    </Link>}
+                    {pack === "producer_pack" && <Link to={"/edit"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
-                    </Link>
+                    </Link>}
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>

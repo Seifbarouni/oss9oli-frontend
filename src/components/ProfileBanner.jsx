@@ -1,14 +1,14 @@
 import React from 'react'
 import spark from '../assets/svgs/spark2.svg'
 
-export const ProfileBanner = ({ shows, episodes, name }) => {
+export const ProfileBanner = ({ shows, episodes, name, img }) => {
     return (
         <div className='border border-black border-l-0 border-t-0 bg-orng4 flex md:flex-row flex-col items-center'>
             <div className='md:border-r border-black p-12  z-50'>
-                <div className='border border-black bg-white rounded-full h-44 w-44 relative'>
+                <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
                     <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
                     </div>
-                    <img src="https://avatars.dicebear.com/api/croodles/me.svg" alt="" />
+                    <img src={img} alt="" className='rounded-full' />
                 </div>
             </div>
             <div className='p-12 flex flex-col'>
