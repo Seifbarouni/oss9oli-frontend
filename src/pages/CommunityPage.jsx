@@ -8,13 +8,17 @@ import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
 import { Vote } from '../components/Vote'
 import { useOpen } from '../store/store'
-import { useNavigate } from 'react-router-dom'
+import { createPath, useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
+import { useState } from 'react'
+import axios from 'axios'
 
 export const CommunityPage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
+    const [post, setPost] = useState("");
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
@@ -24,7 +28,25 @@ export const CommunityPage = () => {
         if (pack === "" || pack === "free" || pack === "consumer_pack") {
             navigate("/accueil")
         }
+        axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`).then(res=>{
+            if(res.data.success){
+                setPosts(res.data.data)
+                console.log(res.data)
+            }
+        }).catch(err=>console.error(err))
     }, [])
+
+    const publish = ()=>{
+        axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`, {
+            content: post,
+            userId: (decode(cookies.oss9oli)).userId
+        }).then(res=>{
+            if(res.data.success){
+                window.location.reload()
+            }
+        }).catch(err=>console.error(err))
+    }
+
 
     const open = useOpen((state) => state.open)
     return (
@@ -44,8 +66,22 @@ export const CommunityPage = () => {
                     <div className='flex flex-col space-y-2'>
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>Minassa lab</span>
+                    </div> 
+                    <div className='flex flex-col mt-6 space-y-1'>
+                                <input type="text" value={post} onChange={e=> setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelques choses...' required />
                     </div>
-                    <div className='flex flex-col mt-24'>
+                    <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
+
+                        <button className="relative mb-6 z-50 mt-16" onClick={publish} >
+                            <div className='text-white rounded-full bg-orng2 border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
+                                Publier
+                            </div>
+                            <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
+                                Publier
+                            </div>
+                        </button>
+                    </div>
+                    {/*<div className='flex flex-col mt-24'>
                         <span className='text-3xl font-semibold'>Evènements à venir</span>
                         <div className='mt-4 flex w-full'>
                             <Events />
@@ -62,10 +98,17 @@ export const CommunityPage = () => {
                     <div className='mt-12'>
                         <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
                     </div>
-                    <div className='border-b border-black mt-12'></div>
-                    <div className='mt-12'>
-                        <Post name={"Kais Saied"} data={"يضيف رمزي، “جميع أشقائي زوجاتهم لا يعملن، فكيف تعمل زوجتي في المستقبل!؟، مهمة العمل تقتصر على الزوج، ومن الناحية الاقتصادية ومساهمة الزوجة في متطلبات الحياة المتعددة، فهذا واجب الزوج وعليه التفكير به جيدا قبل عقد قرانه”. وتواجه العديد من الفتيات مشكلة في تفكير الشباب المقبلين على الزواج، فتراه ناضجا.. متعلما.. مثقفا… لكنه لا يؤيد فكرة عمل الفتاة المتزوجة، يعتقد بأن “شهادة الفتاة شكلية”، معللا ذلك بدورها الأهم في تربية الأبناء وتنشئتهم، وإدارتها لشؤون المنزل، وغيرها من الأسباب التي تقف حجر عثرة في إتمام الزواج أحيانا. وتفكر حينها الفتاة: هل أتنازل عن كل تعبي في سبيل الحصول على “الشهادة” وطموحي وأمنياتي المستقبلية في العمل وفقا لدراستي؟ أم ارضخ لرغبات الشريك وتفكيره في ترك العمل؟."} />
-                    </div>
+                */
+                }
+
+                    {posts.map((post)=>(
+                        <>
+                        <div className='mt-12'>
+                            <Post name={post.userId.name} data={post.content} img={post.userId.avatar}/>
+                        </div>
+                        <div className='border-b border-black mt-12'></div>
+                        </>
+                    ))}
                 </div>
             </div>
         </div>

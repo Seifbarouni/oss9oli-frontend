@@ -1,11 +1,11 @@
 import React from 'react'
 
-export const Post = ({ name, data }) => {
+export const Post = ({ name, data, img }) => {
     return (
         <div className='flex xl:w-2/3'>
             <div className='relative z-50'>
                 <div className='h-20 w-20 border border-black rounded-full bg-white flex items-center justify-center'>
-                    <img src="https://avatars.dicebear.com/api/croodles/BRRRR.svg" alt="" />
+                    <img src={img} alt="" />
                 </div>
                 <div className='h-20 w-20 absolute rounded-full border border-black top-1 left-1 -z-10'>
 
