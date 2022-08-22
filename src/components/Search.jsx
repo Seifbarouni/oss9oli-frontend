@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export const Search = (props) => {
   const [search, setSearch] = useState("")
-  const validate= (e)=>{
+  const validate = (e) => {
     if (e.key === 'Enter' || e.keyCode === 13) {
       props.search(search)
     }
@@ -14,8 +14,8 @@ export const Search = (props) => {
   return <div className={`relative w-full`}>
     <div className={`flex justify-between items-center bg-white border border-black rounded-full p-2 w-full`}>
       <SearchIcon className="h-8 w-8 ml-4" />
-      <input type="text" onKeyDown={validate} onChange={e=> setSearch(e.target.value)} placeholder="Chercher un podcats" className="focus:outline-none w-full placeholder:text-gray-300 mx-4 text-lg p-2" />
-      <div className="flex items-center bg-gris2 rounded-full p-2 border border-black px-4" onClick={()=>props.search(search)}>
+      <input type="text" onKeyDown={validate} onChange={e => setSearch(e.target.value)} placeholder="Chercher un podcats" className="focus:outline-none w-full placeholder:text-gray-300 mx-4 text-lg p-2" />
+      <div className="flex items-center bg-gris2 rounded-full p-2 border border-black px-4 cursor-pointer" onClick={() => props.search(search)}>
         <span className="text-gray-700 sm:text-lg">Search</span>
         <ChevronDownIcon className="h-8 w-8 text-gray-700" />
       </div>

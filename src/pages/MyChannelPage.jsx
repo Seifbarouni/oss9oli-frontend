@@ -10,14 +10,25 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from "axios"
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom'
+import { decode } from '../jwt/jwt'
 
 export const MyChannelPage = () => {
     const open = useOpen((state) => state.open)
     const [cookies] = useCookies(['oss9oli']);
     const [myPodcasts, setMyPodcasts] = useState([])
     const [myChannel, setMyChannel] = useState({})
-    
+    const navigate = useNavigate()
+
     useEffect(() => {
+        if (Object.entries(cookies).length === 0) {
+            navigate("/auth")
+        }
+        const { pack } = decode(cookies.oss9oli)
+        if (pack !== "producer_pack") {
+            navigate("/accueil")
+        }
+
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 setMyPodcasts(res.data.data.pods)

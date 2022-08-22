@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import img1 from '../assets/images/1.png'
 import img2 from '../assets/images/2.png'
 import img3 from '../assets/images/3.png'
@@ -17,9 +17,22 @@ import { Seperator } from '../components/Seperator'
 import { SmallPost } from '../components/SmallPost'
 import { Tags } from '../components/Tags'
 import { useOpen } from '../store/store'
+import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
+import { decode } from '../jwt/jwt'
+import { useState } from 'react'
 
 export const ProfilePage = () => {
     const open = useOpen((state) => state.open)
+    const navigate = useNavigate()
+    const [cookies] = useCookies(['oss9oli']);
+    const user = decode(cookies.oss9oli)
+    useEffect(() => {
+        if (Object.entries(cookies).length === 0) {
+            navigate("/auth")
+        }
+    }, [])
+
     return (
         <div className='flex flex-col realtive z-50'>
             <AuthenticatedNavbar />
@@ -37,7 +50,7 @@ export const ProfilePage = () => {
                 </div>}
                 <div className='flex flex-col flex-grow z-30'>
                     <div className=' flex flex-col '>
-                        <ProfileBanner episodes={13} shows={5} name={"Rana Jollanar Ben Hassine"} />
+                        <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} />
                     </div>
                     <div className='text-3xl font-bold p-6 mt-16'>
                         Podcasts publiés

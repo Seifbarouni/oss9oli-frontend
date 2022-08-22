@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+import { decode } from '../../jwt/jwt'
 
 export const Sidebar = ({ selected }) => {
+    const [cookies] = useCookies(['oss9oli']);
+    const { pack } = decode(cookies.oss9oli)
     return (
         <div className='h-full z-40 font-semibold sticky w-96'>
             <div className='bg-akhdher2 border border-black rounded-r-3xl'>
@@ -9,15 +13,15 @@ export const Sidebar = ({ selected }) => {
                     <Link to={"/accueil"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
                     </Link>
-                    <Link to={"/community"}>
+                    {pack !== "free" && pack !== "consumer_pack" && <Link to={"/community"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
-                    </Link>
-                    <Link to={"/mypods"}>
+                    </Link>}
+                    {pack === "producer_pack" && <Link to={"/mypods"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
-                    </Link>
-                    <Link to={"/edit"}>
+                    </Link>}
+                    {pack === "producer_pack" && <Link to={"/edit"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
-                    </Link>
+                    </Link>}
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
@@ -30,9 +34,9 @@ export const Sidebar = ({ selected }) => {
             <div className=' border border-black rounded-r-3xl absolute top-1 -right-1 -z-10 bg-white w-full'>
                 <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12 invisible'>
                     <span>ACCUEIL</span>
-                    <span>O9 COMMUNITY</span>
-                    <span>MES PODCATS</span>
-                    <span>EDITER CHAINE</span>
+                    {pack !== "free" && pack !== "consumer_pack" && <span>O9 COMMUNITY</span>}
+                    {pack === "producer_pack" && <span>MES PODCATS</span>}
+                    {pack === "producer_pack" && <span>EDITER CHAINE</span>}
                     <span>OPEN MIC</span>
                     <span>STUDIO OSS9OLI</span>
                 </div>

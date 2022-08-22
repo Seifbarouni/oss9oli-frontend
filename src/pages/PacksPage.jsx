@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
+import React from 'react'
 import { Pack } from '../components/Pack'
 import { Seperator } from '../components/Seperator'
 
-import { useLocation } from 'react-router-dom'
 import head from '../assets/svgs/head.svg'
 import headphones from '../assets/svgs/headphones.svg'
 import micro from '../assets/svgs/micro.svg'
 import orange_blob from '../assets/svgs/orange_blob2.svg'
 import spark2 from '../assets/svgs/spark2.svg'
-//import orange_star from '../assets/svgs/orange_star.svg'
 
 export const PacksPage = () => {
-    const location = useLocation();
-    const [auth, setAuth] = useState(false);
-    useEffect(() => {
-        const { search } = location;
-        setAuth(new URLSearchParams(search).get('auth'));
-    }, [])
     return (
         <div className='flex flex-col relative'>
             <div className='absolute z-10 bottom-0'>
                 <img src={orange_blob} alt="" />
             </div>
 
-            {auth === 'true' && <AuthenticatedNavbar />}
             <Seperator mt={0} />
             <div className="relative mt-16 flex justify-center w-full">
                 <div className="header md:text-5xl sm:text-4xl text-2xl relative">
