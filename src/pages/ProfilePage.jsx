@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react'
-import img1 from '../assets/images/1.png'
-import img2 from '../assets/images/2.png'
 import img3 from '../assets/images/3.png'
 import img4 from '../assets/images/4.png'
 import img5 from '../assets/images/5.png'
@@ -11,7 +9,6 @@ import { Channels } from '../components/Channels'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
-import { Podcast } from '../components/Podcast'
 import { ProfileBanner } from '../components/ProfileBanner'
 import { Seperator } from '../components/Seperator'
 import { SmallPost } from '../components/SmallPost'
@@ -20,7 +17,6 @@ import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
-import { useState } from 'react'
 
 export const ProfilePage = () => {
     const open = useOpen((state) => state.open)
@@ -51,14 +47,6 @@ export const ProfilePage = () => {
                 <div className='flex flex-col flex-grow z-30'>
                     <div className=' flex flex-col '>
                         <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} />
-                    </div>
-                    <div className='text-3xl font-bold p-6 mt-16'>
-                        Podcasts publiés
-                    </div>
-                    <div className='flex xl:space-x-8 space-x-0 
-                        xl:space-y-0 space-y-2  xl:flex-row flex-col sm:pl-6 sm:p-0 p-6'>
-                        <Podcast img={img1} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"36:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} w={'lg:w-4/5 w-full'} />
-                        <Podcast img={img2} creator={"Oss9oli"} title={"Ep 3 | Qu'est-ce qu'ils pensent? - Le féminisme en Tunisie"} duration={"50:20"} description={"Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. Pie dessert jelly-o I love tart. Tart gingerbread I love ice cream chocolate cake. Sugar plum chocolate bar powder topping jelly pudding gummies chocolate cake cheesecake.Topping chocolate dragée cake I love cheesecake brownie pie chocolate. "} w={'lg:w-4/5 w-full'} />
                     </div>
                     <div className='mt-16 flex xl:space-x-8 space-x-0
                         xl:space-y-0 space-y-4  xl:flex-row flex-col p-6'>
