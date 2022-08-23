@@ -2,7 +2,7 @@ import React from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
 
-export const Podcast = ({ podcastId, img, title, creator, duration, description, w, h }) => {
+export const Podcast = ({ podcastId, img, title, creator, duration, description, w, h, guest, listens, number, tags, status }) => {
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -16,7 +16,7 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
         openAudio()
         setAudioData(
             {
-                title,
+                title: `${title} avec ${guest} : showname(${number}) - ${creator}`,
                 img,
                 creator,
                 duration,
@@ -35,7 +35,7 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
             >
             </div>
             <div className='w-full flex flex-col p-4 mt-4'>
-                <div className='xl:text-3xl text-xl'>{title}</div>
+                <div className='xl:text-3xl text-xl'>{creator !== "" && title !== "" ? `${title} avec ${guest} : showname(${number}) - ${creator}` : title}</div>
                 <div className='flex sm:flex-row flex-col justify-between items-center'>
                     <div>Par <span className='text-orange-300'>{creator}</span></div>
                     <div className="z-50 relative" onClick={() => newAudio()}>
@@ -53,6 +53,12 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
                             <span className="invisible"> {convertDurationToString()} </span>
                         </div>
                     </div>
+                </div>
+                <div>
+                    {listens ? listens : `0`} listens
+                </div>
+                <div>
+                    status: {status}
                 </div>
                 <div className='border-b border-gray-500 mt-2 mb-4'></div>
                 <div className='overflow-y-scroll h-32'>

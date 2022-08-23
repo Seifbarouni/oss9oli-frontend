@@ -11,6 +11,8 @@ export const Form = () => {
     const [tags, setTags] = useState("")
     const [type, setType] = useState("Monologue")
     const [file, setFile] = useState("")
+    const [episodeNumber, setEpisodeNumber] = useState(1)
+    const [guest, setGuest] = useState("")
     const [loading, setLoading] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
 
@@ -26,13 +28,14 @@ export const Form = () => {
 
         formData.append("type", type)
         formData.append("file", file)
+        formData.append("episodeNumber", episodeNumber)
+        formData.append("guest", guest)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
-                Authorization: `Bearer ${cookies.oss9oli}` 
+                Authorization: `Bearer ${cookies.oss9oli}`
             },
         }
-        //check file is bigger than 100MB
 
         if (file.size > 104857600) {
             alert("File size is too big")
@@ -50,12 +53,12 @@ export const Form = () => {
         }
     }
 
-    const getProgress= ()=>{
+    const getProgress = () => {
         let points = 1
-        if(name) points++;
-        if(description) points++;
-        if(tags) points++;
-        if(file) points++;
+        if (name) points++;
+        if (description) points++;
+        if (tags) points++;
+        if (file) points++;
         return points;
     }
 
@@ -64,18 +67,18 @@ export const Form = () => {
             {!loading && <div className='w-full flex flex-col pb-[700px]'>
                 <div className='flex flex-col space-y-2'>
                     <span>Avancement</span>
-                    <span className='border border-black  w-full flex'>
+                    <span className='border border-black  w-full flex bg-white'>
                         {
-                            getProgress()<5?
-                            <>
-                                <span className={'w-'+getProgress()+'/5 bg-orng2 p-1.5'}></span>
-                                <span className={'w-'+(5-getProgress())+'/5 bg-white p-1.5'}></span>
+                            getProgress() < 5 ?
+                                <>
+                                    <span className={'w-' + getProgress() + '/5 bg-orng2 p-1.5'}></span>
+                                    <span className={'w-' + (5 - getProgress()) + '/5 bg-white p-1.5'}></span>
                                 </>
                                 :
                                 <span className={'w-full bg-orng2 p-1.5'}></span>
 
                         }
-                        
+
                     </span>
                 </div>
                 <form className='rounded-3xl border border-black  bg-white flex flex-col  w-full justify-center items-center p-4 mt-12 relative' onSubmit={onSubmit}>
@@ -93,8 +96,23 @@ export const Form = () => {
                             </div>
                             <div className='flex flex-col mt-16 space-y-1'>
                                 <span className=''>Choisissez un nom pour votre podcast*</span>
-                                <span className='text-gray-500 text-sm'>Choisissez un nom unique qui reprèsente votre podcastRemplissez avec des infomations sur vous et votre podcast</span>
+                                <span className='text-gray-500 text-sm'>Choisissez un nom unique qui reprèsente votre podcast</span>
                                 <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Nom du podcast' value={name} onChange={(e) => setName(e.target.value)} required />
+                            </div>
+                            <div className='flex flex-col mt-6 space-y-1'>
+                                <span className=''>Choisissez le numéro de votre épisode*</span>
+
+                                <input type="number" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Numéro de l'épisode" onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                        event.preventDefault();
+                                    }
+                                }}
+                                    value={episodeNumber} onChange={(e) => setEpisodeNumber(e.target.value)} required />
+                            </div>
+                            <div className='flex flex-col mt-6 space-y-1'>
+                                <span className=''>Invité</span>
+                                <span className='text-gray-500 text-sm'>Nom de votre invité</span>
+                                <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Nom de l'invité" value={guest} onChange={(e) => setGuest(e.target.value)} required />
                             </div>
                             <div className='flex flex-col mt-6 space-y-1'>
                                 <span className=''>Description*</span>
@@ -115,15 +133,6 @@ export const Form = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className='flex flex-col mt-6 space-y-1'>
-                            <span className=''>Catégorie*</span>
-                            <span className='text-gray-500 text-sm'>Selectionnez la catégorie de votre podcastParlez de votre podcast en quelques lignes</span>
-                            <select name="" id="" className='rounded-full py-4 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black p-2 text-white'>
-                                <option value="" className=''>Catégorie</option>
-                                <option value="">Catégorie</option>
-                                <option value="">Catégorie</option>
-                            </select>
-                        </div> */}
                             <div className='flex flex-col mt-6 space-y-1'>
                                 <span className=''>Tags</span>
                                 <span className='text-gray-500 text-sm'>Ajoutez des tags pour que nos auditeurs puissent trouver votre podcast</span>
@@ -132,9 +141,9 @@ export const Form = () => {
                         </div>
                         <div className='flex flex-col sm:w-1/2'>
 
-                            <div className='flex flex-col  space-y-1 sm:mt-0 mt-6'>
+                            <div className='flex flex-col  space-y-1 sm:mt-0'>
                                 <span className=''>Télécharger votre audio*</span>
-                                <span className='text-gray-500 text-sm'>Le fichier ne doit pas dépassez 1000mo</span>
+                                <span className='text-gray-500 text-sm'>Le fichier ne doit pas dépassez 100Mo</span>
                                 <div className='border border-black p-4 bg-gris rounded-3xl flex flex-col justify-center items-center w-1/2'>
                                     <img src={audio} alt="" className='' />
                                     <div class="flex text-sm text-gray-600">
