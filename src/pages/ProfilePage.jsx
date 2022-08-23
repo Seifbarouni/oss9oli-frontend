@@ -46,7 +46,7 @@ export const ProfilePage = () => {
                 </div>}
                 <div className='flex flex-col flex-grow z-30'>
                     <div className=' flex flex-col '>
-                        <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} />
+                        <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} desc={user.description} />
                     </div>
                     <div className='mt-16 flex xl:space-x-8 space-x-0
                         xl:space-y-0 space-y-4  xl:flex-row flex-col p-6'>
