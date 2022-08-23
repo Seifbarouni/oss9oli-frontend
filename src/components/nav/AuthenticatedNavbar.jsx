@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Hamburger } from '../buttons/Hamburger'
 import { JoinButton } from '../buttons/JoinButton'
 
@@ -8,16 +8,32 @@ import { useOpen } from '../../store/store'
 import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export const AuthenticatedNavbar = () => {
     const navigate = useNavigate()
     const setOpen = useOpen((state) => state.setOpen)
     const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
-    const { pack, picture } = decode(cookies.oss9oli)
+    const { pack, picture, isImagePresent } = decode(cookies.oss9oli)
+    const [uploadedImage, setUploadedImage] = useState(null)
     const logout = () => {
         removeCookie("oss9oli")
         navigate("/auth")
     }
+    useEffect(() => {
+        if (isImagePresent === true) {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${cookies.oss9oli}`
+                }
+            }
+            axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
+                setUploadedImage(res.data.image)
+            }).catch((err) => {
+                console.log(err)
+            })
+        }
+    }, [])
     return (
         <nav className="flex items-center justify-evenly p-3 z-40 w-full xl:px-12 ">
             <div className='flex items-center w-full'>
@@ -45,7 +61,10 @@ export const AuthenticatedNavbar = () => {
                 </div>
                 <Link to={"/profile"}>
                     <div className='h-16 w-16 border border-black rounded-full bg-white'>
-                        <img src={picture} alt="" referrerpolicy="no-referrer" className='rounded-full' />
+                        {isImagePresent === false ? <img src={picture} alt="" referrerpolicy="no-referrer" className='rounded-full' /> :
+                            <img src={`data:image/${uploadedImage?.contentType};base64, 
+                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full' />
+                        }
                     </div>
                 </Link>
             </div>
