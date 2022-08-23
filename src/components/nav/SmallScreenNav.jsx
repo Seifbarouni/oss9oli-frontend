@@ -15,16 +15,16 @@ export const SmallScreenNav = ({ selected }) => {
                 <XIcon className='absolute top-6 left-2 cursor-pointer text-white h-12 w-12' onClick={() => setOpen()} />
                 <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12 items-center justify-center'>
                     <Link to={"/accueil"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`} onClick={() => setOpen()}>ACCUEIL</span>
                     </Link>
                     {pack !== "free" && pack !== "consumer_pack" && <Link to={"/community"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`} onClick={() => setOpen()}>O9 COMMUNITY</span>
                     </Link>}
                     {pack === "producer_pack" && <Link to={"/mypods"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`} onClick={() => setOpen()}>MES PODCASTS</span>
                     </Link>}
                     {pack === "producer_pack" && <Link to={"/edit"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`} onClick={() => setOpen()}>EDITER CHAINE</span>
                     </Link>}
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
