@@ -31,7 +31,6 @@ export const CommunityPage = () => {
         axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`).then(res=>{
             if(res.data.success){
                 setPosts(res.data.data)
-                console.log(res.data)
             }
         }).catch(err=>console.error(err))
     }, [])
@@ -104,7 +103,7 @@ export const CommunityPage = () => {
                     {posts.map((post)=>(
                         <>
                         <div className='mt-12'>
-                            <Post name={post.userId.name} data={post.content} img={post.userId.avatar}/>
+                            <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.avatar} likes={post.likes} comments={post.comments} />
                         </div>
                         <div className='border-b border-black mt-12'></div>
                         </>
