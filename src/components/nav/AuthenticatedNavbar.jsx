@@ -7,11 +7,17 @@ import black_logo from '../../assets/svgs/black_logo.svg'
 import { useOpen } from '../../store/store'
 import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
+import { useNavigate } from 'react-router-dom'
 
 export const AuthenticatedNavbar = () => {
+    const navigate = useNavigate()
     const setOpen = useOpen((state) => state.setOpen)
-    const [cookies, setCookie] = useCookies(['oss9oli']);
+    const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
     const { pack, picture } = decode(cookies.oss9oli)
+    const logout = () => {
+        removeCookie("oss9oli")
+        navigate("/auth")
+    }
     return (
         <nav className="flex items-center justify-evenly p-3 z-40 w-full xl:px-12 ">
             <div className='flex items-center w-full'>
@@ -33,7 +39,10 @@ export const AuthenticatedNavbar = () => {
                     <img src={black_logo} alt="" />
                 </Link>
             </div>
-            <div className='w-full flex justify-end'>
+            <div className='w-full flex justify-end items-center'>
+                <div className='pr-4 cursor-pointer hover:underline' onClick={() => logout()}>
+                    Se déconnecter
+                </div>
                 <Link to={"/profile"}>
                     <div className='h-16 w-16 border border-black rounded-full bg-white'>
                         <img src={picture} alt="" referrerpolicy="no-referrer" className='rounded-full' />
