@@ -63,7 +63,7 @@ export const AuthenticatedNavbar = () => {
                     <div className='h-16 w-16 border border-black rounded-full bg-white'>
                         {isImagePresent === false ? <img src={picture} alt="" referrerpolicy="no-referrer" className='rounded-full' /> :
                             <img src={`data:image/${uploadedImage?.contentType};base64, 
-                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full' />
+                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full h-full w-full' />
                         }
                     </div>
                 </Link>

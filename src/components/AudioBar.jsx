@@ -28,7 +28,7 @@ export const AudioBar = () => {
 
     useEffect(() => {
         setTimeout(() => {
-                audioEl.current.play()
+            audioEl.current.play()
         }, 1000)
 
         if (interval != null) clearInterval(interval)
@@ -39,7 +39,7 @@ export const AudioBar = () => {
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
-            <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/${audioData.podcastId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
+            <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
             <div className='flex w-1/3 justify-start'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
                     <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data?.toString('base64')}`} alt="" className='rounded-lg' />
@@ -53,7 +53,7 @@ export const AudioBar = () => {
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
                 <span className='cursor-pointer'>
-                    <img src={fastb} alt="" onClick={()=>{audioEl.current.currentTime-= 10}}/>
+                    <img src={fastb} alt="" onClick={() => { audioEl.current.currentTime -= 10 }} />
                 </span>
                 {audioEl.current?.paused ? <span className='cursor-pointer' onClick={() => playPod()}>
                     <img src={play} alt="" />
@@ -63,7 +63,7 @@ export const AudioBar = () => {
                     </span>
                 }
                 <span className='cursor-pointer'>
-                    <img src={fastf} alt="" onClick={()=>{audioEl.current.currentTime+= 10}}/>
+                    <img src={fastf} alt="" onClick={() => { audioEl.current.currentTime += 10 }} />
                 </span>
             </div>
             <div className='w-1/3 flex justify-end xl:mr-4'>

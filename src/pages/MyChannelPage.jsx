@@ -29,10 +29,9 @@ export const MyChannelPage = () => {
             navigate("/accueil")
         }
 
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/user`,
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
-                setMyPodcasts(res.data.data.pods)
-                setMyChannel(res.data.data.channel)
+                setMyPodcasts(res.data.data)
             }).catch(err => console.log(err))
     }, [])
     return (
@@ -60,11 +59,15 @@ export const MyChannelPage = () => {
                     </div>
                     {myPodcasts.map((podcast) => (
                         <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                            <Podcast podcastId={podcast._id} img={myChannel.image} creator={myChannel.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} status={podcast.status} listens={podcast.numberOfListeners} guest={podcast.guest} number={podcast.episodeNumber} tags={podcast.tags} />
+                            <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} status={podcast.status} listens={podcast.numberOfListeners} guest={podcast.guest} number={podcast.episodeNumber} tags={podcast.tags} />
                         </div>
                     ))}
                     {myPodcasts.length === 0 &&
                         <div className='pb-[665px]'>
+                        </div>
+                    }
+                    {myPodcasts.length === 1 &&
+                        <div className='pb-[400px]'>
                         </div>
                     }
                 </div>
