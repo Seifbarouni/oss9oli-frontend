@@ -34,7 +34,7 @@ export const HomePage = () => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
         }
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts`).then(res => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`).then(res => {
             setPodcasts(res.data.data)
         }).catch(err => console.log(err))
 
@@ -51,7 +51,7 @@ export const HomePage = () => {
             if (actifs[i]) searchTags.push(tags[i])
         }
 
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts?search=${search}&actifs=${JSON.stringify(searchTags)}`).then(res => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes?search=${search}&actifs=${JSON.stringify(searchTags)}`).then(res => {
             setPodcasts(res.data.data)
             console.log(res.data.data)
 
@@ -88,8 +88,11 @@ export const HomePage = () => {
                     </div>
                     {podcasts.map((podcast) => (
                         <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-
-                            <Podcast podcastId={podcast._id} img={podcast.channelId.image} creator={podcast.channelId.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} />
+                            <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length}
+                                description={podcast.description} status={podcast.status} guest={podcast.guest}
+                                listens={podcast.numberOfListeners}
+                                number={podcast.episodeNumber}
+                                w={"w-full"} h={"sm:h-96"} />
                         </div>
                     ))}
 

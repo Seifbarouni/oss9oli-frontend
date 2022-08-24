@@ -86,13 +86,13 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                         <img src={img} alt="" className='rounded-full' />
                         :
                         <img src={`data:image/${uploadedImage?.contentType};base64, 
-                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full' />
+                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full h-44 w-44' />
                     }
                 </div>}
                 {edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
                     <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
                     </div>
-                    <img src={preview} alt="" className='rounded-full bg-asfer3' />
+                    <img src={preview} alt="" className='rounded-full bg-asfer3 h-full w-full' />
                 </div>}
                 {edit &&
                     <input type={"file"} className="mt-2 w-44" onChange={(e) => updateImage(e)} />

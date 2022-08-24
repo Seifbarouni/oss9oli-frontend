@@ -42,7 +42,7 @@ export const Form = () => {
             setFile("")
 
         } else {
-            axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts`, formData, config).then(res => {
+            axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`, formData, config).then(res => {
                 window.location.href = "/mypods"
             }
             ).catch(err => {
