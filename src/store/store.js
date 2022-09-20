@@ -11,6 +11,7 @@ export const useAudio = create((set) => ({
   audioData: {},
   toggleAudio: () => set((state) => ({ isOpen: !state.isOpen })),
   openAudio: () => set(() => ({ isOpen: true })),
+  closeAudio: () => set(() => ({ isOpen: false })),
   setAudioData: (data) =>
     set(() => ({
       audioData: {

@@ -17,11 +17,11 @@ export const AuthenticatedNavbar = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
     const { pack, picture, isImagePresent } = decode(cookies.oss9oli)
     const [uploadedImage, setUploadedImage] = useState(null)
-    const toggleAudio = useAudio((state) => state.toggleAudio)
+    const closeAudio = useAudio((state) => state.closeAudio)
     const logout = () => {
         removeCookie("oss9oli")
         localStorage.removeItem("image")
-        toggleAudio()
+        closeAudio()
         navigate("/auth")
     }
     useEffect(() => {
