@@ -28,14 +28,17 @@ export const HomePage = () => {
     const open = useOpen((state) => state.open)
     const [actifs, setActifs] = useState(new Array(tags.length).fill(false))
     const [podcasts, setPodcasts] = useState([])
+    const [loading, setLoading] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
 
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
         }
+        setLoading(true)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`).then(res => {
             setPodcasts(res.data.data)
+            setLoading(false)
         }).catch(err => console.log(err))
 
     }, [])
@@ -46,6 +49,7 @@ export const HomePage = () => {
         setActifs(temp)
     }
     const getPodcastsBySearch = (search) => {
+        setLoading(true)
         let searchTags = []
         for (let i = 0; i < tags.length; i++) {
             if (actifs[i]) searchTags.push(tags[i])
@@ -54,7 +58,7 @@ export const HomePage = () => {
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes?search=${search}&actifs=${JSON.stringify(searchTags)}`).then(res => {
             setPodcasts(res.data.data)
             console.log(res.data.data)
-
+            setLoading(false)
         }).catch(err => console.log(err))
 
     }
@@ -86,16 +90,21 @@ export const HomePage = () => {
                             Voir plus {'>'}
                         </span>
                     </div>
-                    {podcasts.map((podcast) => (
-                        <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                            <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length}
-                                description={podcast.description} status={podcast.status} guest={podcast.guest}
-                                listens={podcast.numberOfListeners}
-                                number={podcast.episodeNumber}
-                                w={"w-full"} h={"sm:h-96"} />
-                        </div>
-                    ))}
+                    {loading ? <div className='flex justify-center items-center mt-10'>
+                        <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
+                    </div>
+                        : <div className='flex flex-col mt-8'>
 
+                            {podcasts.map((podcast) => (
+                                <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
+                                    <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length}
+                                        description={podcast.description} status={podcast.status} guest={podcast.guest}
+                                        listens={podcast.numberOfListeners}
+                                        number={podcast.episodeNumber}
+                                        w={"w-full"} h={"sm:h-96"} />
+                                </div>
+                            ))}
+                        </div>}
                     <div className={`flex mt-24 justify-between items-end ${!open ? "md:px-44" : ""}`}>
                         <span className='text-orng2 text-5xl'>ECOUTEZ MAINTENANT</span>
                         <span className='text-ka7ouli underline underline-offset-8 sm:text-lg'>

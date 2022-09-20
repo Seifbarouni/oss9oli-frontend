@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useAudio } from '../../store/store'
 
 export const AuthenticatedNavbar = () => {
     const navigate = useNavigate()
@@ -16,8 +17,11 @@ export const AuthenticatedNavbar = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
     const { pack, picture, isImagePresent } = decode(cookies.oss9oli)
     const [uploadedImage, setUploadedImage] = useState(null)
+    const toggleAudio = useAudio((state) => state.toggleAudio)
     const logout = () => {
         removeCookie("oss9oli")
+        localStorage.removeItem("image")
+        toggleAudio()
         navigate("/auth")
     }
     useEffect(() => {
@@ -27,11 +31,32 @@ export const AuthenticatedNavbar = () => {
                     Authorization: `Bearer ${cookies.oss9oli}`
                 }
             }
-            axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                setUploadedImage(res.data.image)
-            }).catch((err) => {
-                console.log(err)
-            })
+            // try to get image from local storage
+            const image = localStorage.getItem("image")
+            if (image) {
+                // parse local storage image
+                try {
+                    const parsedImage = JSON.parse(image)
+                    setUploadedImage(parsedImage)
+                } catch (error) {
+                    // if parsing fails, remove image from local storage
+                    localStorage.removeItem("image")
+                    axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
+                        setUploadedImage(res.data.image)
+                        localStorage.setItem("image", JSON.stringify(res.data.image))
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
+
+            } else {
+                axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
+                    setUploadedImage(res.data.image)
+                    localStorage.setItem("image", JSON.stringify(res.data.image))
+                }).catch((err) => {
+                    console.log(err)
+                })
+            }
         }
     }, [])
     return (

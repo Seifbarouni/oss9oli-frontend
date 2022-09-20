@@ -21,7 +21,7 @@ export const FacebookAuth = () => {
         })
     }, [])
     return (
-        <div>
+        <div className="h-screen">
             <p>Please wait for redirection...</p>
         </div>
     )

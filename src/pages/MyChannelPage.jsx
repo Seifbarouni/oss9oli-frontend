@@ -5,19 +5,19 @@ import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
-import { Podcast } from '../components/Podcast'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from "axios"
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
+import { PodcastList } from '../components/PodcastList'
 
 export const MyChannelPage = () => {
     const open = useOpen((state) => state.open)
     const [cookies] = useCookies(['oss9oli']);
     const [myPodcasts, setMyPodcasts] = useState([])
-    const [myChannel, setMyChannel] = useState({})
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -28,10 +28,12 @@ export const MyChannelPage = () => {
         if (pack !== "producer_pack") {
             navigate("/accueil")
         }
-
+        setLoading(true)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 setMyPodcasts(res.data.data)
+                console.log(res.data.data)
+                setLoading(false)
             }).catch(err => console.log(err))
     }, [])
     return (
@@ -57,19 +59,21 @@ export const MyChannelPage = () => {
                         </span>
 
                     </div>
-                    {myPodcasts.map((podcast) => (
-                        <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                            <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length} description={podcast.description} w={"w-full"} h={"sm:h-96"} status={podcast.status} listens={podcast.numberOfListeners} guest={podcast.guest} number={podcast.episodeNumber} tags={podcast.tags} />
-                        </div>
-                    ))}
+                    {loading && <div className='flex justify-center items-center mt-10'>
+                        <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
+                    </div>}
+                    {myPodcasts.map((podcast) => {
+                        return (
+                            <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
+                                <div className='text-orng2 text-xl pb-4'>{podcast.name}:</div>
+                                <PodcastList list={podcast.episodes} />
+                            </div>
+                        )
+                    })}
                     {myPodcasts.length === 0 &&
                         <div className='pb-[665px]'>
-                        </div>
-                    }
-                    {myPodcasts.length === 1 &&
-                        <div className='pb-[400px]'>
-                        </div>
-                    }
+                        </div>}
+
                 </div>
             </div>
         </div>

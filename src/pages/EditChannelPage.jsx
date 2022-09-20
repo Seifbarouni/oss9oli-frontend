@@ -129,7 +129,7 @@ export const EditChannelPage = () => {
                     </div>
 
                 </form>}
-                {loading && <div className='pb-[900px]'>Loading...</div>}
+                {loading && <div className='pb-[900px]'></div>}
             </div>
         </div>
     )

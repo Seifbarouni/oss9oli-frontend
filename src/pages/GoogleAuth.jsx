@@ -22,7 +22,7 @@ export const GoogleAuth = () => {
         })
     }, [])
     return (
-        <div>
+        <div className="h-screen">
             <p>Please wait for redirection...</p>
         </div>
     )

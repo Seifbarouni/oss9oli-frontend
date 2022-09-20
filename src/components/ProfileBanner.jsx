@@ -27,6 +27,7 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
     const updateUserData = () => {
         const form = new FormData()
         if (inputImage !== "") {
+            localStorage.removeItem("image")
             form.append("file", inputImage)
         }
         if (inputName !== "") {
@@ -62,11 +63,32 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                     Authorization: `Bearer ${cookies.oss9oli}`
                 }
             }
-            axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                setUploadedImage(res.data.image)
-            }).catch((err) => {
-                console.log(err)
-            })
+            // try to get image from local storage
+            const image = localStorage.getItem("image")
+            if (image) {
+                // parse local storage image
+                try {
+                    const parsedImage = JSON.parse(image)
+                    setUploadedImage(parsedImage)
+                } catch (error) {
+                    // if parsing fails, remove image from local storage
+                    localStorage.removeItem("image")
+                    axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
+                        setUploadedImage(res.data.image)
+                        localStorage.setItem("image", JSON.stringify(res.data.image))
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }
+
+            } else {
+                axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
+                    setUploadedImage(res.data.image)
+                    localStorage.setItem("image", JSON.stringify(res.data.image))
+                }).catch((err) => {
+                    console.log(err)
+                })
+            }
         }
     }, [])
     return (

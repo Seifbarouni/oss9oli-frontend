@@ -29,8 +29,7 @@ export const PacksPage = () => {
                 </div> */}
             </div>
             <div className='mt-16 flex 2xl:flex-row flex-col w-full  2xl:space-x-8 2xl:space-y-0 space-y-4 justify-center items-center z-40'>
-
-                {/* <div className=''>
+                <div className='mt-4 flex  justify-center items-center z-40'>
                     <Pack
                         color={"azreg"}
                         price={0}
@@ -42,27 +41,6 @@ export const PacksPage = () => {
                         <span className='sm:text-lg'>1 heure d'écoute</span>
                         <div className='border-b-2 border-azreg opacity-30'></div>
                         <span className='sm:text-lg'>Naviguer dans certaines sections de la plateforme</span>
-                    </Pack>
-                </div> */}
-                <div className='relative'>
-                    <div className='absolute -left-8 -top-14'>
-                        <img src={headphones} alt="" />
-                    </div>
-                    <Pack
-                        color={"orng2"}
-                        price={3.9}
-                        buttonText={"S'inscrire"}
-                        title={"Auditeur"}
-                        pack={"auditeur"}
-                        desc={"Devenez auditeur fidèle et naviguez dans la plateforme en toute liberté"}
-                    >
-                        <span className='sm:text-lg'>Ecouter tous nos podcasts en <span className='font-bold'>illimité</span></span>
-                        <div className='border-b-2 border-orng2 opacity-30'></div>
-                        <span className='sm:text-lg'>Naviguer dans la plateforme en toute liberté</span>
-                        <div className='border-b-2 border-orng2 opacity-30'></div>
-                        <span className='sm:text-lg'>Commentez, likez et partagez vos podcasts préférés</span>
-                        <div className='border-b-2 border-orng2 opacity-30'></div>
-                        <span className='sm:text-lg'>Profitez d'une expérience personnalisée</span>
                     </Pack>
                 </div>
                 <div className='relative'>
@@ -112,20 +90,7 @@ export const PacksPage = () => {
                     </Pack>
                 </div>
             </div>
-            <div className='mt-4 flex  justify-center items-center z-40'>
-                <Pack
-                    color={"azreg"}
-                    price={0}
-                    buttonText={"Essayer"}
-                    title={"Normal"}
-                    pack={"free"}
-                    desc={"Testez la plateforme sans engagements"}
-                >
-                    <span className='sm:text-lg'>1 heure d'écoute</span>
-                    <div className='border-b-2 border-azreg opacity-30'></div>
-                    <span className='sm:text-lg'>Naviguer dans certaines sections de la plateforme</span>
-                </Pack>
-            </div>
+
             <div className='flex flex-col items-center mt-12 pb-12 z-20 justify-center'>
                 <span>
                     *Si vous achetez le pack Community, vous seriez automatiquement auditeur.
