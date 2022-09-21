@@ -19,37 +19,39 @@ export const CommunityPage = () => {
     const [cookies] = useCookies(['oss9oli']);
     const [post, setPost] = useState("");
     const [posts, setPosts] = useState([]);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
         }
-        const { pack } = decode(cookies.oss9oli)
+        const { pack, name } = decode(cookies.oss9oli)
+        setName(name)
         if (pack === "" || pack === "free" || pack === "consumer_pack") {
             navigate("/accueil")
         }
-        axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`).then(res=>{
-            if(res.data.success){
+        axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`).then(res => {
+            if (res.data.success) {
                 setPosts(res.data.data)
             }
-        }).catch(err=>console.error(err))
+        }).catch(err => console.error(err))
     }, [])
 
-    const publish = ()=>{
+    const publish = () => {
         axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`, {
             content: post,
             userId: (decode(cookies.oss9oli)).userId
-        }).then(res=>{
-            if(res.data.success){
+        }).then(res => {
+            if (res.data.success) {
                 window.location.reload()
             }
-        }).catch(err=>console.error(err))
+        }).catch(err => console.error(err))
     }
 
 
     const open = useOpen((state) => state.open)
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col pb-44'>
             <AuthenticatedNavbar />
             <Seperator mt={0} />
             <div className='flex'>
@@ -64,10 +66,10 @@ export const CommunityPage = () => {
                 <div className='sm:pt-16 sm:pl-16 pt-1 pl-1  flex-grow flex flex-col z-40'>
                     <div className='flex flex-col space-y-2'>
                         <span className='header text-5xl'>Bonjour!</span>
-                        <span className='text-3xl'>Minassa lab</span>
-                    </div> 
+                        <span className='text-3xl'>{name}</span>
+                    </div>
                     <div className='flex flex-col mt-6 space-y-1'>
-                                <input type="text" value={post} onChange={e=> setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelques choses...' required />
+                        <input type="text" value={post} onChange={e => setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelques choses...' required />
                     </div>
                     <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
 
@@ -98,14 +100,14 @@ export const CommunityPage = () => {
                         <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
                     </div>
                 */
-                }
+                    }
 
-                    {posts.map((post)=>(
+                    {posts.map((post) => (
                         <>
-                        <div className='mt-12'>
-                            <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.avatar} likes={post.likes} comments={post.comments} />
-                        </div>
-                        <div className='border-b border-black mt-12'></div>
+                            <div className='mt-12'>
+                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.avatar} likes={post.likes} comments={post.comments} />
+                            </div>
+                            <div className='border-b border-black mt-12'></div>
                         </>
                     ))}
                 </div>

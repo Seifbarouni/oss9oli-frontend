@@ -15,49 +15,49 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
     const [coms, setComs] = useState([])
     const [showComm, setShowComm] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
-    const {userId, avatar} = (decode(cookies.oss9oli))
+    const { userId, avatar } = (decode(cookies.oss9oli))
 
-    useEffect(()=>{
-        
-        let tempLikes = likes.filter((id)=>{
+    useEffect(() => {
+
+        let tempLikes = likes.filter((id) => {
             return id == userId
         })
         setLiked(tempLikes.length)
-        
-    },[])
 
-    const like = ()=>{
+    }, [])
+
+    const like = () => {
         axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/likes/${postId}`, {},
-        {headers: { Authorization: `Bearer ${cookies.oss9oli}` }}).then(res=>{
-            if(res.data.success){
-                setLikes(res.data.data);
-                setLiked(res.data.data.includes(userId))
-            }
-        }).catch(err=>console.log(err))
+            { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
+                if (res.data.success) {
+                    setLikes(res.data.data);
+                    setLiked(res.data.data.includes(userId))
+                }
+            }).catch(err => console.log(err))
     }
 
-    const sendComment = e =>{
+    const sendComment = e => {
         if (e.key === 'Enter' || e.keyCode === 13) {
             axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/comments`, {
                 comment: comment,
                 postId: postId
-            }, 
-            { headers: { Authorization: `Bearer ${cookies.oss9oli}` }}).then(res=>{
-                if(res.data.success){
-                    setComs([...coms, res.data.data])
-                    setComment("")
-                }
-            }).catch(err=>console.log(err))
+            },
+                { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
+                    if (res.data.success) {
+                        setComs([...coms, res.data.data])
+                        setComment("")
+                    }
+                }).catch(err => console.log(err))
         }
     }
 
-    const showComms = ()=>{
-        if(!showComm){
-            axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/comments/${postId}`).then(res=>{
-                if(res.data.success){
+    const showComms = () => {
+        if (!showComm) {
+            axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/comments/${postId}`).then(res => {
+                if (res.data.success) {
                     setComs(res.data.data)
                 }
-            }).catch(err=>{
+            }).catch(err => {
                 console.log(err)
             })
         }
@@ -71,7 +71,7 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
         <div className='flex xl:w-2/3'>
             <div className='relative z-50'>
                 <div className='h-20 w-20 border border-black rounded-full bg-white flex items-center justify-center'>
-                    <img src={img} alt="" />
+                    <img src={img} alt="" className='rounded-full' />
                 </div>
                 <div className='h-20 w-20 absolute rounded-full border border-black top-1 left-1 -z-10'>
 
@@ -90,19 +90,19 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
                     </span>
                 </span>
                 <div className='flex items-center '>
-                    <img src={liked?pinkHeartPNG: blackHeartPNG}  onClick={like} /> 
+                    <img src={liked ? pinkHeartPNG : blackHeartPNG} onClick={like} />
                     {likess.length}
                     <img src={commentPNG} /> {comments.length}
                 </div>
                 <div>
                     <div onClick={showComms}>
-                    {showComm?<p>hide comments</p>: <p>see comments </p>}
+                        {showComm ? <p>hide comments</p> : <p>see comments </p>}
                     </div>
                     {
-                        coms.map((comment)=>(
+                        coms.map((comment) => (
                             <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
                                 <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
-                                    <img src={avatar} alt="" />
+                                    <img src={comment.userId.avatar} alt="" className='rounded-full' />
                                 </div>
                                 <div >
                                     <p>{comment.userId.name}</p>
@@ -111,13 +111,13 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
                             </div>
                         ))
                     }
-                    
+
                 </div>
                 <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
                     <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
-                        <img src={avatar} alt="" />
+                        <img src={img} alt="" className='rounded-full' />
                     </div>
-                    <input type="text" value={comment} onKeyDown={sendComment} onChange={e=>setComment(e.target.value)} placeholder="Qu'est ce que vous en pensez?" className='w-full focus:outline-none pl-4 placeholder:text-gris' />
+                    <input type="text" value={comment} onKeyDown={sendComment} onChange={e => setComment(e.target.value)} placeholder="Qu'est ce que vous en pensez?" className='w-full focus:outline-none pl-4 placeholder:text-gris' />
                 </div>
             </div>
 
