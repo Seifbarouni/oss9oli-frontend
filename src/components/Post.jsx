@@ -15,12 +15,12 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
     const [coms, setComs] = useState([])
     const [showComm, setShowComm] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
-    const { userId, avatar } = (decode(cookies.oss9oli))
+    const { userId, customSeed } = (decode(cookies.oss9oli))
 
     useEffect(() => {
 
         let tempLikes = likes.filter((id) => {
-            return id == userId
+            return id === userId
         })
         setLiked(tempLikes.length)
 
@@ -71,7 +71,7 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
         <div className='flex xl:w-2/3'>
             <div className='relative z-50'>
                 <div className='h-20 w-20 border border-black rounded-full bg-white flex items-center justify-center'>
-                    <img src={img} alt="" className='rounded-full' />
+                    <img src={`https://avatars.dicebear.com/api/croodles/${img}.svg`} alt="" className='rounded-full' />
                 </div>
                 <div className='h-20 w-20 absolute rounded-full border border-black top-1 left-1 -z-10'>
 
@@ -84,27 +84,31 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
                         a publié une pensée
                     </span>
                 </span>
-                <span className='lg:text-xl text-lg p-4 flex justify-center h-44 overflow-y-scroll'>
+                <span className='lg:text-xl text-lg pt-2 pb-2 flex overflow-y-scroll'>
                     <span>
                         {data}
                     </span>
                 </span>
-                <div className='flex items-center '>
-                    <img src={liked ? pinkHeartPNG : blackHeartPNG} onClick={like} />
-                    {likess.length}
-                    <img src={commentPNG} /> {comments.length}
+                <div className='flex items-center space-x-4'>
+                    <div className='flex items-center space-x-1'>
+                        <img src={liked ? pinkHeartPNG : blackHeartPNG} onClick={like} />
+                        <span>{likess.length}</span>
+                    </div>
+                    <div className='flex items-center space-x-1'>
+                        <img src={commentPNG} /> <span>{comments.length}</span>
+                    </div>
                 </div>
                 <div>
-                    <div onClick={showComms}>
+                    <div onClick={showComms} className="cursor-pointer">
                         {showComm ? <p>hide comments</p> : <p>see comments </p>}
                     </div>
                     {
                         coms.map((comment) => (
                             <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
                                 <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
-                                    <img src={comment.userId.avatar} alt="" className='rounded-full' />
+                                    <img src={`https://avatars.dicebear.com/api/croodles/${comment.userId.customSeed}.svg`} alt="" className='rounded-full' />
                                 </div>
-                                <div >
+                                <div className='pl-4'>
                                     <p>{comment.userId.name}</p>
                                     <p>{comment.comment}</p>
                                 </div>
@@ -115,7 +119,7 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
                 </div>
                 <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
                     <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
-                        <img src={img} alt="" className='rounded-full' />
+                        <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" className='rounded-full' />
                     </div>
                     <input type="text" value={comment} onKeyDown={sendComment} onChange={e => setComment(e.target.value)} placeholder="Qu'est ce que vous en pensez?" className='w-full focus:outline-none pl-4 placeholder:text-gris' />
                 </div>

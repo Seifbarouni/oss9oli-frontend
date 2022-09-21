@@ -1,5 +1,5 @@
 import { PencilAltIcon, XIcon } from '@heroicons/react/solid'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import spark from '../assets/svgs/spark2.svg'
@@ -9,27 +9,15 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
     const [edit, setEdit] = useState(false)
     const [inputName, setInputName] = useState(name)
     const [inputImage, setInputImage] = useState("")
-    const [uploadedImage, setUploadedImage] = useState(null)
-    const [preview, setPreview] = useState("")
     const [loading, setLoading] = useState(false)
     const [inputDescription, setInputDescription] = useState(desc || "")
     const [cookies, setCookie] = useCookies(["oss9oli"])
-    const updateImage = (e) => {
-        // check if image is bigger than 2MB
-        if (e.target.files[0].size > 2097152) {
-            alert("Image is too big")
-        }
-        else {
-            setInputImage(e.target.files[0])
-            setPreview(URL.createObjectURL(e.target.files[0]))
-        }
-    }
+    const { customSeed } = decode(cookies.oss9oli)
+
+
     const updateUserData = () => {
         const form = new FormData()
-        if (inputImage !== "") {
-            localStorage.removeItem("image")
-            form.append("file", inputImage)
-        }
+
         if (inputName !== "") {
             form.append("name", inputName)
         }
@@ -55,42 +43,7 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
         }
         )
     }
-    const { isImagePresent } = decode(cookies.oss9oli)
-    useEffect(() => {
-        if (isImagePresent === true) {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${cookies.oss9oli}`
-                }
-            }
-            // try to get image from local storage
-            const image = localStorage.getItem("image")
-            if (image) {
-                // parse local storage image
-                try {
-                    const parsedImage = JSON.parse(image)
-                    setUploadedImage(parsedImage)
-                } catch (error) {
-                    // if parsing fails, remove image from local storage
-                    localStorage.removeItem("image")
-                    axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                        setUploadedImage(res.data.image)
-                        localStorage.setItem("image", JSON.stringify(res.data.image))
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-                }
 
-            } else {
-                axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                    setUploadedImage(res.data.image)
-                    localStorage.setItem("image", JSON.stringify(res.data.image))
-                }).catch((err) => {
-                    console.log(err)
-                })
-            }
-        }
-    }, [])
     return (
         <div className='border border-black border-l-0 border-t-0 bg-orng4 flex md:flex-row flex-col items-center md:items-start'>
             {!edit && <div className='md:hidden flex items-center   cursor-pointer w-full p-2' onClick={() => setEdit(true)}>
@@ -104,21 +57,13 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                 {!edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
                     <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
                     </div>
-                    {isImagePresent === false ?
-                        <img src={img} alt="" className='rounded-full' />
-                        :
-                        <img src={`data:image/${uploadedImage?.contentType};base64, 
-                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full h-44 w-44' />
-                    }
+                    <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" className='rounded-full' />
                 </div>}
                 {edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
                     <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
                     </div>
-                    <img src={preview} alt="" className='rounded-full bg-asfer3 h-full w-full' />
+                    <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" className='rounded-full bg-asfer3 h-full w-full' />
                 </div>}
-                {edit &&
-                    <input type={"file"} className="mt-2 w-44" onChange={(e) => updateImage(e)} />
-                }
             </div>
             <div className='p-12 flex flex-col '>
                 <div className=''>

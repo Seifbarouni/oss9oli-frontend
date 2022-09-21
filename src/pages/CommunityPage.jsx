@@ -8,7 +8,7 @@ import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
 import { Vote } from '../components/Vote'
 import { useOpen } from '../store/store'
-import { createPath, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import { useState } from 'react'
@@ -20,19 +20,22 @@ export const CommunityPage = () => {
     const [post, setPost] = useState("");
     const [posts, setPosts] = useState([]);
     const [name, setName] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
         }
         const { pack, name } = decode(cookies.oss9oli)
-        setName(name)
         if (pack === "" || pack === "free" || pack === "consumer_pack") {
             navigate("/accueil")
         }
+        setName(name)
         axios.get(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`).then(res => {
             if (res.data.success) {
                 setPosts(res.data.data)
+                setLoading(false)
             }
         }).catch(err => console.error(err))
     }, [])
@@ -68,8 +71,8 @@ export const CommunityPage = () => {
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>{name}</span>
                     </div>
-                    <div className='flex flex-col mt-6 space-y-1'>
-                        <input type="text" value={post} onChange={e => setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelques choses...' required />
+                    <div className='flex flex-col mt-6 space-y-1 px-4'>
+                        <input type="text" value={post} onChange={e => setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelque chose...' required />
                     </div>
                     <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
 
@@ -102,10 +105,16 @@ export const CommunityPage = () => {
                 */
                     }
 
+                    {loading &&
+                        <div className='flex justify-center items-center mt-10'>
+                            <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
+                        </div>
+                    }
+
                     {posts.map((post) => (
                         <>
                             <div className='mt-12'>
-                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.avatar} likes={post.likes} comments={post.comments} />
+                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} comments={post.comments} />
                             </div>
                             <div className='border-b border-black mt-12'></div>
                         </>

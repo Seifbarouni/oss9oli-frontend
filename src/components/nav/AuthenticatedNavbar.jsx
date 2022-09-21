@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Hamburger } from '../buttons/Hamburger'
 import { JoinButton } from '../buttons/JoinButton'
 
@@ -8,57 +8,19 @@ import { useOpen } from '../../store/store'
 import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { useAudio } from '../../store/store'
 
 export const AuthenticatedNavbar = () => {
     const navigate = useNavigate()
     const setOpen = useOpen((state) => state.setOpen)
     const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
-    const { pack, picture, isImagePresent } = decode(cookies.oss9oli)
-    const [uploadedImage, setUploadedImage] = useState(null)
+    const { pack, customSeed } = decode(cookies.oss9oli)
     const closeAudio = useAudio((state) => state.closeAudio)
     const logout = () => {
         removeCookie("oss9oli")
-        localStorage.removeItem("image")
         closeAudio()
         navigate("/auth")
     }
-    useEffect(() => {
-        if (isImagePresent === true) {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${cookies.oss9oli}`
-                }
-            }
-            // try to get image from local storage
-            const image = localStorage.getItem("image")
-            if (image) {
-                // parse local storage image
-                try {
-                    const parsedImage = JSON.parse(image)
-                    setUploadedImage(parsedImage)
-                } catch (error) {
-                    // if parsing fails, remove image from local storage
-                    localStorage.removeItem("image")
-                    axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                        setUploadedImage(res.data.image)
-                        localStorage.setItem("image", JSON.stringify(res.data.image))
-                    }).catch((err) => {
-                        console.log(err)
-                    })
-                }
-
-            } else {
-                axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/image`, config).then((res) => {
-                    setUploadedImage(res.data.image)
-                    localStorage.setItem("image", JSON.stringify(res.data.image))
-                }).catch((err) => {
-                    console.log(err)
-                })
-            }
-        }
-    }, [])
     return (
         <nav className="flex items-center justify-evenly p-3 z-40 w-full xl:px-12 ">
             <div className='flex items-center w-full'>
@@ -86,10 +48,7 @@ export const AuthenticatedNavbar = () => {
                 </div>
                 <Link to={"/profile"}>
                     <div className='h-16 w-16 border border-black rounded-full bg-white'>
-                        {isImagePresent === false ? <img src={picture} alt="" referrerpolicy="no-referrer" className='rounded-full' /> :
-                            <img src={`data:image/${uploadedImage?.contentType};base64, 
-                     ${uploadedImage?.data.toString('base64')}`} alt="" className='rounded-full h-full w-full' />
-                        }
+                        <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" referrerpolicy="no-referrer" className='rounded-full' />
                     </div>
                 </Link>
             </div>
