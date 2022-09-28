@@ -36,7 +36,13 @@ export const HomePage = () => {
             navigate("/auth")
         }
         setLoading(true)
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`).then(res => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`,
+            {
+                headers: {
+                    Authorization: `Bearer ${cookies.oss9oli}`
+                }
+            }
+        ).then(res => {
             setPodcasts(res.data.data)
             setLoading(false)
         }).catch(err => console.log(err))

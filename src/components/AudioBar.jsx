@@ -4,9 +4,14 @@ import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
+import { useCookies } from 'react-cookie';
+import { decode } from '../jwt/jwt'
+
 
 var interval = null;
 export const AudioBar = () => {
+    const [cookies] = useCookies(['oss9oli']);
+    const { userId } = decode(cookies.oss9oli)
     const audioData = useAudio((state) => state.audioData)
     const [currentTime, setCurrentTime] = useState("")
     const audioEl = useRef()
@@ -39,7 +44,7 @@ export const AudioBar = () => {
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
-            <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
+            <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}/${userId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
             <div className='flex w-1/3 justify-start'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black'>
                     <img src={`data:${audioData.img?.contentType};base64,${audioData.img?.data?.toString('base64')}`} alt="" className='rounded-lg' />
