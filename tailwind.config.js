@@ -25,6 +25,7 @@ module.exports = {
         asfer3: "#F8962F1A",
         ak7el: "#000000",
         ka7ouli: "#3C3C3C",
+        ka7ouli2: "#001E1D",
       },
     },
   },
