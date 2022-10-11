@@ -59,7 +59,7 @@ export const Auth = () => {
                         ou
                     </div>
                     <a href={`https://www.facebook.com/v14.0/dialog/oauth?client_id=${process.env.REACT_APP_FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_FACEBOOK_REDIRECT_URL}&state=state-param&scope=email`} className="relative rounded-full w-full z-50">
-                        <div className='flex items-center border border-black bg-azreg p-3 rounded-full px-5 transition duration-150 hover:-translate-x-1 hover:translate-y-1 z-40'>
+                        <div className='flex items-center border border-black bg-azreg2 p-3 rounded-full px-5 transition duration-150 hover:-translate-x-1 hover:translate-y-1 z-40'>
                             <div>
                                 <img src={facebook} alt="" />
                             </div>
@@ -105,7 +105,7 @@ export const Auth = () => {
                             ou
                         </div>
                         <a href="#" className="relative rounded-full w-full z-50">
-                            <div className='flex items-center border border-black bg-azreg p-3 rounded-full px-5 transition duration-150 hover:-translate-x-1 hover:translate-y-1 z-40'>
+                            <div className='flex items-center border border-black bg-azreg2 p-3 rounded-full px-5 transition duration-150 hover:-translate-x-1 hover:translate-y-1 z-40'>
                                 <div>
                                     <img src={facebook} alt="" />
                                 </div>

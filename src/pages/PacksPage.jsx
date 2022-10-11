@@ -29,18 +29,25 @@ export const PacksPage = () => {
                 </div> */}
             </div>
             <div className='mt-16 flex 2xl:flex-row flex-col w-full  2xl:space-x-8 2xl:space-y-0 space-y-4 justify-center items-center z-40'>
-                <div className='mt-4 flex  justify-center items-center z-40'>
+                <div className='mt-4 flex  justify-center items-center z-40 relative'>
+                    <div className='absolute -left-8 -top-10'>
+                        <img src={headphones} alt="" />
+                    </div>
                     <Pack
                         color={"azreg"}
                         price={0}
-                        buttonText={"Essayer"}
-                        title={"Normal"}
+                        buttonText={"S'incrire"}
+                        title={"Auditeur"}
                         pack={"free"}
-                        desc={"Testez la plateforme sans engagements"}
+                        desc={"Devenez auditeur fidèle et naviguez dans la plateforme en toute liberté"}
                     >
-                        <span className='sm:text-lg'>1 heure d'écoute</span>
+                        <span className='sm:text-lg'>Ecouter tous nos podcasts en illimité</span>
                         <div className='border-b-2 border-azreg opacity-30'></div>
-                        <span className='sm:text-lg'>Naviguer dans certaines sections de la plateforme</span>
+                        <span className='sm:text-lg'>Naviguer dans la plateforme en toute liberté</span>
+                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <span className='sm:text-lg'>Commentez, likez et partagez vos podcasts préférés</span>
+                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <span className='sm:text-lg'>Profitez d'une expérience personnalisée</span>
                     </Pack>
                 </div>
                 <div className='relative'>

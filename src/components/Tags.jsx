@@ -25,7 +25,7 @@ export const Tags = () => {
                         </span>
                     </div>
                     <div className='p-3'>
-                        <span className='bg-azreg px-8 py-3 rounded-full border border-black text-white text-lg flex items-center justify-between space-x-4 w-44'>
+                        <span className='bg-azreg2 px-8 py-3 rounded-full border border-black text-white text-lg flex items-center justify-between space-x-4 w-44'>
                             <span>Art</span><span className='text-base'>x</span>
                         </span>
                     </div>

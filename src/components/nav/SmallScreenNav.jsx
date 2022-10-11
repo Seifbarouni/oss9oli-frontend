@@ -11,7 +11,7 @@ export const SmallScreenNav = ({ selected }) => {
     const { pack } = decode(cookies.oss9oli)
     return (
         <div className='z-50 w-screen'>
-            <div className='bg-akhdher2 border border-black relative'>
+            <div className='bg-azreg3 border border-black relative'>
                 <XIcon className='absolute top-6 left-2 cursor-pointer text-white h-12 w-12' onClick={() => setOpen()} />
                 <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12 items-center justify-center'>
                     <Link to={"/accueil"}>
