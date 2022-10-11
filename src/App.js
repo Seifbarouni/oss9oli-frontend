@@ -20,6 +20,7 @@ import { useAudio, useOpen } from "./store/store";
 import { FacebookAuth } from "./pages/FacebookAuth";
 import { GoogleAuth } from "./pages/GoogleAuth";
 import { AudioBar } from "./components/AudioBar";
+import { ChannelPage } from "./pages/ChannelPage";
 
 function App() {
   const close = useOpen((state) => state.close);
@@ -134,6 +135,14 @@ function App() {
             element={
               <div className="bg-gris2 -z-50">
                 <GoogleAuth />
+              </div>
+            }
+          />
+          <Route
+            path="/channel/:id"
+            element={
+              <div className="bg-gris2 -z-50">
+                <ChannelPage />
               </div>
             }
           />
