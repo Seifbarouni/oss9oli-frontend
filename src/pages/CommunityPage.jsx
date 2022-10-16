@@ -13,6 +13,7 @@ import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import { useState } from 'react'
 import axios from 'axios'
+import { Question } from '../components/Question'
 
 export const CommunityPage = () => {
     const navigate = useNavigate()
@@ -85,7 +86,10 @@ export const CommunityPage = () => {
                             </div>
                         </button>
                     </div>
-                    {/*<div className='flex flex-col mt-24'>
+                    <div className='flex flex-col mt-24'>
+                        <Question />
+                    </div>
+                    <div className='flex flex-col mt-24'>
                         <span className='text-3xl font-semibold'>Evènements à venir</span>
                         <div className='mt-4 flex w-full'>
                             <Events />
@@ -102,8 +106,6 @@ export const CommunityPage = () => {
                     <div className='mt-12'>
                         <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
                     </div>
-                */
-                    }
 
                     {loading &&
                         <div className='flex justify-center items-center mt-10'>
