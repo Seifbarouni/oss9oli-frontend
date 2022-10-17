@@ -14,15 +14,15 @@ import { useCookies } from 'react-cookie'
 import { useState } from 'react'
 import axios from 'axios'
 import { Question } from '../components/Question'
+import { Pensee } from '../components/Pensee'
 
 export const CommunityPage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
-    const [post, setPost] = useState("");
     const [posts, setPosts] = useState([]);
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
-
+    const [type, setType] = useState("pensee")
     useEffect(() => {
         setLoading(true);
         if (Object.entries(cookies).length === 0) {
@@ -41,16 +41,7 @@ export const CommunityPage = () => {
         }).catch(err => console.error(err))
     }, [])
 
-    const publish = () => {
-        axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`, {
-            content: post,
-            userId: (decode(cookies.oss9oli)).userId
-        }).then(res => {
-            if (res.data.success) {
-                window.location.reload()
-            }
-        }).catch(err => console.error(err))
-    }
+    
 
 
     const open = useOpen((state) => state.open)
@@ -72,23 +63,33 @@ export const CommunityPage = () => {
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>{name}</span>
                     </div>
-                    <div className='flex flex-col mt-6 space-y-1 px-4'>
-                        <input type="text" value={post} onChange={e => setPost(e.target.value)} className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Ecrit quelque chose...' required />
-                    </div>
+                    {type == "pensee"?
+                    <Pensee />
+                    : 
+                    <Question />
+                    }
+                    
                     <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
 
-                        <button className="relative mb-6 z-50 mt-16" onClick={publish} >
-                            <div className='text-white rounded-full bg-orng2 border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
-                                Publier
+                        <button className="relative mb-6 z-50 mt-16" onClick={()=>{setType("pensee")}}>
+                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee"? "bg-gray-400" : "bg-akhdher")}>
+                                Pensée
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
-                                Publier
+                                Pensée
+                            </div>
+                        </button>
+
+                        <button className="relative mb-6 z-50 mt-16" onClick={()=>{setType("vote")}}>
+                            <div  className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '+  (type == "vote"? "bg-gray-400" : "bg-orng")}>
+                                Vote
+                            </div>
+                            <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
+                                Vote
                             </div>
                         </button>
                     </div>
-                    <div className='flex flex-col mt-24'>
-                        <Question />
-                    </div>
+                    {/**/}
                     <div className='flex flex-col mt-24'>
                         <span className='text-3xl font-semibold'>Evènements à venir</span>
                         <div className='mt-4 flex w-full'>
@@ -103,9 +104,11 @@ export const CommunityPage = () => {
                         </div>
                     </div>
                     <div className='border-b border-black mt-12'></div>
-                    <div className='mt-12'>
+                    {
+                    /*<div className='mt-12'>
                         <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
                     </div>
+                    */}
 
                     {loading &&
                         <div className='flex justify-center items-center mt-10'>
