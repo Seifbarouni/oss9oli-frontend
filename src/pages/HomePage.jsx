@@ -69,7 +69,7 @@ export const HomePage = () => {
 
     }
     return (
-        <div className='flex flex-col '>
+        <div className='flex flex-col'>
             <AuthenticatedNavbar />
             <Seperator mt={0} />
             <div className='flex w-full'>
@@ -81,7 +81,7 @@ export const HomePage = () => {
                         <SmallScreenNav selected={"accueil"} />
                     </div>
                 </div>}
-                <div className='flex flex-col z-40 w-full p-4'>
+                <div className='flex flex-col z-40 w-full p-4 xl:px-24'>
                     <div className={`mt-4 ${!open ? "md:px-44" : ""}`}>
                         <Search search={getPodcastsBySearch} />
                     </div>

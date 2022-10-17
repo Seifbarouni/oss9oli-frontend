@@ -39,11 +39,19 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
             >
             </div>
             <div className='w-full flex flex-col p-4 mt-4'>
-                <Link
-                    to={`/episode/${podcastId}`}
-                >
-                    <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest} : showname(${number}) - ${creator}` : title}</div>
-                </Link>
+
+                <div>
+                    <div className='flex justify-between'>
+                        <span>Episode {number}</span>
+                        <span className='text-gray-500'>show name</span>
+                    </div>
+                    <Link
+                        to={`/episode/${podcastId}`}
+                    >
+                        <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest}` : title}</div>
+                    </Link>
+
+                </div>
                 <div className='flex sm:flex-row flex-col justify-between items-center mt-4'>
                     <div className='flex space-x-2'>
                         <span>
