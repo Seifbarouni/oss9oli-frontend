@@ -103,10 +103,15 @@ export const HomePage = () => {
 
                             {podcasts.map((podcast) => (
                                 <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                                    <Podcast podcastId={podcast._id} img={podcast.podcastId.image} creator={podcast.podcastId.name} title={podcast.title} duration={podcast.length}
-                                        description={podcast.description} status={podcast.status} guest={podcast.guest}
+                                    <Podcast podcastId={podcast._id}
+                                        img={podcast.podcastId.image}
+                                        creator={podcast.podcastId.name}
+                                        title={podcast.title} duration={podcast.length}
+                                        description={podcast.description} status={podcast.status}
+                                        guest={podcast.guest}
                                         listens={podcast.numberOfListeners}
                                         number={podcast.episodeNumber}
+                                        tags={podcast.tags}
                                         w={"w-full"} h={"sm:h-96"} />
                                 </div>
                             ))}

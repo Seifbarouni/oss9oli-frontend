@@ -38,7 +38,7 @@ export const AuthenticatedNavbar = () => {
                 </div>}
             </div>
             <div className='w-full flex justify-center'>
-                <Link to={'/'}>
+                <Link to={'/accueil'}>
                     <img src={black_logo} alt="" />
                 </Link>
             </div>

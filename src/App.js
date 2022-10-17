@@ -21,6 +21,7 @@ import { FacebookAuth } from "./pages/FacebookAuth";
 import { GoogleAuth } from "./pages/GoogleAuth";
 import { AudioBar } from "./components/AudioBar";
 import { ChannelPage } from "./pages/ChannelPage";
+import { EpisodePage } from "./pages/EpisodePage";
 
 function App() {
   const close = useOpen((state) => state.close);
@@ -139,16 +140,24 @@ function App() {
             }
           />
           <Route
-            path="/channel/:id"
+            path="/channel/:name"
             element={
               <div className="bg-gris2 -z-50">
                 <ChannelPage />
               </div>
             }
           />
+          <Route
+            path="/episode/:id"
+            element={
+              <div className="bg-gris2 -z-50">
+                <EpisodePage />
+              </div>
+            }
+          />
         </Routes>
+        {isAudioBarOpen && <AudioBar />}
       </BrowserRouter>
-      {isAudioBarOpen && <AudioBar />}
     </div>
   );
 }

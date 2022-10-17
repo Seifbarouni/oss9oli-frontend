@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
 
 export const Podcast = ({ podcastId, img, title, creator, duration, description, w, h, guest, listens, number, tags, status }) => {
+    let t = tags !== undefined ? tags[0].split(",") : []
+    t.shift()
+    const [allTags, setAllTags] = useState(t)
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -26,7 +30,7 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
     }
     return (
         <div className={`flex bg-white rounded-3xl border border-black justify-between ${w} ${h}`}>
-            <div className='w-1/2 rounded-3xl bg-cover'
+            <div className='w-1/2 rounded-3xl bg-cover bg-center'
                 style={
                     {
                         backgroundImage: `url(data:${img?.contentType};base64,${img?.data?.toString('base64')})`
@@ -35,9 +39,25 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
             >
             </div>
             <div className='w-full flex flex-col p-4 mt-4'>
-                <div className='xl:text-3xl text-xl'>{creator !== "" && title !== "" ? `${title} avec ${guest} : showname(${number}) - ${creator}` : title}</div>
-                <div className='flex sm:flex-row flex-col justify-between items-center'>
-                    <div>Par <span className='text-orange-300'>{creator}</span></div>
+                <Link
+                    to={`/episode/${podcastId}`}
+                >
+                    <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest} : showname(${number}) - ${creator}` : title}</div>
+                </Link>
+                <div className='flex sm:flex-row flex-col justify-between items-center mt-4'>
+                    <div className='flex space-x-2'>
+                        <span>
+                            Par
+                        </span>
+                        <span>
+                            <Link
+                                to={`/channel/${creator}`}
+                            >
+                                <span className='text-orange-300 hover:underline cursor-pointer'>{creator}</span>
+                            </Link>
+                        </span>
+
+                    </div>
                     <div className="z-50 relative" onClick={() => newAudio()}>
                         <div
                             className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
@@ -63,6 +83,18 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
                 <div className='border-b border-gray-500 mt-2 mb-4'></div>
                 <div className='overflow-y-scroll h-32'>
                     {description}
+                </div>
+                <div className='flex items-center space-x-3'>
+                    <div>
+                        Tags:
+                    </div>
+                    <div className='flex space-x-2'>
+                        {allTags.map((tag, index) => {
+                            return (
+                                <span key={index} className='bg-gris rounded-3xl border border-black cursor-pointer px-4 p-1'>{tag}</span>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
