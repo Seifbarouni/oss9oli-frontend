@@ -9,7 +9,7 @@ export const Sidebar = ({ selected }) => {
     return (
         <div className='h-full z-40 font-semibold sticky w-80'>
             <div className='bg-azreg3 border border-black rounded-r-3xl'>
-                <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12'>
+                <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12'>
                     <Link to={"/accueil"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
                     </Link>
@@ -26,13 +26,13 @@ export const Sidebar = ({ selected }) => {
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
                 </div>
-                <div className='flex flex-col space-y-8 mt-40 pl-12 text-white text-2xl mb-12'>
+                <div className='flex flex-col space-y-12 mt-40 pl-12 text-white text-2xl mb-12'>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "settings" ? " underline" : ""}`}>PARAMETRES</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "stats" ? " underline" : ""}`}>STATISTIQUES</span>
                 </div>
             </div>
             <div className=' border border-black rounded-r-3xl absolute top-1 -right-1 -z-10 bg-white w-full'>
-                <div className='mt-28 flex flex-col space-y-8 text-white text-2xl pl-12 invisible'>
+                <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12 invisible'>
                     <span>ACCUEIL</span>
                     {pack !== "free" && pack !== "consumer_pack" && <span>O9 COMMUNITY</span>}
                     {pack === "producer_pack" && <span>MES PODCATS</span>}
@@ -40,7 +40,7 @@ export const Sidebar = ({ selected }) => {
                     <span>OPEN MIC</span>
                     <span>STUDIO OSS9OLI</span>
                 </div>
-                <div className='flex flex-col space-y-8 mt-40 pl-12 text-white text-2xl  mb-12 invisible'>
+                <div className='flex flex-col space-y-12 mt-40 pl-12 text-white text-2xl  mb-12 invisible'>
                     <span>PARAMETRES</span><span>STATISTIQUES</span>
                 </div>
             </div>
