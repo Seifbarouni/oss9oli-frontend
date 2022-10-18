@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
+import axios from 'axios'
 
-export const Podcast = ({ podcastId, img, title, creator, duration, description, w, h, guest, listens, number, tags, status }) => {
+export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, description, w, h, guest, listens, number, tags, status }) => {
     let t = tags !== undefined ? tags[0].split(",") : []
     t.shift()
     const [allTags, setAllTags] = useState(t)
@@ -16,6 +17,7 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
     }
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
+    const [channelName, setChannelName] = useState("")
     const newAudio = () => {
         openAudio()
         setAudioData(
@@ -24,10 +26,29 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
                 img,
                 creator,
                 duration,
-                podcastId
+                podcastId: episodeId
             }
         )
     }
+    useEffect(() => {
+
+        if (podcastId && podcastId.channelId !== undefined) {
+            // get channel name request
+            const getChannelName = async () => {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/${podcastId.channelId}`)
+                    setChannelName(response.data.data.name)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+            getChannelName()
+        }
+
+    }, [])
+
+
     return (
         <div className={`flex bg-white rounded-3xl border border-black justify-between ${w} ${h}`}>
             <div className='w-1/2 rounded-3xl bg-cover bg-center'
@@ -43,25 +64,29 @@ export const Podcast = ({ podcastId, img, title, creator, duration, description,
                 <div>
                     <div className='flex justify-between'>
                         <span>Episode {number}</span>
-                        <span className='text-gray-500'>show name</span>
+                        <Link
+                            to={`/episode/${podcastId._id}`}
+                        >
+                            <span className='text-gray-500'>{creator}</span>
+                        </Link>
                     </div>
                     <Link
-                        to={`/episode/${podcastId}`}
+                        to={`/episode/${podcastId._id}`}
                     >
                         <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest}` : title}</div>
                     </Link>
 
                 </div>
                 <div className='flex sm:flex-row flex-col justify-between items-center mt-4'>
-                    <div className='flex space-x-2'>
+                    <div className={`flex space-x-2 ${channelName === "" ? "invisible" : ""}`}>
                         <span>
                             Par
                         </span>
                         <span>
                             <Link
-                                to={`/channel/${creator}`}
+                                to={`/channel/${podcastId.channelId}`}
                             >
-                                <span className='text-orange-300 hover:underline cursor-pointer'>{creator}</span>
+                                <span className='text-orange-300 hover:underline cursor-pointer'>{channelName}</span>
                             </Link>
                         </span>
 

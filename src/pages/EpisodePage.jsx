@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import { useOpen } from '../store/store'
@@ -13,13 +13,17 @@ import green_blob from '../assets/svgs/green_blob.svg'
 import img1 from '../assets/images/1.png'
 import { RecentEp } from '../components/RecentEp'
 import { Podcast } from '../components/Podcast'
+import axios from 'axios'
 
 let tags = ["Féminité", "Culture", "Art", "Economie", "Société"]
 
 export const EpisodePage = () => {
     const open = useOpen((state) => state.open)
-    const [podcasts, setPodcasts] = useState([])
+    const { id } = useParams()
+    const [episodes, setEpisodes] = useState([])
+    const [loading, setLoading] = useState(false)
     const [actifs, setActifs] = useState(new Array(tags.length).fill(false))
+    const [latestEp, setLatestEp] = useState({})
 
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
@@ -34,6 +38,31 @@ export const EpisodePage = () => {
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
+        }
+        // api / v1 / episodes / podcast /: id
+        if (id.length !== 24 || !id.match(/^[0-9a-fA-F]{24}$/)) {
+            navigate("/accueil")
+        } else {
+            // get episodes by podcast id
+            const getEpisodes = async () => {
+                try {
+                    setLoading(true)
+                    const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`
+                    )
+                    // put latest episode in latestEp
+                    setLatestEp(res.data.data[0])
+                    // remove latest episode from episodes
+                    res.data.data.shift()
+                    // put the rest in episodes
+                    setEpisodes(res.data.data)
+
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+            getEpisodes()
+            setLoading(false)
+
         }
     }, [])
     return (
@@ -60,75 +89,49 @@ export const EpisodePage = () => {
                             <Tag title={tag} actif={actifs[index]} setActif={() => setActif(index)} />
                         ))}
                     </div>
-                    <div className='mt-24 xl:px-24'>
+                    {!loading && <div className='mt-24 xl:px-24'>
                         <RecentEp
-                            episodeNumber={1}
-                            episodeName="Pensées révolutionnaires - الثورة على الواقع"
-                            createdAt="Jan 14, 2023"
-                            episodeDescription="Les manifestations débutent le 17 décembre 2010, après l'immolation par le feu d'un jeune vendeur ambulant de fruits et légumes à Sidi Bouzid, Mohamed Bouazizi, dont la marchandise avait été confisquée par les autorités10 et à la suite d'une agression physique subie de la part d'une policière, Fadia Hamdi.11"
-                            episodeDuration="1:30:00"
-                            podcastName="podcast name"
+                            podcastId={latestEp.podcastId}
+                            img={latestEp.podcastId?.image}
+                            episodeNumber={latestEp.episodeNumber}
+                            episodeName={latestEp.title}
+                            createdAt={latestEp.createdAt}
+                            episodeDescription={latestEp.description}
+                            episodeDuration={latestEp.length}
+                            podcastName={latestEp.podcastId?.name}
                             channelName="channel name"
-                            tags={["Politique", "Revolution", "Tunisie", "Liberte"]}
+                            tags={latestEp.tags}
+                            guest={latestEp.guest}
+                            status={latestEp.status}
                         />
-                    </div>
+                    </div>}
                     <div className='mt-36 xl:px-24 text-4xl font-bold'>
                         Plus d'épisodes
                     </div>
                     {/* grid of two columns */}
-                    <div className='mt-12 xl:px-24 grid grid-cols-1 md:grid-cols-2 gap-4'>
-                        <Podcast podcastId={"id"}
-                            img={img1}
-                            creator={"creator"}
-                            title={"title"}
-                            duration={120}
-                            description={"description"}
-                            status={"actif"}
-                            guest={"guest"}
-                            listens={120}
-                            number={1}
-                            tags={["Politique,Revolution,Tunisie,Liberte"]}
-                            w={"w-full"} h={"sm:h-96"} />
-                        <Podcast podcastId={"id"}
-                            img={img1}
-                            creator={"creator"}
-                            title={"title"}
-                            duration={120}
-                            description={"description"}
-                            status={"actif"}
-                            guest={"guest"}
-                            listens={120}
-                            number={1}
-                            tags={["Politique,Revolution,Tunisie,Liberte"]}
+                    {!loading && <div className='mt-12 xl:px-24 grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        {episodes.map((ep, index) => {
+                            return (
+                                <Podcast
+                                    episodeId={ep._id}
+                                    podcastId={ep.podcastId}
+                                    img={ep.podcastId.image}
+                                    creator={ep.podcastId.name}
+                                    title={ep.title}
+                                    duration={ep.length}
+                                    description={ep.description}
+                                    status={ep.status}
+                                    guest={ep.guest}
+                                    listens={ep.numberOfListeners}
+                                    number={ep.episodeNumber}
+                                    tags={ep.tags}
+                                    w={"w-full"} h={"sm:h-96"}
 
-                            w={"w-full"} h={"sm:h-96"} />
-                        <Podcast podcastId={"id"}
-                            img={img1}
-                            creator={"creator"}
-                            title={"title"}
-                            duration={120}
-                            description={"description"}
-                            status={"actif"}
-                            guest={"guest"}
-                            listens={120}
-                            number={1}
-                            tags={["Politique,Revolution,Tunisie,Liberte"]}
-                            w={"w-full"} h={"sm:h-96"} />
-                        <Podcast podcastId={"id"}
-                            img={img1}
-                            creator={"creator"}
-                            title={"title"}
-                            duration={120}
-                            description={"description"}
-                            status={"actif"}
-                            guest={"guest"}
-                            listens={120}
-                            number={1}
-                            tags={["Politique,Revolution,Tunisie,Liberte"]}
+                                />
+                            )
+                        })}
 
-                            w={"w-full"} h={"sm:h-96"} />
-
-                    </div>
+                    </div>}
                     <div className='mt-36 xl:px-24 text-4xl font-bold'>
                         Description du podcast
                     </div>

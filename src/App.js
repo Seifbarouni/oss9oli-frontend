@@ -140,7 +140,7 @@ function App() {
             }
           />
           <Route
-            path="/channel/:name"
+            path="/channel/:id"
             element={
               <div className="bg-gris2 -z-50">
                 <ChannelPage />

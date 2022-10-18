@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import img6 from '../assets/images/7.png'
 import img4 from '../assets/images/4.png'
 import red_blob from '../assets/svgs/red_blob.svg'
@@ -11,19 +11,51 @@ import { Podcast } from '../components/Podcast'
 import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { PodBanner } from '../components/PodBanner'
+import axios from 'axios'
 
 
 export const ChannelPage = () => {
   const open = useOpen((state) => state.open)
+  const [channel, setChannel] = useState({})
+  const [channelPods, setChannelPods] = useState([])
   const navigate = useNavigate()
+  const { id } = useParams()
+  console.log(id)
   const [cookies] = useCookies(['oss9oli']);
   const user = decode(cookies.oss9oli)
   useEffect(() => {
     if (Object.entries(cookies).length === 0) {
       navigate("/auth")
+    }
+    // make sure the id is a valid mongodb id
+    if (id.length !== 24 || !id.match(/^[0-9a-fA-F]{24}$/)) {
+      navigate("/accueil")
+    } else {
+      // get the channel
+      const getChannel = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/${id}`)
+          setChannel(response.data.data)
+        }
+        catch (err) {
+          console.log(err)
+          navigate("/accueil")
+        }
+      }
+      const getChannelPods = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/channel/${id}`)
+          setChannelPods(response.data.data)
+        }
+        catch (err) {
+          console.log(err)
+        }
+      }
+      getChannel()
+      getChannelPods()
     }
   }, [])
 
@@ -43,7 +75,7 @@ export const ChannelPage = () => {
           <SmallScreenNav selected={"channel"} />
         </div>}
         <div className=' flex flex-col  w-full'>
-          <ChannelBanner name={"Elhiwar Ettounsi"} img={img6} />
+          <ChannelBanner name={channel.name} img={channel.image} desc={channel.description} />
           <div className='px-20 sm:mt-80 mt-[500px] flex justify-between'>
             <span className='text-4xl'>
               Derniers sons
@@ -77,8 +109,19 @@ export const ChannelPage = () => {
             </span>
           </div>
 
-          <div className='px-20 mt-6'>
-            <PodBanner />
+          <div className='px-20 mt-6 flex flex-col space-y-8'>
+            {
+              channelPods.map((pod, index) => {
+                return <div key={index}>
+                  <PodBanner
+                    podcastId={pod._id}
+                    name={pod.name}
+                    img={pod.image}
+                    desc={pod.description}
+                  />
+                </div>
+              })
+            }
           </div>
           <div className='z-50 w-full relative px-20 mt-24 pb-16 '>
             <div className='border border-black bg-white p-6 flex flex-col rounded-3xl h-96 w-full'>

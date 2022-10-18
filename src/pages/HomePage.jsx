@@ -103,7 +103,9 @@ export const HomePage = () => {
 
                             {podcasts.map((podcast) => (
                                 <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
-                                    <Podcast podcastId={podcast._id}
+                                    <Podcast
+                                        episodeId={podcast._id}
+                                        podcastId={podcast.podcastId}
                                         img={podcast.podcastId.image}
                                         creator={podcast.podcastId.name}
                                         title={podcast.title} duration={podcast.length}
