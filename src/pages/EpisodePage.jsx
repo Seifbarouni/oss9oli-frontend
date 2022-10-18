@@ -10,7 +10,6 @@ import { Search } from '../components/Search'
 import { Tag } from '../components/Tag'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import green_blob from '../assets/svgs/green_blob.svg'
-import img1 from '../assets/images/1.png'
 import { RecentEp } from '../components/RecentEp'
 import { Podcast } from '../components/Podcast'
 import axios from 'axios'
@@ -20,10 +19,10 @@ let tags = ["Féminité", "Culture", "Art", "Economie", "Société"]
 export const EpisodePage = () => {
     const open = useOpen((state) => state.open)
     const { id } = useParams()
-    const [episodes, setEpisodes] = useState([])
+    const [episodes, setEpisodes] = useState()
     const [loading, setLoading] = useState(false)
+    const [podcastDescription, setPodcastDescription] = useState("")
     const [actifs, setActifs] = useState(new Array(tags.length).fill(false))
-    const [latestEp, setLatestEp] = useState({})
 
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
@@ -49,15 +48,14 @@ export const EpisodePage = () => {
                     setLoading(true)
                     const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`
                     )
-                    // put latest episode in latestEp
-                    setLatestEp(res.data.data[0])
-                    // remove latest episode from episodes
-                    res.data.data.shift()
-                    // put the rest in episodes
                     setEpisodes(res.data.data)
+                    if (res.data.data.length > 0) {
+                        setPodcastDescription(res.data.data[0].podcastId.description)
+                    }
 
                 } catch (err) {
                     console.log(err)
+                    navigate("/accueil")
                 }
             }
             getEpisodes()
@@ -80,7 +78,7 @@ export const EpisodePage = () => {
                     <SmallScreenNav selected={"channel"} />
                 </div>}
 
-                <div className='flex flex-col z-40 w-full p-4'>
+                <div className='flex flex-col z-40 w-full p-4 mb-96'>
                     <div className={`mt-4 ${!open ? "md:px-44" : ""}`}>
                         <Search />
                     </div>
@@ -89,34 +87,35 @@ export const EpisodePage = () => {
                             <Tag title={tag} actif={actifs[index]} setActif={() => setActif(index)} />
                         ))}
                     </div>
-                    {!loading && <div className='mt-24 xl:px-24'>
+                    {!loading && episodes !== undefined && episodes.length !== 0 && <div className='mt-24 xl:px-24'>
                         <RecentEp
-                            podcastId={latestEp.podcastId}
-                            img={latestEp.podcastId?.image}
-                            episodeNumber={latestEp.episodeNumber}
-                            episodeName={latestEp.title}
-                            createdAt={latestEp.createdAt}
-                            episodeDescription={latestEp.description}
-                            episodeDuration={latestEp.length}
-                            podcastName={latestEp.podcastId?.name}
-                            channelName="channel name"
-                            tags={latestEp.tags}
-                            guest={latestEp.guest}
-                            status={latestEp.status}
+                            episodeId={episodes[0]._id}
+                            podcastId={episodes[0].podcastId}
+                            img={episodes[0].podcastId?.image}
+                            episodeNumber={episodes[0].episodeNumber}
+                            episodeName={episodes[0].title}
+                            createdAt={episodes[0].createdAt}
+                            episodeDescription={episodes[0].description}
+                            episodeDuration={episodes[0].length}
+                            podcastName={episodes[0].podcastId?.name}
+                            tags={episodes[0].tags}
+                            guest={episodes[0].guest}
+                            status={episodes[0].status}
                         />
                     </div>}
                     <div className='mt-36 xl:px-24 text-4xl font-bold'>
                         Plus d'épisodes
                     </div>
                     {/* grid of two columns */}
-                    {!loading && <div className='mt-12 xl:px-24 grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    {!loading && episodes && <div className='mt-12 xl:px-24 grid grid-cols-1 md:grid-cols-2 gap-4'>
                         {episodes.map((ep, index) => {
                             return (
                                 <Podcast
+                                    key={index}
                                     episodeId={ep._id}
                                     podcastId={ep.podcastId}
-                                    img={ep.podcastId.image}
-                                    creator={ep.podcastId.name}
+                                    img={ep.podcastId?.image}
+                                    creator={ep.podcastId?.name}
                                     title={ep.title}
                                     duration={ep.length}
                                     description={ep.description}
@@ -136,7 +135,7 @@ export const EpisodePage = () => {
                         Description du podcast
                     </div>
                     <div className='mt-4 xl:px-24 w-2/3 text-lg'>
-                        Les manifestations débutent le 17 décembre 2010, après l'immolation par le feu d'un jeune vendeur ambulant de fruits et légumes à Sidi Bouzid, Mohamed Bouazizi, dont la marchandise avait été confisquée par les autorités10 et à la suite d'une agression physique subie de la part d'une policière, Fadia Hamdi.11
+                        {podcastDescription}
                     </div>
                     <div className='mt-36 xl:px-24 text-4xl font-bold'>
                         Informations sur le créateur

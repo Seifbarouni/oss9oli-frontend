@@ -32,7 +32,6 @@ export const MyChannelPage = () => {
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 setMyPodcasts(res.data.data)
-                console.log(res.data.data)
                 setLoading(false)
             }).catch(err => console.log(err))
     }, [])

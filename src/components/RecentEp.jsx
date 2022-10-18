@@ -14,12 +14,12 @@ export const RecentEp = ({
     podcastId,
     tags,
     guest,
+    episodeId,
     status
 
 }) => {
-    let t = tags !== undefined ? tags[0].split(",") : []
-    t.shift()
-    const [allTags, setAllTags] = useState(t)
+
+    const [allTags, setAllTags] = useState([])
     // format date
     const formatDate = (date) => {
         let d = new Date(date)
@@ -48,12 +48,15 @@ export const RecentEp = ({
                 img,
                 creator: channelName,
                 duration: episodeDuration,
-                podcastId: podcastId._id
+                podcastId: episodeId
             }
         )
     }
 
     useEffect(() => {
+        let t = tags !== undefined ? tags[0].split(",") : []
+        t.shift()
+        setAllTags(t)
         if (podcastId && podcastId.channelId !== undefined) {
             // get channel name request
             const getChannelName = async () => {
@@ -91,7 +94,7 @@ export const RecentEp = ({
                 <div className='h-32 overflow-y-scroll text-lg mt-1'>
                     {episodeDescription}
                 </div>
-                <div className='flex justify-between'>
+                <div className='flex justify-between mt-4'>
                     <div className='flex items-start space-x-3'>
                         <span className='h-12 w-12 bg-gris border border-black rounded-full'></span>
                         <span>{channelName}</span>

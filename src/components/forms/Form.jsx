@@ -30,6 +30,7 @@ export const Form = () => {
         formData.append("file", file)
         formData.append("episodeNumber", episodeNumber)
         formData.append("guest", guest)
+        formData.append("podcastId", "630608845495d2aaf6d17738")
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',

@@ -57,7 +57,7 @@ export const AudioBar = () => {
                 </div>
                 <div className='flex flex-col ml-2'>
                     <Link
-                        to={`/episode/${audioData.podcastId._id}`}
+                        to={`/episode/${audioData.podcastId}`}
                     >
                         <span className='xl:text-xl font-bold hover:underline cursor-pointer'>{audioData.title}</span>
                     </Link>

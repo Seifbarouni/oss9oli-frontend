@@ -26,6 +26,9 @@ export const SmallScreenNav = ({ selected }) => {
                     {pack === "producer_pack" && <Link to={"/edit"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`} onClick={() => setOpen()}>EDITER CHAINE</span>
                     </Link>}
+                    {pack === "producer_pack" && <Link to={"/edit_podcasts"}>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit_pods" ? " underline" : ""}`} onClick={() => setOpen()}>EDITER PODCASTS</span>
+                    </Link>}
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>

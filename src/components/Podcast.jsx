@@ -19,6 +19,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
     const openAudio = useAudio((state) => state.openAudio)
     const [channelName, setChannelName] = useState("")
     const newAudio = () => {
+        // if (status === "actif") {
         openAudio()
         setAudioData(
             {
@@ -29,6 +30,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                 podcastId: episodeId
             }
         )
+        //   }
     }
     useEffect(() => {
 
@@ -65,13 +67,13 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                     <div className='flex justify-between'>
                         <span>Episode {number}</span>
                         <Link
-                            to={`/episode/${podcastId._id}`}
+                            to={`/episode/${podcastId?._id}`}
                         >
                             <span className='text-gray-500'>{creator}</span>
                         </Link>
                     </div>
                     <Link
-                        to={`/episode/${podcastId._id}`}
+                        to={`/episode/${podcastId?._id}`}
                     >
                         <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest}` : title}</div>
                     </Link>
@@ -84,14 +86,14 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                         </span>
                         <span>
                             <Link
-                                to={`/channel/${podcastId.channelId}`}
+                                to={`/channel/${podcastId?.channelId}`}
                             >
                                 <span className='text-orange-300 hover:underline cursor-pointer'>{channelName}</span>
                             </Link>
                         </span>
 
                     </div>
-                    <div className="z-50 relative" onClick={() => newAudio()}>
+                    <div className="z-50 relative" onClick={() => newAudio()} >
                         <div
                             className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >

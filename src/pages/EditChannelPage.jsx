@@ -29,7 +29,7 @@ export const EditChannelPage = () => {
             navigate("/accueil")
         }
         setLoading(true)
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/chan/get`, {
             headers: { Authorization: `Bearer ${cookies.oss9oli}` }
         }).then(res => {
             setName(res.data.data.name)
@@ -68,14 +68,20 @@ export const EditChannelPage = () => {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }
-        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, formData, config).then(res => {
-            console.log(res)
-            window.location.reload()
+        // check if description is more than 256 characters
+        if (description.length > 256) {
+            alert("Description is too long")
+        } else {
+            axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, formData, config).then(res => {
+                console.log(res)
+                window.location.reload()
+            }
+            ).catch(err => {
+                console.log(err)
+            }
+            )
         }
-        ).catch(err => {
-            console.log(err)
-        }
-        )
+
     }
     return (
         <div className='flex flex-col'>
