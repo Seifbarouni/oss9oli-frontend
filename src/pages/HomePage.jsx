@@ -14,7 +14,6 @@ import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Podcast } from '../components/Podcast'
 import { Search } from '../components/Search'
-import { Seperator } from '../components/Seperator'
 import { SmallPost } from '../components/SmallPost'
 import { Tag } from '../components/Tag'
 import { useOpen } from '../store/store'
@@ -71,11 +70,12 @@ export const HomePage = () => {
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
-            <Seperator mt={0} />
-            <div className='flex w-full'>
-                {open && <div className='lg:flex hidden'>
-                    <Sidebar selected={"accueil"} />
-                </div>}
+            <div className='flex w-full relative'>
+                <div>
+                    {open && <div className='lg:flex hidden sticky top-24'>
+                        <Sidebar selected={"accueil"} />
+                    </div>}
+                </div>
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <div className='sticky'>
                         <SmallScreenNav selected={"accueil"} />

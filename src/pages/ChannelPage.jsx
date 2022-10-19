@@ -62,15 +62,16 @@ export const ChannelPage = () => {
   return (
     <div className='flex flex-col realtive z-50 h-full'>
       <AuthenticatedNavbar />
-      <Seperator mt={0} />
       <div className='absolute right-0 top-32  '>
         <img src={red_blob} alt="" className='' />
       </div>
 
       <div className='flex z-40'>
-        {open && <div className='lg:flex hidden'>
-          <Sidebar selected={"channel"} />
-        </div>}
+        <div>
+          {open && <div className='lg:flex hidden sticky top-24'>
+            <Sidebar selected={"channel"} />
+          </div>}
+        </div>
         {open && <div className='flex lg:hidden absolute top-0 z-50'>
           <SmallScreenNav selected={"channel"} />
         </div>}

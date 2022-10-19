@@ -38,11 +38,13 @@ export const MyChannelPage = () => {
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
-            <Seperator mt={0} />
+            {/* <Seperator mt={0} /> */}
             <div className='flex'>
-                {open && <div className='lg:flex hidden'>
-                    <Sidebar selected={"mypods"} />
-                </div>}
+                <div>
+                    {open && <div className='lg:flex hidden sticky top-24'>
+                        <Sidebar selected={"mypods"} />
+                    </div>}
+                </div>
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <div className='sticky'>
                         <SmallScreenNav selected={"mypods"} />

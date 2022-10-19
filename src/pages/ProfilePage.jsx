@@ -10,7 +10,6 @@ import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { ProfileBanner } from '../components/ProfileBanner'
-import { Seperator } from '../components/Seperator'
 import { SmallPost } from '../components/SmallPost'
 import { Tags } from '../components/Tags'
 import { useOpen } from '../store/store'
@@ -32,15 +31,16 @@ export const ProfilePage = () => {
     return (
         <div className='flex flex-col realtive z-50'>
             <AuthenticatedNavbar />
-            <Seperator mt={0} />
             <div className='absolute right-0 top-44  '>
                 <img src={red_blob} alt="" className='' />
             </div>
 
             <div className='flex z-40'>
-                {open && <div className='lg:flex hidden'>
-                    <Sidebar selected={"profile"} />
-                </div>}
+                <div>
+                    {open && <div className='lg:flex hidden sticky top-24'>
+                        <Sidebar selected={"profile"} />
+                    </div>}
+                </div>
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <SmallScreenNav selected={"profile"} />
                 </div>}

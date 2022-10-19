@@ -22,7 +22,7 @@ export const AuthenticatedNavbar = () => {
         navigate("/auth")
     }
     return (
-        <nav className="flex items-center justify-evenly p-3 z-40 w-full xl:px-12 ">
+        <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-12 sticky top-0 border-b border-black bg-gris2">
             <div className='flex items-center w-full'>
                 <div onClick={() => setOpen()}>
                     <Hamburger />

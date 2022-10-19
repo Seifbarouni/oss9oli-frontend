@@ -22,7 +22,6 @@ import { GoogleAuth } from "./pages/GoogleAuth";
 import { AudioBar } from "./components/AudioBar";
 import { ChannelPage } from "./pages/ChannelPage";
 import { EpisodePage } from "./pages/EpisodePage";
-import { EditPodcastsPage } from "./pages/EditPodcastsPage";
 
 function App() {
   const close = useOpen((state) => state.close);
@@ -129,14 +128,6 @@ function App() {
             element={
               <div className="bg-gris2  relative">
                 <EditChannelPage />
-              </div>
-            }
-          />
-          <Route
-            path="/edit_podcasts"
-            element={
-              <div className="bg-gris2  relative">
-                <EditPodcastsPage />
               </div>
             }
           />

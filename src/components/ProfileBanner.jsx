@@ -8,31 +8,25 @@ import { decode } from '../jwt/jwt'
 export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
     const [edit, setEdit] = useState(false)
     const [inputName, setInputName] = useState(name)
-    const [inputImage, setInputImage] = useState("")
     const [loading, setLoading] = useState(false)
     const [inputDescription, setInputDescription] = useState(desc || "")
     const [cookies, setCookie] = useCookies(["oss9oli"])
     const { customSeed } = decode(cookies.oss9oli)
 
 
-    const updateUserData = () => {
-        const form = new FormData()
-
-        if (inputName !== "") {
-            form.append("name", inputName)
-        }
-        if (inputDescription !== "") {
-            form.append("description", inputDescription)
-        }
+    const updateUserData = async () => {
         const config = {
             headers: {
-                'content-type': 'multipart/form-data',
                 Authorization: `Bearer ${cookies.oss9oli}`
             },
         }
         setLoading(true)
         const { userId } = decode(cookies.oss9oli)
-        axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${userId}`, form, config
+        console.log({ inputName, inputDescription })
+        axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${userId}`, {
+            name: inputName,
+            description: inputDescription
+        }, config
         ).then(res => {
             setCookie("oss9oli", res.data.data)
             window.location.reload()
@@ -53,7 +47,7 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                 <XIcon className='h-8 w-8' onClick={() => setEdit(false)} />
             </div>}
 
-            <div className='md:border-r border-black p-11  z-50'>
+            <div className=' p-11  z-50'>
                 {!edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
                     <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
                     </div>
