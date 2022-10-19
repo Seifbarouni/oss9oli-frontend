@@ -115,15 +115,20 @@ export const CommunityPage = () => {
                             <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
                         </div>
                     }
-
-                    {posts.map((post) => (
+                        
+                    {posts.map((post) => 
+                        post.__t == "Vote"? 
+                        <div className='mt-12'>
+                            <Vote name={post.userId.name} question={post.question} options={post.options} img={post.userId.customSeed} userId={decode(cookies.oss9oli).userId} postId={post._id} />
+                        </div>
+                        :
                         <>
                             <div className='mt-12'>
                                 <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} comments={post.comments} />
                             </div>
                             <div className='border-b border-black mt-12'></div>
                         </>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>

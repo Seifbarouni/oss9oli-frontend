@@ -20,6 +20,7 @@ export const Question = () => {
         })
         if(arr.length >= 2 && question != ""){
             axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/posts`, {
+                type: "vote",
                 question,
                 options: arr,
                 userId: (decode(cookies.oss9oli)).userId

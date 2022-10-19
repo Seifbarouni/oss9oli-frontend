@@ -6,3 +6,7 @@
     font-family: "Gotham";
     src: local("Gotham"), url(../src/assets/fonts/Gotham-Font/GothamMedium.ttf) format("woff");
 }
+
+body{
+   /* cursor: url('./assets/images/souris.png') 16 16, auto*/
+} 
