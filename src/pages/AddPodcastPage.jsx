@@ -28,7 +28,7 @@ export const AddPodcastPage = () => {
             {/* <Seperator mt={0} /> */}
             <div className='flex'>
                 <div>
-                    {open && <div className='lg:flex hidden sticky top-24'>
+                    {open && <div className='lg:flex hidden sticky top-24 z-50'>
                         <Sidebar selected={"addpod"} />
                     </div>}
                 </div>
@@ -37,8 +37,8 @@ export const AddPodcastPage = () => {
                         <SmallScreenNav selected={"addpod"} />
                     </div>
                 </div>}
-                <div className='flex flex-col z-40 w-full sm:p-12 p-6'>
-                    <div className={`flex mt-4 justify-between items-end ${!open ? "md:px-44" : ""}`}>
+                <div className='flex flex-col z-40 w-full xl:p-12 p-6'>
+                    <div className={`flex mt-4 justify-between items-end ${!open ? "xl:px-44" : ""}`}>
                         <Form />
                     </div>
                 </div>

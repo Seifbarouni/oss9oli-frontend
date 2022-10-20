@@ -44,8 +44,8 @@ export const ProfilePage = () => {
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <SmallScreenNav selected={"profile"} />
                 </div>}
-                <div className='flex flex-col flex-grow z-30'>
-                    <div className=' flex flex-col '>
+                <div className='flex flex-col flex-grow -z-20'>
+                    <div className=' flex flex-col'>
                         <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} desc={user.description} />
                     </div>
                     <div className='mt-16 flex xl:space-x-8 space-x-0
