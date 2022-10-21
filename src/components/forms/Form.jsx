@@ -25,33 +25,40 @@ export const Form = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        setLoading(true)
+        //setLoading(true)
         const formData = new FormData()
         formData.append("title", name)
         formData.append("description", description)
-        const tagArray = tags.split("#")
-        console.log(tagArray)
-        formData.append("tags", tagArray)
-
+        formData.append("explicit", explicit)
         formData.append("type", type)
+        const tagArray = tags.split("#")
+        formData.append("tags", tagArray)
+        formData.append("file", imageFile)
         formData.append("file", file)
         formData.append("episodeNumber", episodeNumber)
+        formData.append("episodeName", epName)
+        formData.append("episodeDescription", epDescription)
         formData.append("guest", guest)
-        formData.append("podcastId", "630608845495d2aaf6d17738")
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
                 Authorization: `Bearer ${cookies.oss9oli}`
             },
         }
-
         if (file.size > 104857600) {
             alert("File size is too big")
             setFile("")
-
+        } else if (imageFile.size > 2097152) {
+            alert("Image size is too big")
+            setImageFile("")
+        }
+        // check if description is longer than 200 characters
+        else if (description.length > 200 || epDescription.length > 200) {
+            alert("Description is too long")
         } else {
-            axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`, formData, config).then(res => {
-                window.location.href = "/mypods"
+            axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts`, formData, config).then(res => {
+                console.log(res.data.data)
+                // window.location.href = "/mypods"
             }
             ).catch(err => {
                 alert(err)

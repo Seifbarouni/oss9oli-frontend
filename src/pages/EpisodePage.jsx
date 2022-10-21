@@ -48,6 +48,7 @@ export const EpisodePage = () => {
                     setLoading(true)
                     const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`
                     )
+                    console.log(res.data.data)
                     setEpisodes(res.data.data)
                     if (res.data.data.length > 0) {
                         setPodcastDescription(res.data.data[0].podcastId.description)
