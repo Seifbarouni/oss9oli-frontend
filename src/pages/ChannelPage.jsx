@@ -23,7 +23,6 @@ export const ChannelPage = () => {
   const [channelPods, setChannelPods] = useState([])
   const navigate = useNavigate()
   const { id } = useParams()
-  console.log(id)
   const [cookies] = useCookies(['oss9oli']);
   const user = decode(cookies.oss9oli)
   useEffect(() => {

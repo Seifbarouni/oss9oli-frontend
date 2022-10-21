@@ -7,7 +7,7 @@ export const Sidebar = ({ selected }) => {
     const [cookies] = useCookies(['oss9oli']);
     const { pack } = decode(cookies.oss9oli)
     return (
-        <div className='h-full z-50 font-semibold sticky w-80 top-0'>
+        <div className='h-full z-40 font-semibold sticky w-80 top-0'>
             <div className='bg-azreg3 border border-black rounded-r-3xl'>
                 <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12'>
                     <Link to={"/accueil"}>
@@ -19,6 +19,9 @@ export const Sidebar = ({ selected }) => {
                     {pack === "producer_pack" && <Link to={"/mypods"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`}>MES PODCASTS</span>
                     </Link>}
+                    {pack === "producer_pack" && <Link to={"/addpod"}>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "addpod" ? " underline" : ""}`}>AJOUTER PODCAST</span>
+                    </Link>}
                     {pack === "producer_pack" && <Link to={"/edit"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>EDITER CHAINE</span>
                     </Link>}
@@ -28,7 +31,7 @@ export const Sidebar = ({ selected }) => {
                 </div>
                 <Link
                     to={"/profile"}
-                    className='flex flex-col space-y-12 mt-40 pl-12 text-white text-2xl mb-12'>
+                    className='flex flex-col space-y-12 mt-32 pl-12 text-white text-2xl mb-12'>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "profile" ? " underline" : ""}`}>PROFILE</span>
                 </Link>
             </div>
@@ -37,11 +40,12 @@ export const Sidebar = ({ selected }) => {
                     <span>ACCUEIL</span>
                     {pack !== "free" && pack !== "consumer_pack" && <span>O9 COMMUNITY</span>}
                     {pack === "producer_pack" && <span>MES PODCATS</span>}
+                    {pack === "producer_pack" && <span>AJOUTER PODCAST</span>}
                     {pack === "producer_pack" && <span>EDITER CHAINE</span>}
                     <span>OPEN MIC</span>
                     <span>STUDIO OSS9OLI</span>
                 </div>
-                <div className='flex flex-col space-y-12 mt-40 pl-12 text-white text-2xl  mb-12 invisible'>
+                <div className='flex flex-col space-y-12 mt-32 pl-12 text-white text-2xl  mb-12 invisible'>
                     <span>PARAMETRES</span>
                 </div>
             </div>

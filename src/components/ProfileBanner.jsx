@@ -22,7 +22,6 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
         }
         setLoading(true)
         const { userId } = decode(cookies.oss9oli)
-        console.log({ inputName, inputDescription })
         axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${userId}`, {
             name: inputName,
             description: inputDescription

@@ -23,6 +23,9 @@ export const SmallScreenNav = ({ selected }) => {
                     {pack === "producer_pack" && <Link to={"/mypods"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "mypods" ? " underline" : ""}`} onClick={() => setOpen()}>MES PODCASTS</span>
                     </Link>}
+                    {pack === "producer_pack" && <Link to={"/addpod"}>
+                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "addpod" ? " underline" : ""}`} onClick={() => setOpen()}>AJOUTER PODCAST</span>
+                    </Link>}
                     {pack === "producer_pack" && <Link to={"/edit"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`} onClick={() => setOpen()}>EDITER CHAINE</span>
                     </Link>}
@@ -33,10 +36,11 @@ export const SmallScreenNav = ({ selected }) => {
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
                 </div>
-                <div className='flex flex-col justify-center items-center space-y-8 mt-40 pl-12 text-white text-2xl mb-12'>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "settings" ? " underline" : ""}`}>PARAMETRES</span>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "stats" ? " underline" : ""}`}>STATISTIQUES</span>
-                </div>
+                <Link
+                    to={"/profile"}
+                    className='flex flex-col justify-center items-center space-y-8 mt-40 pl-12 text-white text-2xl mb-12'>
+                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "profile" ? " underline" : ""}`}>PROFILE</span>
+                </Link>
             </div>
 
         </div>

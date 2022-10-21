@@ -44,7 +44,7 @@ export const AudioBar = () => {
         }, 1000)
     }, [audioData.podcastId])
     return (
-        <div className='sticky bottom-0 bg-gris4 p-2 z-40 border-t border-b border-black flex items-center justify-between px-4'>
+        <div className='sticky bottom-0 bg-gris4 p-2 z-50 border-t border-b border-black flex items-center justify-between px-4'>
             <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}/${userId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
             <div className='flex w-1/3 justify-start'>
                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black bg-cover bg-center'
@@ -66,7 +66,7 @@ export const AudioBar = () => {
                             par:
                         </span>
                         <Link
-                            to={`/channel/${audioData.creator}`}
+                            to={`/channel/${audioData.channelId}`}
                         >
                             <span className='text-orng2 cursor-pointer hover:underline'>
                                 {audioData.creator}

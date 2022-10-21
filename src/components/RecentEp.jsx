@@ -44,11 +44,12 @@ export const RecentEp = ({
         openAudio()
         setAudioData(
             {
-                title: `${episodeName} avec ${guest} : showname(${episodeName}) - ${channelName}`,
+                title: `${episodeName} avec ${guest} : ${podcastId.name}(${episodeName}) - ${channelName}`,
                 img,
                 creator: channelName,
                 duration: episodeDuration,
-                podcastId: episodeId
+                podcastId: episodeId,
+                channelId: podcastId.channelId
             }
         )
     }

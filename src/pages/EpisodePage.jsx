@@ -48,8 +48,11 @@ export const EpisodePage = () => {
                     setLoading(true)
                     const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`
                     )
-                    console.log(res.data.data)
                     setEpisodes(res.data.data)
+                    // check if array is empty
+                    if (res.data.data.length === 0) {
+                        navigate("/accueil")
+                    }
                     if (res.data.data.length > 0) {
                         setPodcastDescription(res.data.data[0].podcastId.description)
                     }
@@ -90,6 +93,9 @@ export const EpisodePage = () => {
                             <Tag title={tag} actif={actifs[index]} setActif={() => setActif(index)} />
                         ))}
                     </div>
+                    {loading && <div className='flex justify-center items-center mt-8'>
+                        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                    </div>}
                     {!loading && episodes !== undefined && episodes.length !== 0 && <div className='mt-24 xl:px-24'>
                         <RecentEp
                             episodeId={episodes[0]._id}

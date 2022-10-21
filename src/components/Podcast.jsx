@@ -23,11 +23,12 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
         openAudio()
         setAudioData(
             {
-                title: `${title} avec ${guest} : showname(${number}) - ${creator}`,
+                title: `${title} avec ${guest} : ${podcastId.name}(${number}) - ${creator}`,
                 img,
                 creator,
                 duration,
-                podcastId: episodeId
+                podcastId: episodeId,
+                channelId: podcastId.channelId
             }
         )
         //   }
