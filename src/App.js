@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import green_blob2 from "./assets/svgs/green_blob2.svg";
+import red_blob2 from "./assets/svgs/red_blob2.svg";
+import orange_blob2 from "./assets/svgs/orange_blob2.svg";
 import g_acc from "./assets/svgs/g_acc.svg";
 import o_acc from "./assets/svgs/o_acc.svg";
 import y_acc from "./assets/svgs/y_acc.svg";
@@ -16,6 +18,8 @@ import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { AddPodcastPage } from "./pages/AddPodcastPage";
 import { useAudio, useOpen } from "./store/store";
+import { useCookies } from "react-cookie";
+import { decode } from "./jwt/jwt";
 
 import { FacebookAuth } from "./pages/FacebookAuth";
 import { GoogleAuth } from "./pages/GoogleAuth";
@@ -26,6 +30,8 @@ import { EpisodePage } from "./pages/EpisodePage";
 function App() {
   const close = useOpen((state) => state.close);
   const isAudioBarOpen = useAudio((state) => state.isOpen);
+  const [cookies, setCookie] = useCookies(["oss9oli"]);
+  const { pack } = decode(cookies.oss9oli);
   useEffect(() => {
     // If screen is medium or smaller, open the menu.
     if (window.innerWidth <= 1250) {
@@ -72,9 +78,21 @@ function App() {
             path="/profile"
             element={
               <div className="bg-gris2  relative">
-                <div className="absolute  bottom-0 left-0">
-                  <img src={green_blob2} alt="" className="" />
-                </div>
+                {pack === "community_pack" && (
+                  <div className="absolute  bottom-0 left-0">
+                    <img src={green_blob2} alt="" className="" />
+                  </div>
+                )}
+                {pack === "producer_pack" && (
+                  <div className="absolute  bottom-0 left-0">
+                    <img src={orange_blob2} alt="" className="" />
+                  </div>
+                )}
+                {pack === "free" && (
+                  <div className="absolute  bottom-0 left-0">
+                    <img src={red_blob2} alt="" className="" />
+                  </div>
+                )}
                 <ProfilePage />
               </div>
             }

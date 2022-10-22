@@ -26,6 +26,7 @@ module.exports = {
         ak7el: "#000000",
         ka7ouli: "#3C3C3C",
         ka7ouli2: "#001E1D",
+        a7mer: "#EF4423",
       },
     },
   },

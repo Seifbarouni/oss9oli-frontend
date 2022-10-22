@@ -34,7 +34,7 @@ export const PacksPage = () => {
                         <img src={headphones} alt="" />
                     </div>
                     <Pack
-                        color={"azreg"}
+                        color={"bg-azreg"}
                         price={0}
                         buttonText={"S'incrire"}
                         title={"Auditeur"}
@@ -55,7 +55,7 @@ export const PacksPage = () => {
                         <img src={head} alt="" />
                     </div>
                     <Pack
-                        color={"akhdher"}
+                        color={"bg-akhdher"}
                         price={29.9}
                         buttonText={"Rejoindre"}
                         title={"COMMUNITY PACK"}
@@ -79,7 +79,7 @@ export const PacksPage = () => {
                         <img src={micro} alt="" />
                     </div>
                     <Pack
-                        color={"asfer2"}
+                        color={"bg-asfer2"}
                         price={49.9}
                         buttonText={"Commencez"}
                         title={"Creator"}

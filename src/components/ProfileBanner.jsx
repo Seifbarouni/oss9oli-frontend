@@ -1,19 +1,18 @@
-import { PencilAltIcon, XIcon } from '@heroicons/react/solid'
+import { XIcon } from '@heroicons/react/solid'
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import spark from '../assets/svgs/spark2.svg'
+import foucha from '../assets/svgs/foucha.svg'
 import { decode } from '../jwt/jwt'
 
-export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
+export const ProfileBanner = ({ name, desc }) => {
     const [edit, setEdit] = useState(false)
     const [inputName, setInputName] = useState(name)
     const [loading, setLoading] = useState(false)
     const [inputDescription, setInputDescription] = useState(desc || "")
     const [cookies, setCookie] = useCookies(["oss9oli"])
-    const { customSeed } = decode(cookies.oss9oli)
-
-
+    const { customSeed, pack } = decode(cookies.oss9oli)
     const updateUserData = async () => {
         const config = {
             headers: {
@@ -38,27 +37,37 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
     }
 
     return (
-        <div className='border border-black border-l-0 border-t-0 bg-orng4 flex md:flex-row flex-col items-center md:items-start'>
+        <div className={`border border-black border-l-0 border-t-0 ${pack === "producer_pack" ? "bg-orng4" : ""} ${pack === "community_pack" ? "bg-green-100" : ""} ${pack === "free" ? "bg-red-50" : ""} flex md:flex-row flex-col items-center md:items-start`}>
             {!edit && <div className='md:hidden flex items-center   cursor-pointer w-full p-2' onClick={() => setEdit(true)}>
-                <PencilAltIcon className='h-8 w-8' />
+                <img src={foucha} alt="" />
             </div>}
             {edit && <div className='md:hidden flex items-center   cursor-pointer w-full p-2' >
                 <XIcon className='h-8 w-8' onClick={() => setEdit(false)} />
             </div>}
 
             <div className=' p-11  z-50'>
-                {!edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
-                    <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
+                <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
+                    <div className={`border border-black  
+                    ${pack === "producer_pack" ? "bg-orng" : ""} 
+                    ${pack === "community_pack" ? "bg-akhdher" : ""} 
+                    ${pack === "free" ? "bg-a7mer" : ""}
+                    rounded-full h-44 w-44 absolute top-1 left-1 -z-10`}>
                     </div>
                     <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" className='rounded-full' />
-                </div>}
-                {edit && <div className='border border-black bg-white rounded-full h-44 w-44 relative flex  justify-center'>
-                    <div className='border border-black bg-orng rounded-full h-44 w-44 absolute top-1 left-1 -z-10'>
-                    </div>
-                    <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" className='rounded-full bg-asfer3 h-full w-full' />
-                </div>}
+                </div>
             </div>
             <div className='p-12 flex flex-col '>
+                <div className={`${pack === "producer_pack" ? "text-orng5" : ""} font-black ${pack === "community_pack" ? "text-akhdher" : ""}
+                    ${pack === "free" ? "text-a7mer" : ""}
+                `}
+
+
+                >{pack === "producer_pack" ? "CREATEUR" : ""}
+                    {pack === "community_pack" ? "COMMUNAUTE O9" : ""}
+                    {pack === "free" ? "AUDITEUR" : ""}
+
+
+                </div>
                 <div className=''>
                     {!edit && <span className='xl:text-5xl lg:text-3xl text-2xl font-bold relative'>
                         <div className='absolute xl:bottom-4 bottom-2 -right-8'>
@@ -70,28 +79,38 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                         <div className='absolute xl:bottom-4 bottom-2 -right-8'>
                             <img src={spark} alt="" />
                         </div>
-                        <input type="text" required placeholder='Nom' value={inputName} onChange={(e) => setInputName(e.target.value)} className="w-2/3 bg-asfer3 border border-black rounded-xl  placeholder:text-gray-400 focus:outline-none" />
+                        <input type="text" required placeholder='Nom' value={inputName} onChange={(e) => setInputName(e.target.value)} className={`w-2/3  ${pack === "producer_pack" ? "bg-asfer3" : ""}
+                        ${pack === "community_pack" ? "bg-green-100" : ""}
+                        ${pack === "free" ? "bg-red-100" : ""}
+                        border border-black rounded-xl  placeholder:text-gray-400 focus:outline-none`} />
                     </span>}
-                </div>
-                <div className='flex space-x-2  text-gray-700 mt-6'>
-                    <span>{shows} shows</span><span>-</span><span>{episodes} épisodes </span>
                 </div>
                 <div className='mt-4 border border-black xl:w-[300px] w-56 rounded-xl flex-grow  '>
 
-                    {!edit && <div className='h-24 rounded-xl bg-asfer3  p-2 overflow-scroll w-full'>
+                    {!edit && <div className={`h-24 rounded-xl   p-2 overflow-scroll w-full
+                    ${pack === "producer_pack" ? "bg-asfer3" : ""} 
+                     ${pack === "community_pack" ? "bg-green-100" : ""}
+                        ${pack === "free" ? "bg-red-100" : ""}
+                    `}>
                         {desc}
                     </div>}
 
-                    {edit && <input type="text" required className='h-full w-full rounded-xl bg-asfer3  p-6 placeholder:text-gray-400 focus:outline-none' placeholder='Décrivez-vous au monde..' value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} />}
+                    {edit && <input type="text" required className={`h-full w-full rounded-xl ${pack === "producer_pack" ? "bg-asfer3" : ""} 
+                     ${pack === "community_pack" ? "bg-green-100" : ""}
+                        ${pack === "free" ? "bg-red-100" : ""}
+                    p-6 placeholder:text-gray-400 focus:outline-none`} placeholder='Décrivez-vous au monde..' value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} />}
                 </div>
             </div>
             {!edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2 cursor-pointer' onClick={() => setEdit(true)}>
-                <PencilAltIcon className='h-8 w-8' />
+                <img src={foucha} alt="" />
             </div>}
             {edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2' >
                 <div className='flex flex-col justify-end items-end space-y-2'>
                     <XIcon className='h-8 w-8 cursor-pointer' onClick={() => setEdit(false)} />
-                    {loading === false && <div className='bg-orng text-white border border-black rounded-xl p-2 cursor-pointer' onClick={() => updateUserData()}>
+                    {loading === false && <div className={`${pack === "producer_pack" ? "bg-orng" : ""}
+                    ${pack === "community_pack" ? "bg-akhdher" : ""}
+                    ${pack === "free" ? "bg-a7mer" : ""}
+                    text-white border border-black rounded-xl p-2 cursor-pointer`} onClick={() => updateUserData()}>
                         Sauvegarder
                     </div>}
                     {loading === true &&
@@ -102,7 +121,11 @@ export const ProfileBanner = ({ shows, episodes, name, img, desc }) => {
                 </div>
             </div>}
             {edit && loading === false &&
-                <div className='bg-orng text-white border border-black rounded-xl p-2 cursor-pointer mb-4 md:hidden flex' onClick={() => updateUserData()}>
+                <div className={` 
+                ${pack === "producer_pack" ? "bg-orng" : ""}
+                    ${pack === "community_pack" ? "bg-akhdher" : ""}
+                    ${pack === "free" ? "bg-a7mer" : ""}
+                text-white border border-black rounded-xl p-2 cursor-pointer mb-4 md:hidden flex`} onClick={() => updateUserData()}>
                     Sauvegarder
                 </div>
             }

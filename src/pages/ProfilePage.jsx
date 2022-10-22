@@ -4,6 +4,7 @@ import img4 from '../assets/images/4.png'
 import img5 from '../assets/images/5.png'
 import img6 from '../assets/images/6.png'
 import red_blob from '../assets/svgs/red_blob.svg'
+import green_blob from '../assets/svgs/green_blob.svg'
 import two_green_stars from '../assets/svgs/two_green_stars.svg'
 import { Channels } from '../components/Channels'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
@@ -22,6 +23,7 @@ export const ProfilePage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
     const user = decode(cookies.oss9oli)
+    console.log(user.pack)
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
@@ -29,11 +31,15 @@ export const ProfilePage = () => {
     }, [])
 
     return (
-        <div className='flex flex-col realtive z-50'>
+        <div className='flex flex-col realtive '>
             <AuthenticatedNavbar />
-            <div className='absolute right-0 top-44  '>
+
+            {user.pack === "community_pack" && <div className='absolute right-0 top-0'>
+                <img src={green_blob} alt="" className='' />
+            </div>}
+            {(user.pack === "producer_pack" || user.pack === "free") && <div className='absolute right-0 top-0'>
                 <img src={red_blob} alt="" className='' />
-            </div>
+            </div>}
 
             <div className='flex z-40'>
                 <div>
@@ -46,7 +52,7 @@ export const ProfilePage = () => {
                 </div>}
                 <div className='flex flex-col flex-grow -z-20'>
                     <div className=' flex flex-col'>
-                        <ProfileBanner episodes={13} shows={5} name={user.name} img={user.picture} desc={user.description} />
+                        <ProfileBanner name={user.name} desc={user.description} />
                     </div>
                     <div className='mt-16 flex xl:space-x-8 space-x-0
                         xl:space-y-0 space-y-4  xl:flex-row flex-col p-6'>
