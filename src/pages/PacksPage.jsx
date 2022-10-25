@@ -34,7 +34,7 @@ export const PacksPage = () => {
                         <img src={headphones} alt="" />
                     </div>
                     <Pack
-                        color={"bg-azreg"}
+                        color={"bg-orng6"}
                         price={0}
                         buttonText={"S'incrire"}
                         title={"Auditeur"}
@@ -42,11 +42,11 @@ export const PacksPage = () => {
                         desc={"Devenez auditeur fidèle et naviguez dans la plateforme en toute liberté"}
                     >
                         <span className='sm:text-lg'>Ecouter tous nos podcasts en illimité</span>
-                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <div className='border-b-2 border-orng6 opacity-30'></div>
                         <span className='sm:text-lg'>Naviguer dans la plateforme en toute liberté</span>
-                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <div className='border-b-2 border-orng6 opacity-30'></div>
                         <span className='sm:text-lg'>Commentez, likez et partagez vos podcasts préférés</span>
-                        <div className='border-b-2 border-azreg opacity-30'></div>
+                        <div className='border-b-2 border-orng6 opacity-30'></div>
                         <span className='sm:text-lg'>Profitez d'une expérience personnalisée</span>
                     </Pack>
                 </div>
@@ -59,7 +59,7 @@ export const PacksPage = () => {
                         price={29.9}
                         buttonText={"Rejoindre"}
                         title={"COMMUNITY PACK"}
-                        pack={"community"}
+                        pack={"community_pack"}
                         desc={"Appartenez à une communauté qui fait écho"}
                     >
                         <span className='sm:text-lg'>Echangez avec d'autres membres de la communauté</span>
@@ -83,7 +83,7 @@ export const PacksPage = () => {
                         price={49.9}
                         buttonText={"Commencez"}
                         title={"Creator"}
-                        pack={"creator"}
+                        pack={"producer_pack"}
                         desc={"Hebergez vos podcasts et fidélisez votre propre audience"}
                         more={"*Vous pourriez personnaliser votre pack."}
                     >

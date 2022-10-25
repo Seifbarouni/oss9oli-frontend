@@ -13,6 +13,7 @@ module.exports = {
         orng3: "#F8962A",
         orng4: "#FFF0E1",
         orng5: "#F8962F",
+        orng6: "#EA291B",
         azreg: "#100F26",
         azreg2: "#17214E",
         azreg3: "#010444",

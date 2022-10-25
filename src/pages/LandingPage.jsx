@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { JoinButton } from '../components/buttons/JoinButton'
-import { PlayButton } from '../components/buttons/PlayButton'
 import { InfoCard } from '../components/cards/InfoCard'
 import { Contributors } from '../components/Contributors'
 import { Footer } from '../components/Footer'
@@ -20,7 +19,6 @@ import rana from '../assets/images/rana.png'
 import people from '../assets/images/people.png'
 import shh from '../assets/images/shh.png'
 import green_blob from '../assets/svgs/green_blob.svg'
-import green_blob2 from '../assets/svgs/green_blob2.svg'
 import gr122 from '../assets/svgs/Group 120.svg'
 import gr121 from '../assets/svgs/Group 121.svg'
 import gr120 from '../assets/svgs/Group 122.svg'
@@ -33,8 +31,12 @@ import star from '../assets/svgs/yellow_star.svg'
 import orng_play_button from '../assets/svgs/orng_play_button.svg'
 import yezzin3ad from '../assets/svgs/yezzin3ad.svg'
 import contact_arrow from '../assets/svgs/contact_arrow.svg'
+import yellow_mic from '../assets/svgs/yellow_mic.svg'
+import orange_headphones from '../assets/svgs/orange_headphones.svg'
+import green_face from '../assets/svgs/green_face.svg'
 
 export const LandingPage = () => {
+    const [openNumber, setOpenNumber] = useState(1)
     return (
         <div
             className='flex flex-col '
@@ -164,7 +166,7 @@ export const LandingPage = () => {
                                 cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 lg:text-base sm:text-sm text-xs"}
                                 cd3={"border border-black rounded-full py-3 px-6 absolute right-1 top-1 -z-10 w-full lg:text-base sm:text-sm text-xs"}
                                 data={"JE REJOINS LA COMMUNAUTE"}
-                                to={"/auth"}
+                                to={"/auth?pack=community_pack"}
                             />
                         </div>
                     </div>
@@ -175,18 +177,198 @@ export const LandingPage = () => {
                 className="flex md:flex-row flex-col mt-12 md:space-x-6 2xl:px-96 md:px-12 justify-center w-full"
             >
                 <div className="flex flex-col space-y-2">
-                    <InfoCard bg={"bg-orng2"} img={gr122}>
-                        Devenez auditeur fidèle et naviguez dans la plateforme en toute
-                        liberté
-                    </InfoCard>
+                    {openNumber !== 1 &&
+                        <div
+                            onClick={() => setOpenNumber(1)}
+                        >
+                            <InfoCard bg={"bg-orng2"} img={gr122}>
+                                Devenez auditeur fidèle et naviguez dans la plateforme en toute
+                                liberté
+                            </InfoCard>
+                        </div>
+                    }
+                    {openNumber === 1 &&
+                        <div
+                            className=" p-1 rounded-3xl  h-full relative z-40"
+                        >
+                            <div className='flex flex-col  rounded-3xl bg-white h-full px-8 pt-12 z-50 border border-black'>
+                                <div className='flex space-x-8 z-50'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={orange_headphones} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez longuement désiré avoir un média qui vous respecte ? Vous vous ennuyez souvent en consommant le média tunisien ? Vous aimez passer votre temps à écouter des podcasts, sans vous soucier du temps ou du lieu ? Vous avez un sujet dans la tête et vous voulez savoir ce que les autres en ont à dire ? Vous voulez mieux comprendre votre position par rapport aux faits de la société ? OU vous êtes simplement curieux ou curieuse ?
+                                    </div>
+                                </div>
+                                <Link
+                                    to={"/auth?pack=free"}
+                                >
+                                    <div className='relative flex items-center justify-end mt-4'>
+                                        <div
+                                            className="text-white text-2xl bg-orng2 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        >
+                                            <span>S'inscrire</span>
+                                        </div>
+                                        <div
+                                            className="border border-black rounded-full   px-6 py-2 absolute right-1 top-1 z-10  text-2xl"
+                                        >
+                                            <span className="invisible"> S'inscrire </span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className='flex flex-col  rounded-3xl bg-orng2 h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
+                                <div className='flex space-x-8 invisible'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={orange_headphones} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez longuement désiré avoir un média qui vous respecte ? Vous vous ennuyez souvent en consommant le média tunisien ? Vous aimez passer votre temps à écouter des podcasts, sans vous soucier du temps ou du lieu ? Vous avez un sujet dans la tête et vous voulez savoir ce que les autres en ont à dire ? Vous voulez mieux comprendre votre position par rapport aux faits de la société ? OU vous êtes simplement curieux ou curieuse ?
+                                    </div>
+                                </div>
+                                <div className='relative flex items-center justify-end mt-4 invisible'>
+                                    <div
+                                        className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                    >
+                                        <span>S'inscrire</span>
+                                    </div>
+                                    <div
+                                        className="border border-black rounded-full   px-6 absolute right-1 top-1 z-10  text-2xl"
+                                    >
+                                        <span className="invisible"> S'inscrire </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
-                    <InfoCard bg={"bg-akhdher"} img={gr120}>
-                        Appartenez à une communauté qui fait écho
-                    </InfoCard>
+                    {openNumber !== 2 &&
+                        <div
+                            onClick={() => setOpenNumber(2)}
+                        >
+                            <InfoCard
+                                bg={"bg-akhdher"} img={gr120}>
+                                Appartenez à une communauté qui fait écho
+                            </InfoCard>
+                        </div>
+                    }
+                    {openNumber === 2 &&
+                        <div
+                            className=" p-1 rounded-3xl  h-full relative z-40"
+                        >
+                            <div className='flex flex-col  rounded-3xl bg-white h-full px-8 pt-12 z-50 border border-black'>
+                                <div className='flex space-x-8 z-50'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={green_face} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez toujours rêvé de participer dans votre podcast préféré ? De faire partie de la conversation ? D'avoir votre voix sonner fort ? D'appartenir à une communauté qui fait écho ? De partager votre expérience personnelle et ce vous en avez appris avec le monde ? De demander l'avis des autres sur les confusions qui vous êtes arrivées ? Vous avez toujours rêvé de changer le monde ? Votre voix peut le faire.
+                                    </div>
+                                </div>
+                                <Link
+                                    to={"/auth?pack=community_pack"}
+                                >
+                                    <div className='relative flex items-center justify-end mt-4'>
+                                        <div
+                                            className="text-white text-2xl bg-akhdher rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        >
+                                            <span>Rejoindre</span>
+                                        </div>
+                                        <div
+                                            className="border border-black rounded-full   px-6 py-2 absolute right-1 top-1 z-10  text-2xl"
+                                        >
+                                            <span className="invisible"> Rejoindre </span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className='flex flex-col  rounded-3xl bg-akhdher h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
+                                <div className='flex space-x-8 invisible'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={green_face} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez longuement désiré avoir un média qui vous respecte ? Vous vous ennuyez souvent en consommant le média tunisien ? Vous aimez passer votre temps à écouter des podcasts, sans vous soucier du temps ou du lieu ? Vous avez un sujet dans la tête et vous voulez savoir ce que les autres en ont à dire ? Vous voulez mieux comprendre votre position par rapport aux faits de la société ? OU vous êtes simplement curieux ou curieuse ?
+                                    </div>
+                                </div>
+                                <div className='relative flex items-center justify-end mt-4 invisible'>
+                                    <div
+                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                    >
+                                        <span>Rejoindre</span>
+                                    </div>
+                                    <div
+                                        className="border border-black rounded-full   px-6 absolute right-1 top-1 z-10  text-2xl"
+                                    >
+                                        <span className="invisible"> Rejoindre </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
-                    <InfoCard bg={"bg-asfer2"} img={gr121}>
-                        Hebergez vos podcasts et fidélisez votre première audience
-                    </InfoCard>
+                    {openNumber !== 3 &&
+                        <div
+                            onClick={() => setOpenNumber(3)}
+                        >
+                            <InfoCard bg={"bg-asfer2"} img={gr121}>
+                                Hebergez vos podcasts et fidélisez votre première audience
+                            </InfoCard>
+                        </div>
+                    }
+                    {openNumber === 3 &&
+                        <div
+                            className=" p-1 rounded-3xl  h-full relative z-40"
+                        >
+                            <div className='flex flex-col  rounded-3xl bg-white h-full px-8 pt-12 z-50 border border-black'>
+                                <div className='flex space-x-8 z-50'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={yellow_mic} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez toujours voulu avoir un espace pour vous-même ? Vous avez toujours pensé que vous avez beaucoup à partager avec le monde ? Vous avez toujours rêvé de devenir un créateur de contenu ? D'enregistrer le premier épisode du podcast que vous avez dans la tête ? Vous ne savez pas où commencer ?
+                                    </div>
+                                </div>
+                                <Link
+                                    to={"/auth?pack=producer_pack"}>
+                                    <div className='relative flex items-center justify-end mt-4'>
+                                        <div
+                                            className="text-white text-2xl bg-asfer2 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        >
+                                            <span>Commencez</span>
+                                        </div>
+                                        <div
+                                            className="border border-black rounded-full   px-6 py-2 absolute right-1 top-1 z-10  text-2xl"
+                                        >
+                                            <span className="invisible"> Commencez </span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className='flex flex-col  rounded-3xl bg-asfer2 h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
+                                <div className='flex space-x-8 invisible'>
+                                    <div className=" flex justify-center h-44 w-44 ">
+                                        <img src={yellow_mic} alt="" />
+                                    </div>
+                                    <div className=" w-3/4">
+                                        Vous avez toujours voulu avoir un espace pour vous-même ? Vous avez toujours pensé que vous avez beaucoup à partager avec le monde ? Vous avez toujours rêvé de devenir un créateur de contenu ? D'enregistrer le premier épisode du podcast que vous avez dans la tête ? Vous ne savez pas où commencer ?
+                                    </div>
+                                </div>
+                                <div className='relative flex items-center justify-end mt-4 invisible'>
+                                    <div
+                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                    >
+                                        <span>Commencez</span>
+                                    </div>
+                                    <div
+                                        className="border border-black rounded-full   px-6 absolute right-1 top-1 z-10  text-2xl"
+                                    >
+                                        <span className="invisible"> Commencez </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                 </div>
                 <div
