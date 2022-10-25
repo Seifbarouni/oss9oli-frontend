@@ -2,49 +2,55 @@ import React from 'react'
 import hrt from '../assets/svgs/heart.svg'
 
 
-export const Contributors = ({ bg, children, type, data, img, heart }) => {
+export const Contributors = ({ bg, children, num, img, heart }) => {
     return (
-        <div className="relative lg:w-96 md:w-7/12 w-11/12 z-40">
+        <div
+            className="relative w-[340px]  z-40"
+
+        >
             {heart && <div className='absolute -left-10 -top-10 z-50'>
                 <img src={hrt} alt="" />
             </div>}
-            <div
-                className={`flex flex-col justify-between h-96 border border-black ${bg} text-black rounded-3xl p-6 w-full z-50`}
-            >
-                <div className="sm:text-3xl text-2xl font-bold mt-4">
-                    {children}
-                </div>
-                <div className="flex sm:flex-row flex-col items-start w-full">
-                    <div className="lg:w-1/3 w-1/5 h-full">
-                        <div
-                            className="rounded-full bg-white h-20 w-20 border border-black"
-                        >
-                            <img
-                                src={img}
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-col lg:w-2/3 w-4/5">
-                        <span className="text-lg font-bold">{type}</span>
-                        <span>{data}</span>
-                    </div>
-                </div>
+            <div className={`sm:text-3xl text-2xl  header text-white  absolute
+            [text-shadow:_0_3px_0_rgb(0_0_0_/_40%)]
+                ${num === "1" && "bottom-2 -left-6"}
+                ${num === "2" && "top-1 -left-6"}
+                ${num === "3" && "bottom-12 -right-20"}
+                `}>
+                {children}
             </div>
             <div
-                className="flex flex-col justify-between h-96 border border-black text-black rounded-3xl p-6 absolute top-2 left-2 -z-10 w-full"
+                className={`flex flex-col justify-between h-96 border border-black  text-black  p-6 w-full z-50 bg-fit  bg-no-repeat
+                
+                ${num === "1" && "rounded-tl-[200px]"}
+                ${num === "2" && "rounded-br-[200px]"}
+                ${num === "3" && "rounded-bl-[200px]"}
+                `}
+                style={
+                    {
+                        backgroundImage: `url(${img})`,
+                    }
+                }
             >
-                <div className="text-xl font-bold">
+
+
+            </div>
+            <div
+                className={`flex flex-col justify-between h-96 border border-black ${bg} text-black  p-6 absolute   -z-10 w-full
+                ${num === "1" && "rounded-tl-[200px] top-2 -left-2"}
+                ${num === "2" && "rounded-br-[200px] top-2 right-2"}
+                ${num === "3" && "rounded-bl-[200px] top-2 right-2"}
+
+                
+                `}
+            >
+                <div className="text-xl font-bold invisible">
                     {children}
                 </div>
-                <div className="flex items-start space-x-8">
+                <div className="flex items-start space-x-8 invisible">
                     <div
                         className="rounded-full bg-white h-20 w-20 border border-black"
                     ></div>
-                    <div className="flex flex-col">
-                        <span className="text-lg font-bold invisible">{type}</span>
-                        <span>{data}</span>
-                    </div>
                 </div>
             </div>
         </div>
