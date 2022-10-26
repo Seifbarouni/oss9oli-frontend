@@ -7,19 +7,17 @@ import black_logo from '../../assets/svgs/black_logo.svg'
 import { useOpen } from '../../store/store'
 import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
-import { useNavigate } from 'react-router-dom'
 import { useAudio } from '../../store/store'
 
 export const AuthenticatedNavbar = () => {
-    const navigate = useNavigate()
     const setOpen = useOpen((state) => state.setOpen)
     const [cookies, setCookie, removeCookie] = useCookies(['oss9oli']);
     const { pack, customSeed } = decode(cookies.oss9oli)
     const closeAudio = useAudio((state) => state.closeAudio)
     const logout = () => {
-        removeCookie("oss9oli")
+        removeCookie("oss9oli", { path: "/", sameSite: "strict" })
         closeAudio()
-        navigate("/auth")
+        window.location = "/auth"
     }
     return (
         <nav className="flex items-center justify-evenly p-3 z-50 w-full xl:px-12 sticky top-0 border-b border-black bg-gris2">
