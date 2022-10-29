@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 export const JoinButton = ({ cd1, cd2, cd3, data, to }) => {
     return (
         <div className={cd1}>
-            <Link
-                to={to}
-            >
+            
                 <div
                     className={cd2}
                 >
@@ -17,7 +15,6 @@ export const JoinButton = ({ cd1, cd2, cd3, data, to }) => {
                 >
                     <span className="invisible"> {data} </span>
                 </div>
-            </Link>
         </div>
     )
 }

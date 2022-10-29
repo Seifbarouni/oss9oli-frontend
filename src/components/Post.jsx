@@ -1,6 +1,8 @@
 import React from 'react'
-import pinkHeartPNG from '../assets/images/pinkheart.png'
-import blackHeartPNG from '../assets/images/blackheart.png'
+import likeActifPNG from '../assets/images/like-actif.png'
+import dislikeActifPNG from '../assets/images/dislike-actif.png'
+import likePNG from '../assets/images/like.png'
+import dislikePNG from '../assets/images/dislike.png'
 import commentPNG from '../assets/images/comment.png'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -8,9 +10,11 @@ import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
-export const Post = ({ postId, name, data, img, likes, comments }) => {
+export const Post = ({ postId, name, data, img, likes, dislikes ,comments }) => {
     const [liked, setLiked] = useState(false)
     const [likess, setLikes] = useState(likes)
+    const [disliked, setDisliked] = useState(false)
+    const [dislikess, setDislikes] = useState(dislikes)
     const [comment, setComment] = useState("")
     const [coms, setComs] = useState([])
     const [showComm, setShowComm] = useState(false)
@@ -18,20 +22,43 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
     const { userId, customSeed } = (decode(cookies.oss9oli))
 
     useEffect(() => {
-
+        console.log(likes)
+        console.log(dislikes)
         let tempLikes = likes.filter((id) => {
             return id === userId
         })
+        let tempDislikes = dislikes.filter((id) => {
+            return id === userId
+        })
         setLiked(tempLikes.length)
+        setDisliked(tempDislikes.length)
 
     }, [])
 
     const like = () => {
-        axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/likes/${postId}`, {},
+        axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/react/like/${postId}`, {},
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 if (res.data.success) {
-                    setLikes(res.data.data);
-                    setLiked(res.data.data.includes(userId))
+                    console.log(res.data.data)
+                    setLikes(res.data.data.likes);
+                    setLiked(res.data.data.likes.includes(userId))
+                    setDislikes(res.data.data.dislikes);
+                    setDisliked(res.data.data.dislikes.includes(userId))
+
+                }
+            }).catch(err => console.log(err))
+    }
+
+    const dislike = () => {
+        axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/react/dislike/${postId}`, {},
+            { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
+                if (res.data.success) {
+                    console.log(res.data.data)
+                    setLikes(res.data.data.likes);
+                    setLiked(res.data.data.likes.includes(userId))
+                    setDislikes(res.data.data.dislikes);
+                    setDisliked(res.data.data.dislikes.includes(userId))
+
                 }
             }).catch(err => console.log(err))
     }
@@ -91,8 +118,12 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
                 </span>
                 <div className='flex items-center space-x-4'>
                     <div className='flex items-center space-x-1'>
-                        <img src={liked ? pinkHeartPNG : blackHeartPNG} onClick={like} />
+                        <img src={liked ? likeActifPNG : likePNG} onClick={like} />
                         <span>{likess.length}</span>
+                    </div>
+                    <div className='flex items-center space-x-1'>
+                        <img src={disliked ? dislikeActifPNG : dislikePNG} onClick={dislike} />
+                        <span>{dislikess.length}</span>
                     </div>
                     <div className='flex items-center space-x-1'>
                         <img src={commentPNG} /> <span>{comments.length}</span>
