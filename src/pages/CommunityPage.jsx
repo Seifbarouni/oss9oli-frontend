@@ -124,7 +124,7 @@ export const CommunityPage = () => {
                         :
                         <>
                             <div className='mt-12'>
-                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} comments={post.comments} />
+                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} dislikes={post.dislikes} comments={post.comments} />
                             </div>
                             <div className='border-b border-black mt-12'></div>
                         </>

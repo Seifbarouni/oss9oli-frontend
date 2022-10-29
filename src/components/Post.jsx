@@ -10,11 +10,11 @@ import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
-export const Post = ({ postId, name, data, img, likes, comments }) => {
+export const Post = ({ postId, name, data, img, likes, dislikes ,comments }) => {
     const [liked, setLiked] = useState(false)
     const [likess, setLikes] = useState(likes)
     const [disliked, setDisliked] = useState(false)
-    const [dislikess, setDislikes] = useState(likes)
+    const [dislikess, setDislikes] = useState(dislikes)
     const [comment, setComment] = useState("")
     const [coms, setComs] = useState([])
     const [showComm, setShowComm] = useState(false)
@@ -22,11 +22,16 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
     const { userId, customSeed } = (decode(cookies.oss9oli))
 
     useEffect(() => {
-
+        console.log(likes)
+        console.log(dislikes)
         let tempLikes = likes.filter((id) => {
             return id === userId
         })
+        let tempDislikes = dislikes.filter((id) => {
+            return id === userId
+        })
         setLiked(tempLikes.length)
+        setDisliked(tempDislikes.length)
 
     }, [])
 
@@ -34,6 +39,7 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
         axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/react/like/${postId}`, {},
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 if (res.data.success) {
+                    console.log(res.data.data)
                     setLikes(res.data.data.likes);
                     setLiked(res.data.data.likes.includes(userId))
                     setDislikes(res.data.data.dislikes);
@@ -47,6 +53,7 @@ export const Post = ({ postId, name, data, img, likes, comments }) => {
         axios.put(`${process.env.REACT_APP_POST_SERVICE}/api/v1/react/dislike/${postId}`, {},
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {
                 if (res.data.success) {
+                    console.log(res.data.data)
                     setLikes(res.data.data.likes);
                     setLiked(res.data.data.likes.includes(userId))
                     setDislikes(res.data.data.dislikes);

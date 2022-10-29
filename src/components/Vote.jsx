@@ -2,7 +2,6 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { JoinButton } from './buttons/JoinButton'
-let total = 0;
 let colors = [
     "orng",
     "azreg",
@@ -17,13 +16,17 @@ let colors = [
 ]
 export const Vote = ({ name, question, options, img, userId, postId }) => {
     const [result, setResult] = useState([]);
+    const [totalUsers, setTotal] = useState(0);
     const Voter = (option)=>{
         axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/votes`, {userId, postId, optionSelected: option}).then(res => {
             if (res.data.success) {
                 setResult(res.data.data.options)
+                console.log(res.data.data.options)
+                let total = 0;
                 for(let option of res.data.data.options){
                     total += option.users.length
                 }
+                setTotal(total);
             }
         }).catch(err => console.error(err))
     }
@@ -52,8 +55,8 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                 {
                     result.length > 0 ? 
                         <div class="w-full h-6 bg-gray-200 rounded-small dark:bg-gray-700 flex" style={{height: "50px"}}>
-                            {result.map((option, index)=> (option.users.length*100 / total) > 1?
-                                 <div class={`h-6 bg-${colors[index%colors.length]} rounded-small text-blue-100 dark:bg-${colors[index%colors.length]} text-center font-medium`} style={{width: (option.users.length*100 / total)+"%" , height: "50px"}}>{(option.users.length*100 / total)}% {option.option}</div>
+                            {result.map((option, index)=> (option.users.length*100 / totalUsers) > 1?
+                                 <div class={`h-6 bg-${colors[index%colors.length]} rounded-small text-blue-100 dark:bg-${colors[index%colors.length]} text-center font-medium`} style={{width: (option.users.length*100 / totalUsers)+"%" , height: "50px"}}>{Math.round(option.users.length*100 / totalUsers)}% {option.option}</div>
                                  : <></>
                             )}
                         </div>
