@@ -6,7 +6,7 @@ import star_pod from '../assets/svgs/star_pod.svg'
 
 
 
-export const PodBanner = ({ img, name, desc, podcastId }) => {
+export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
     return (
         <div className='flex flex-col rounded-3xl bg-white border border-black relative'>
             <div className='bg-akhdher w-full h-96 absolute opacity-30 rounded-3xl z-20'></div>
@@ -53,7 +53,7 @@ export const PodBanner = ({ img, name, desc, podcastId }) => {
                 </div>
             </div>
             <div className='bg-white rounded-b-3xl p-3 text-center text-akhdher2 font-bold text-xl cursor-pointer'>
-                + Ecouter la playlist
+                {listEps === false ? '+ Ecouter la playlist ' : 'Playlist'}
             </div>
         </div>
     )

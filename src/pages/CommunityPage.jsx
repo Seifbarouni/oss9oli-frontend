@@ -41,7 +41,7 @@ export const CommunityPage = () => {
         }).catch(err => console.error(err))
     }, [])
 
-    
+
 
 
     const open = useOpen((state) => state.open)
@@ -64,16 +64,16 @@ export const CommunityPage = () => {
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>{name}</span>
                     </div>
-                    {type == "pensee"?
-                    <Pensee />
-                    : 
-                    <Question />
+                    {type == "pensee" ?
+                        <Pensee />
+                        :
+                        <Question />
                     }
-                    
-                    <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
 
-                        <button className="relative mb-6 z-50 mt-16" onClick={()=>{setType("pensee")}}>
-                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee"? "bg-gray-400" : "bg-akhdher")}>
+                    <div className={`flex justify-center items-center space-x-4 ${!open ? "md:px-44" : ""}`}>
+
+                        <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("pensee") }}>
+                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee" ? "bg-gray-400" : "bg-akhdher")}>
                                 Pensée
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
@@ -81,8 +81,8 @@ export const CommunityPage = () => {
                             </div>
                         </button>
 
-                        <button className="relative mb-6 z-50 mt-16" onClick={()=>{setType("vote")}}>
-                            <div  className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '+  (type == "vote"? "bg-gray-400" : "bg-orng")}>
+                        <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("vote") }}>
+                            <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "vote" ? "bg-gray-400" : "bg-orng")}>
                                 Vote
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
@@ -105,30 +105,26 @@ export const CommunityPage = () => {
                         </div>
                     </div>
                     <div className='border-b border-black mt-12'></div>
-                    {
-                    /*<div className='mt-12'>
-                        <Vote name={"Rana Jollanar"} vote_data={"“Nous sommes heureux en Tunisie.”"} />
-                    </div>
-                    */}
 
                     {loading &&
                         <div className='flex justify-center items-center mt-10'>
                             <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
                         </div>
                     }
-                        
-                    {posts.map((post) => 
-                        post.__t == "Vote"? 
-                        <div className='mt-12'>
-                            <Vote name={post.userId.name} question={post.question} options={post.options} img={post.userId.customSeed} userId={decode(cookies.oss9oli).userId} postId={post._id} />
-                        </div>
-                        :
-                        <>
+
+                    {posts.map((post) =>
+                        post.__t == "Vote" ?
                             <div className='mt-12'>
-                                <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} dislikes={post.dislikes} comments={post.comments} />
+                                <Vote name={post.userId.name} question={post.question} options={post.options} img={post.userId.customSeed} userId={decode(cookies.oss9oli).userId} postId={post._id} />
+                                <div className='border-b border-black mt-12'></div>
                             </div>
-                            <div className='border-b border-black mt-12'></div>
-                        </>
+                            :
+                            <>
+                                <div className='mt-12'>
+                                    <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} dislikes={post.dislikes} comments={post.comments} />
+                                </div>
+                                <div className='border-b border-black mt-12'></div>
+                            </>
                     )}
                 </div>
             </div>

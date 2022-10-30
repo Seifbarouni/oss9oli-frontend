@@ -10,11 +10,11 @@ import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
-export const Post = ({ postId, name, data, img, likes, dislikes ,comments }) => {
+export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => {
     const [liked, setLiked] = useState(false)
     const [likess, setLikes] = useState(likes)
     const [disliked, setDisliked] = useState(false)
-    const [dislikess, setDislikes] = useState(dislikes)
+    const [dislikess, setDislikes] = useState(dislikes || 0)
     const [comment, setComment] = useState("")
     const [coms, setComs] = useState([])
     const [showComm, setShowComm] = useState(false)
@@ -27,11 +27,11 @@ export const Post = ({ postId, name, data, img, likes, dislikes ,comments }) => 
         let tempLikes = likes.filter((id) => {
             return id === userId
         })
-        let tempDislikes = dislikes.filter((id) => {
+        let tempDislikes = dislikes?.filter((id) => {
             return id === userId
         })
         setLiked(tempLikes.length)
-        setDisliked(tempDislikes.length)
+        setDisliked(tempDislikes?.length)
 
     }, [])
 

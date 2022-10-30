@@ -5,6 +5,7 @@ import axios from 'axios'
 import spark from '../assets/svgs/spark2.svg'
 import foucha from '../assets/svgs/foucha.svg'
 import { decode } from '../jwt/jwt'
+import { Link } from 'react-router-dom'
 
 export const ProfileBanner = ({ name, desc }) => {
     const [edit, setEdit] = useState(false)
@@ -82,10 +83,33 @@ export const ProfileBanner = ({ name, desc }) => {
                         <input type="text" required placeholder='Nom' value={inputName} onChange={(e) => setInputName(e.target.value)} className={`w-2/3  ${pack === "producer_pack" ? "bg-asfer3" : ""}
                         ${pack === "community_pack" ? "bg-green-100" : ""}
                         ${pack === "free" ? "bg-red-100" : ""}
-                        border border-black rounded-xl  placeholder:text-gray-400 focus:outline-none`} />
+                        border border-black border-dashed rounded-xl  placeholder:text-gray-400 focus:outline-none`} />
                     </span>}
                 </div>
-                <div className='mt-4 border border-black xl:w-[300px] w-56 rounded-xl flex-grow  '>
+                {
+                    pack === "producer_pack" &&
+                    <div
+                        className='flex mt-1 z-50'
+
+                    >
+                        <Link
+                            to="/mychannel"
+                        >
+                            <div
+                                className="text-white text-xl bg-orng5 rounded-full px-2  text-center cursor-pointer border border-black z-30 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                            >
+                                <span>Ma chaine</span>
+                            </div>
+                            <div
+                                className="border border-black rounded-full px-2 absolute right-1 top-1 z-20 text-xl"
+                            >
+                                <span className="">Ma chaine</span>
+                            </div>
+                        </Link>
+                    </div>
+
+                }
+                {/* <div className='mt-4 border border-black xl:w-[300px] w-56 rounded-xl flex-grow  '>
 
                     {!edit && <div className={`h-24 rounded-xl   p-2 overflow-scroll w-full
                     ${pack === "producer_pack" ? "bg-asfer3" : ""} 
@@ -99,7 +123,7 @@ export const ProfileBanner = ({ name, desc }) => {
                      ${pack === "community_pack" ? "bg-green-100" : ""}
                         ${pack === "free" ? "bg-red-100" : ""}
                     p-6 placeholder:text-gray-400 focus:outline-none`} placeholder='Décrivez-vous au monde..' value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} />}
-                </div>
+                </div> */}
             </div>
             {!edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2 cursor-pointer' onClick={() => setEdit(true)}>
                 <img src={foucha} alt="" />

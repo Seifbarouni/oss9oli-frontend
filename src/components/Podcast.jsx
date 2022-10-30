@@ -94,7 +94,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                         </span>
 
                     </div>
-                    <div className="z-50 relative" onClick={() => newAudio()} >
+                    <div className="z-40 relative" onClick={() => newAudio()} >
                         <div
                             className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >

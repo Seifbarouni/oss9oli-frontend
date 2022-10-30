@@ -118,6 +118,7 @@ export const ChannelPage = () => {
                     name={pod.name}
                     img={pod.image}
                     desc={pod.description}
+                    listEps={false}
                   />
                 </div>
               })

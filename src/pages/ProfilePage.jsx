@@ -50,15 +50,15 @@ export const ProfilePage = () => {
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <SmallScreenNav selected={"profile"} />
                 </div>}
-                <div className='flex flex-col flex-grow -z-20'>
+                <div className='flex flex-col flex-grow -z-20 pb-44'>
                     <div className=' flex flex-col'>
                         <ProfileBanner name={user.name} desc={user.description} />
                     </div>
-                    <div className='mt-16 flex xl:space-x-8 space-x-0
+                    {/* <div className='mt-16 flex xl:space-x-8 space-x-0
                         xl:space-y-0 space-y-4  xl:flex-row flex-col p-6'>
                         <Tags />
                         <Channels />
-                    </div>
+                    </div> */}
                     <div className='mt-16 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
                         <div className='absolute -top-6 right-6 md:flex hidden'>
                             <img src={two_green_stars} alt="" />

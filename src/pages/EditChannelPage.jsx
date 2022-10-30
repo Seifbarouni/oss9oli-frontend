@@ -2,21 +2,26 @@ import React, { useState, useEffect } from 'react'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
-import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { decode } from '../jwt/jwt'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { ChannelBannerWithEdit } from '../components/ChannelBannerWithEdit'
+import { PodBanner } from '../components/PodBanner'
+import { Podcast } from '../components/Podcast'
+import plus from '../assets/svgs/+.svg'
 
 export const EditChannelPage = () => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [file, setFile] = useState()
-    const [newFile, setNewFile] = useState()
-    const [preview, setPreview] = useState()
     const [channelId, setChannelId] = useState("")
+    const [episodes, setEpisodes] = useState([])
+    const [podcasts, setPodcasts] = useState([])
     const [loading, setLoading] = useState(false)
+    const [loading_spinner, setLoadingSpinner] = useState(false)
+    const [focus, setFocus] = useState("mes_sons")
     const [cookies] = useCookies(['oss9oli']);
     const open = useOpen((state) => state.open)
     const navigate = useNavigate()
@@ -37,52 +42,46 @@ export const EditChannelPage = () => {
             setChannelId(res.data.data._id)
             setFile(res.data.data.image)
             setLoading(false)
+            myEps()
         }).catch(err => {
             console.log(err)
             setLoading(false)
         }
         )
-
     }, [])
-    const updateImage = (e) => {
-        // check if image is bigger than 2MB
-        if (e.target.files[0].size > 2097152) {
-            alert("Image is too big")
-        }
-        else {
-            setNewFile(e.target.files[0])
-            setPreview(URL.createObjectURL(e.target.files[0]))
-        }
-    }
-    const onSubmit = (e) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append("name", name)
-        formData.append("description", description)
-        formData.append("file", newFile)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            },
-            headers: {
-                Authorization: `Bearer ${cookies.oss9oli}`
-            }
-        }
-        // check if description is more than 256 characters
-        if (description.length > 256) {
-            alert("Description is too long")
-        } else {
-            axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/channels/me`, formData, config).then(res => {
-                console.log(res)
-                window.location.reload()
-            }
-            ).catch(err => {
-                console.log(err)
-            }
-            )
-        }
 
+    const myEps = () => {
+        const getEpisodes = async () => {
+            const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/eps_user/get`, {
+                headers: { Authorization: `Bearer ${cookies.oss9oli}` }
+            })
+            setEpisodes(res.data.data)
+        }
+        if (episodes.length === 0) {
+            setLoadingSpinner(true)
+            getEpisodes()
+            setLoadingSpinner(false)
+        }
+        setFocus("mes_sons")
     }
+
+    const myPods = () => {
+        const getPodcasts = async () => {
+            const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/channel/${channelId}`, {
+                headers: { Authorization: `Bearer ${cookies.oss9oli}` }
+            })
+            console.log(res.data.data)
+            setPodcasts(res.data.data)
+        }
+        if (podcasts.length === 0) {
+            setLoadingSpinner(true)
+            getPodcasts()
+            setLoadingSpinner(false)
+        }
+        setFocus("mes_pods")
+    }
+
+
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
@@ -98,45 +97,83 @@ export const EditChannelPage = () => {
                         <SmallScreenNav selected={"edit"} />
                     </div>
                 </div>}
-                {!loading && <form className='flex flex-col z-40 w-full p-12' onSubmit={onSubmit}>
-                    <div className={`flex mt-4 flex-col ${!open ? "md:px-44" : ""}`}>
-                        <span className='text-orng2 text-5xl'>EDITER CHAINE</span>
-                        <div className='flex flex-col space-y-1 mt-4'>
-                            <span className=''>Informations de votre chaine</span>
-                            <span className='text-gray-500 text-sm'>Editez les informations de votre chaine </span>
+
+                {!loading &&
+
+                    <div className='flex flex-col w-full pb-72'>
+                        <ChannelBannerWithEdit
+                            name={name}
+                            desc={description}
+                            img={file} />
+                        <div className='mt-64 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
+                            <span className={`underline-offset-8 hover:underline cursor-pointer ${focus === "mes_sons" ? "underline font-bold" : ""}`}
+                                onClick={() => myEps()}
+                            >TOUS MES SONS</span>
+                            <span
+                                className={`underline-offset-8 hover:underline cursor-pointer ${focus === "mes_pods" ? "underline font-bold" : ""}`}
+                                onClick={() => myPods()}
+
+                            >MES PODCASTS</span>
+                            <span
+                                className={`underline-offset-8 hover:underline cursor-pointer ${focus === "fd" ? "underline font-bold" : ""}`}
+                                onClick={() => setFocus("fd")}
+
+                            >FILE D'ATTENTE</span>
                         </div>
-                    </div>
-                    <div className={`flex flex-col mt-16 space-y-1 ${!open ? "md:px-44" : ""}`}>
-                        <span className=''>Editez le nom de votre chaine*</span>
-                        <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Nom de la chaine' value={name} onChange={(e) => setName(e.target.value)} />
-                    </div>
-                    <div className={`flex flex-col mt-6 space-y-1 ${!open ? "md:px-44" : ""}`}>
-                        <span className=''>Editez la description de votre chaine*</span>
-                        <input type="text" className='rounded-[40px] py-12 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Une courte description de votre chaine. Quelques phrases sont recommendées.' value={description} onChange={(e) => setDescription(e.target.value)} />
-                    </div>
-                    <div className={`flex flex-col mt-6 space-y-1 ${!open ? "md:px-44" : ""}`}>
-                        <span className=''>Editez la photo de votre chaine*</span>
-                        <div className='w-96 h-72 rounded-3xl border border-black'>
-                            {!preview ? <img src={`data:image/${file?.contentType};base64, 
-                     ${file?.data.toString('base64')}`} className='w-full h-full rounded-3xl' alt=''></img> :
-                                <img src={preview} className='w-full h-full rounded-3xl' alt=''></img>
+                        <div className='px-32 mt-12'>
+                            {focus === "mes_pods" &&
+                                <div className='flex flex-col space-y-8'>
+                                    {podcasts.map(pod => {
+                                        return (
+                                            <PodBanner
+                                                podcastId={pod._id}
+                                                name={pod.name}
+                                                img={pod.image}
+                                                desc={pod.description}
+                                                listEps={true}
+                                            />
+                                        )
+                                    })}
+
+                                    <Link
+                                        to={`/addpod`}
+                                    >
+                                        <div className='w-full p-12 bg-white flex justify-center items-center rounded-3xl border border-black hover:border-2'>
+                                            <img src={plus} alt="" />
+                                        </div>
+                                    </Link>
+
+                                </div>
                             }
+                            {focus === "mes_sons" &&
+                                <div className='flex flex-col space-y-8'>
+                                    {episodes.map(episode => {
+                                        return (
+                                            <Podcast
+                                                episodeId={episode._id}
+                                                podcastId={episode.podcastId}
+                                                img={episode.podcastId.image}
+                                                creator={episode.podcastId.name}
+                                                title={episode.title} duration={episode.length}
+                                                description={episode.description} status={episode.status}
+                                                guest={episode.guest}
+                                                listens={episode.numberOfListeners}
+                                                number={episode.episodeNumber}
+                                                tags={episode.tags}
+                                                w={"w-full"} h={"sm:h-96"} />
+                                        )
+                                    })}
+                                </div>}
+                            {loading_spinner &&
+                                <div className='flex justify-center'>
+                                    <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-orng2"></div>
+                                </div>
+                            }
+
+
                         </div>
-                        <input type="file" onChange={(e) => updateImage(e)} accept="image/*" />
                     </div>
-                    <div className={`flex justify-center items-center ${!open ? "md:px-44" : ""}`}>
-
-                        <button className="relative mb-6 z-50 mt-16" type="submit">
-                            <div className='text-white rounded-full bg-orng2 border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
-                                Sauvegarder
-                            </div>
-                            <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
-                                Sauvegarder
-                            </div>
-                        </button>
-                    </div>
-
-                </form>}
+                }
                 {loading && <div className='pb-[900px]'></div>}
             </div>
         </div>

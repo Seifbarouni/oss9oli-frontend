@@ -122,14 +122,14 @@ function App() {
               </div>
             }
           />
-          <Route
+          {/* <Route
             path="/mypods"
             element={
               <div className="bg-gris2  relative">
                 <MyChannelPage />
               </div>
             }
-          />
+          /> */}
           <Route
             path="/addpod"
             element={
@@ -142,7 +142,7 @@ function App() {
             }
           />
           <Route
-            path="/edit"
+            path="/mychannel"
             element={
               <div className="bg-gris2  relative">
                 <EditChannelPage />
