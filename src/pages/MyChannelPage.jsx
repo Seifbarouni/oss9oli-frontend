@@ -28,6 +28,7 @@ export const MyChannelPage = () => {
         if (pack !== "producer_pack") {
             navigate("/accueil")
         }
+        window.scrollTo(0, 0)
         setLoading(true)
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/user`,
             { headers: { Authorization: `Bearer ${cookies.oss9oli}` } }).then(res => {

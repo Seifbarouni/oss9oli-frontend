@@ -21,6 +21,8 @@ export const AddPodcastPage = () => {
         if (pack !== "producer_pack") {
             navigate("/accueil")
         }
+        // scroll to top
+        window.scrollTo(0, 0)
     }, [])
     return (
         <div className='flex flex-col'>

@@ -28,6 +28,7 @@ export const ProfilePage = () => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
         }
+        window.scrollTo(0, 0)
     }, [])
 
     return (
