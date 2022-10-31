@@ -42,7 +42,7 @@ export const MyChannelPage = () => {
             {/* <Seperator mt={0} /> */}
             <div className='flex'>
                 <div>
-                    {open && <div className='lg:flex hidden sticky top-24'>
+                    {open && <div className='lg:flex hidden sticky top-24 z-50'>
                         <Sidebar selected={"mypods"} />
                     </div>}
                 </div>

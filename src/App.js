@@ -26,6 +26,7 @@ import { GoogleAuth } from "./pages/GoogleAuth";
 import { AudioBar } from "./components/AudioBar";
 import { ChannelPage } from "./pages/ChannelPage";
 import { EpisodePage } from "./pages/EpisodePage";
+import { AddEpisodePage } from "./pages/AddEpisodePage";
 
 function App() {
   const close = useOpen((state) => state.close);
@@ -122,14 +123,18 @@ function App() {
               </div>
             }
           />
-          {/* <Route
-            path="/mypods"
+          <Route
+            path="/addep/:id"
             element={
               <div className="bg-gris2  relative">
-                <MyChannelPage />
+                <div className="absolute  top-0 left-0 z-10 ">
+                  <img src={g_form} alt="" className="" />
+                </div>
+                <AddEpisodePage />
               </div>
             }
-          /> */}
+          />
+
           <Route
             path="/addpod"
             element={

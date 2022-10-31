@@ -20,9 +20,6 @@ export const SmallScreenNav = ({ selected }) => {
                     {pack !== "free" && pack !== "consumer_pack" && <Link to={"/community"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`} onClick={() => setOpen()}>O9 COMMUNITY</span>
                     </Link>}
-                    {pack === "producer_pack" && <Link to={"/addpod"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "addpod" ? " underline" : ""}`} onClick={() => setOpen()}>AJOUTER PODCAST</span>
-                    </Link>}
                     {pack === "producer_pack" && <Link to={"/mychannel"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`} onClick={() => setOpen()}>MA CHAINE</span>
                     </Link>}

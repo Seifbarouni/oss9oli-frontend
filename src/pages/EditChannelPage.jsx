@@ -88,7 +88,7 @@ export const EditChannelPage = () => {
             {/* <Seperator mt={0} /> */}
             <div className='flex'>
                 <div>
-                    {open && <div className='lg:flex hidden sticky top-24'>
+                    {open && <div className='lg:flex hidden sticky top-24 z-40'>
                         <Sidebar selected={"edit"} />
                     </div>}
                 </div>

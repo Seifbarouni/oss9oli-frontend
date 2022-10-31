@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import star_pod from '../assets/svgs/star_pod.svg'
@@ -12,10 +12,6 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
     const [showEps, setShowEps] = useState(false)
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
-
-    useEffect(() => {
-
-    }, [])
 
     const convertDurationToString = (d) => {
         let quotient = Math.floor(d / 60) > 10 ? Math.floor(d / 60) : "0" + Math.floor(d / 60);
@@ -53,6 +49,19 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
             }
         }
     }
+
+    const deleteEpisode = async (episodeId) => {
+        try {
+            const resp = await axios.delete(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${episodeId}`)
+            console.log(resp.data.data)
+            // remove episode from episodes
+            const newEpisodes = episodes.filter(episode => episode._id !== episodeId)
+            setEpisodes(newEpisodes)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div className='flex flex-col rounded-3xl bg-white border border-black relative'>
             <div className='bg-akhdher w-full h-96 absolute opacity-30 rounded-3xl z-20'></div>
@@ -98,24 +107,29 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                     </div>
                 </div>
             </div>
-            <div className='bg-white rounded-b-3xl p-3 text-center text-akhdher2 font-bold text-xl cursor-pointer' onClick={() => {
-                if (showEps === false) {
-                    showData()
-                }
-                else {
-                    setShowEps(false)
-                }
-            }}>
-                {listEps === false && showEps === false ? '+ Ecouter la playlist ' : 'Playlist'}
+            <div className='bg-white rounded-b-3xl p-3 text-center ' >
+
+
+                <span
+                    className='text-akhdher2 font-bold text-xl cursor-pointer'
+                    onClick={() => {
+                        if (showEps === false) {
+                            showData()
+                        }
+                        else {
+                            setShowEps(false)
+                        }
+                    }}
+                >
+                    {listEps === false && showEps === false ? '+ Ecouter la playlist ' : 'Playlist'}
+                </span>
 
                 {showEps === true &&
                     <div className='flex flex-col space-y-2 mt-1'>
                         {episodes.map((ep) => (
                             <div>
                                 <div className='flex flex-col space-y-2 mt-1'>
-                                    <Link
-
-                                        to={`/episode/${ep._id}`}
+                                    <div
                                     >
                                         <div className='flex space-x-4 justify-between'>
                                             <div className='flex space-x-2'>
@@ -127,7 +141,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                     }
                                                 >
                                                 </div>
-                                                <div className='text-black'>
+                                                <div className='text-black text-lg'>
                                                     {ep.title}
                                                 </div>
                                             </div>
@@ -149,7 +163,9 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                         <span className="invisible"> {convertDurationToString(ep.duration)} </span>
                                                     </div>
                                                 </div>
-                                                <div className="z-40 relative" >
+                                                <div className="z-40 relative"
+                                                    onClick={() => deleteEpisode(ep._id)}
+                                                >
                                                     <div
                                                         className="text-white text-2xl bg-gris rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                                                     >
@@ -163,7 +179,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -182,13 +198,13 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                     }
                                                 >
                                                 </div>
-                                                <div className='text-black'>
-                                                    asdsad asdasdsa ssd2
+                                                <div className='text-black text-lg'>
+                                                    brrrrrrrrrrrrrrrrr
                                                 </div>
                                             </div>
                                             <div className='flex space-x-2'>
                                                 <Link
-                                                    to={"/addep"}
+                                                    to={"/addep/" + podcastId}
                                                 >
                                                     <div className="z-40 relative">
                                                         <div
@@ -211,7 +227,9 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                 </div>
                             </div>
                         </div>
-                        <div onClick={() => setShowEps(false)}>
+                        <div onClick={() => setShowEps(false)}
+                            className="text-akhdher2 font-bold text-xl cursor-pointer hover:underline"
+                        >
                             Fermer
                         </div>
 

@@ -17,9 +17,6 @@ export const Sidebar = ({ selected }) => {
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
                     </Link>}
 
-                    {pack === "producer_pack" && <Link to={"/addpod"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "addpod" ? " underline" : ""}`}>AJOUTER PODCAST</span>
-                    </Link>}
                     {pack === "producer_pack" && <Link to={"/mychannel"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>MA CHAINE</span>
                     </Link>}
@@ -37,7 +34,6 @@ export const Sidebar = ({ selected }) => {
                 <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12 invisible'>
                     <span>ACCUEIL</span>
                     {pack !== "free" && pack !== "consumer_pack" && <span>O9 COMMUNITY</span>}
-                    {pack === "producer_pack" && <span>AJOUTER PODCAST</span>}
                     {pack === "producer_pack" && <span>MA CHAINE</span>}
                     <span>OPEN MIC</span>
                     <span>STUDIO OSS9OLI</span>
