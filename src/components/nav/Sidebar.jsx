@@ -17,9 +17,9 @@ export const Sidebar = ({ selected }) => {
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
                     </Link>}
 
-                    {pack === "producer_pack" && <Link to={"/mychannel"}>
+                    {pack === "producer_pack" && <a href={"/mychannel"}>
                         <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>MA CHAINE</span>
-                    </Link>}
+                    </a>}
 
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
                     <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
