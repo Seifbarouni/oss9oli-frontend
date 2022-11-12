@@ -56,6 +56,8 @@ export const Form = () => {
             alert("Description is too long")
         } else {
             axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts`, formData, config).then(res => {
+                localStorage.removeItem("myEps")
+                localStorage.removeItem("myPods")
                 window.location.href = "/mychannel"
             }
             ).catch(err => {

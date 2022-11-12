@@ -51,13 +51,20 @@ export const EditChannelPage = () => {
     }, [])
 
     const myEps = () => {
+
         const getEpisodes = async () => {
             const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/eps_user/get`, {
                 headers: { Authorization: `Bearer ${cookies.oss9oli}` }
             })
             setEpisodes(res.data.data)
+            localStorage.setItem("myEps", JSON.stringify(res.data.data))
         }
-        if (episodes.length === 0) {
+        // get episodes from local storage
+        const myEps = localStorage.getItem("myEps")
+
+        if (myEps) {
+            setEpisodes(JSON.parse(myEps))
+        } else {
             setLoadingSpinner(true)
             getEpisodes()
             setLoadingSpinner(false)
@@ -70,10 +77,14 @@ export const EditChannelPage = () => {
             const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/podcasts/channel/${channelId}`, {
                 headers: { Authorization: `Bearer ${cookies.oss9oli}` }
             })
-            console.log(res.data.data)
+            localStorage.setItem("myPods", JSON.stringify(res.data.data))
             setPodcasts(res.data.data)
         }
-        if (podcasts.length === 0) {
+        // get podcasts from local storage
+        const myPods = localStorage.getItem("myPods")
+        if (myPods) {
+            setPodcasts(JSON.parse(myPods))
+        } else {
             setLoadingSpinner(true)
             getPodcasts()
             setLoadingSpinner(false)

@@ -71,6 +71,7 @@ export const AddEpisodePage = () => {
             alert("Description is too long")
         } else {
             axios.post(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`, formData, config).then(res => {
+                localStorage.removeItem("myEps")
                 window.location.href = "/mychannel"
             }
             ).catch(err => {
