@@ -17,13 +17,13 @@ let colors = [
 export const Vote = ({ name, question, options, img, userId, postId }) => {
     const [result, setResult] = useState([]);
     const [totalUsers, setTotal] = useState(0);
-    const Voter = (option)=>{
-        axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/votes`, {userId, postId, optionSelected: option}).then(res => {
+    const Voter = (option) => {
+        axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/votes`, { userId, postId, optionSelected: option }).then(res => {
             if (res.data.success) {
                 setResult(res.data.data.options)
                 console.log(res.data.data.options)
                 let total = 0;
-                for(let option of res.data.data.options){
+                for (let option of res.data.data.options) {
                     total += option.users.length
                 }
                 setTotal(total);
@@ -53,30 +53,30 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                     </span>
                 </span>
                 {
-                    result.length > 0 ? 
-                        <div class="w-full h-6 bg-gray-200 rounded-small dark:bg-gray-700 flex" style={{height: "50px"}}>
-                            {result.map((option, index)=> (option.users.length*100 / totalUsers) > 1?
-                                 <div class={`h-6 bg-${colors[index%colors.length]} rounded-small text-blue-100 dark:bg-${colors[index%colors.length]} text-center font-medium`} style={{width: (option.users.length*100 / totalUsers)+"%" , height: "50px"}}>{Math.round(option.users.length*100 / totalUsers)}% {option.option}</div>
-                                 : <></>
+                    result.length > 0 ?
+                        <div class="mx-16 h-6 rounded-[300px] bg-akhdher flex border border-black" style={{ height: "50px" }}>
+                            {result.map((option, index) => (option.users.length * 100 / totalUsers) > 1 ?
+                                <div class={`h-6 bg-${colors[index % colors.length]} rounded-small p-2 text-white dark:bg-${colors[index % colors.length]} text-center font-medium`} style={{ width: (option.users.length * 100 / totalUsers) + "%", height: "50px" }}>{Math.round(option.users.length * 100 / totalUsers)}% {option.option}</div>
+                                : <></>
                             )}
                         </div>
-                    
-                    :
-                    <div className='flex sm:flex-row flex-col justify-center items-center sm:space-x-4 space-x-0 sm:space-y-0 space-y-4'>
-                    {options.map((option)=>(
-                        <div onClick={()=>Voter(option.option)}>
-                        <JoinButton
-                            cd1={"relative z-50"}
-                            cd2={"text-white sm:text-2xl text-lg bg-gris rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
-                            cd3={"border border-black rounded-full  py-3 px-16 absolute right-1 top-1 -z-20 w-full sm:text-2xl text-lg"}
-                            data={option.option}
-                        />
-                    </div>
-                    ))}
-                    
-                </div>
+
+                        :
+                        <div className='flex sm:flex-row flex-col justify-center items-center sm:space-x-4 space-x-0 sm:space-y-0 space-y-4'>
+                            {options.map((option) => (
+                                <div onClick={() => Voter(option.option)}>
+                                    <JoinButton
+                                        cd1={"relative z-50"}
+                                        cd2={"text-white sm:text-2xl text-lg bg-gris rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
+                                        cd3={"border border-black rounded-full  py-3 px-16 absolute right-1 top-1 -z-20 w-full sm:text-2xl text-lg"}
+                                        data={option.option}
+                                    />
+                                </div>
+                            ))}
+
+                        </div>
                 }
-                
+
             </div>
 
         </div>
