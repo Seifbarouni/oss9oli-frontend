@@ -16,6 +16,7 @@ export const AuthenticatedNavbar = () => {
     const closeAudio = useAudio((state) => state.closeAudio)
     const logout = () => {
         removeCookie("oss9oli", { path: "/", sameSite: "strict" })
+        localStorage.clear()
         closeAudio()
         window.location = "/auth"
     }
