@@ -32,7 +32,7 @@ export const ProfilePage = () => {
     }, [])
 
     return (
-        <div className='flex flex-col realtive '>
+        <div className='flex flex-col realtive pb-12'>
             <AuthenticatedNavbar />
 
             {user.pack === "community_pack" && <div className='absolute right-0 top-0'>

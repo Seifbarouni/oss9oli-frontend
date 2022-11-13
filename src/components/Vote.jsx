@@ -2,21 +2,18 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { JoinButton } from './buttons/JoinButton'
-let colors = [
-    "orng",
-    "azreg",
-    "gris3",
-    "gris4",
-    "orng",
-    "orng2",
-    "orng3",
-    "orng4",
-    "orng5",
-    "azreg",
-]
+
 export const Vote = ({ name, question, options, img, userId, postId }) => {
     const [result, setResult] = useState([]);
     const [totalUsers, setTotal] = useState(0);
+    const colors = [
+        "orng",
+        "azreg",
+        "akhdher",
+        "asfer",
+        "a7mer",
+        "ka7ouli",
+    ]
     const Voter = (option) => {
         axios.post(`${process.env.REACT_APP_POST_SERVICE}/api/v1/votes`, { userId, postId, optionSelected: option }).then(res => {
             if (res.data.success) {
@@ -29,6 +26,11 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                 setTotal(total);
             }
         }).catch(err => console.error(err))
+    }
+    const randomColor = () => {
+        const index = Math.floor(Math.random() * colors.length)
+        console.log(index)
+        return colors[index]
     }
     return (
         <div className='flex xl:w-2/3'>
@@ -54,9 +56,9 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                 </span>
                 {
                     result.length > 0 ?
-                        <div class="mx-16 h-6 rounded-[300px] bg-akhdher flex border border-black" style={{ height: "50px" }}>
+                        <div class="mx-16 h-6 rounded-[300px] flex border-t border-b border-l border-black" style={{ height: "50px" }}>
                             {result.map((option, index) => (option.users.length * 100 / totalUsers) > 1 ?
-                                <div class={`h-6 bg-${colors[index % colors.length]} rounded-small p-2 text-white dark:bg-${colors[index % colors.length]} text-center font-medium`} style={{ width: (option.users.length * 100 / totalUsers) + "%", height: "50px" }}>{Math.round(option.users.length * 100 / totalUsers)}% {option.option}</div>
+                                <div class={`h-6 bg-${randomColor()} rounded-[300px] border-r border-black p-2 text-white text-center font-medium`} style={{ width: (option.users.length * 100 / totalUsers) + "%", height: "48px" }}>{Math.round(option.users.length * 100 / totalUsers)}% {option.option}</div>
                                 : <></>
                             )}
                         </div>
