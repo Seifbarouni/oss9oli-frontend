@@ -1,7 +1,25 @@
+import axios from 'axios'
 import React from 'react'
+import { useCookies } from 'react-cookie'
+import { decode } from '../jwt/jwt'
 import { JoinButton } from './buttons/JoinButton'
 
 export const Pack = ({ children, color, price, buttonText, title, desc, more, pack }) => {
+    const [cookies, setCookie] = useCookies(['oss9oli']);
+    const payload = decode(cookies.oss9oli)
+    const updateUser = ()=>{
+        console.log(pack)
+        axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${payload.userId}`, {pack: pack}, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            console.log(res.data)
+            if(res.data.success){
+                setCookie("oss9oli", res.data.data)
+            }
+        })
+    }
     return (
         <div className='flex flex-col bg-white rounded-[50px] w-96 border border-black'>
             <div className={`flex flex-col ${color} text-white rounded-t-[50px] p-6 items-center text-center h-36 border-b border-black`}>
@@ -30,6 +48,7 @@ export const Pack = ({ children, color, price, buttonText, title, desc, more, pa
                         cd3={"border border-black rounded-full py-2 px-12 absolute right-1 top-1 -z-30 w-full sm:text-3xl text-xl"}
                         data={buttonText}
                         to={`/auth?pack=${pack}`}
+                        func={updateUser}
                     />
                 </div>
             </div>
