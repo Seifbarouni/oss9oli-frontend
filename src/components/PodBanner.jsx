@@ -121,7 +121,12 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                         }
                     }}
                 >
-                    {listEps === false && showEps === false ? '+ Ecouter la playlist ' : 'Playlist'}
+                    {listEps === false && showEps === false ? <Link
+                        to={`/episode/${podcastId}`}
+                    >
+                        + Ecouter la playlist
+
+                    </Link> : 'Playlist'}
                 </span>
 
                 {showEps === true &&

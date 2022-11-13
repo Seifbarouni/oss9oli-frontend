@@ -76,35 +76,13 @@ export const ChannelPage = () => {
         </div>}
         <div className=' flex flex-col  w-full'>
           <ChannelBanner name={channel.name} img={channel.image} desc={channel.description} />
-          <div className='px-20 sm:mt-80 mt-[500px] flex justify-between'>
-            <span className='text-4xl'>
-              Derniers sons
-            </span>
-            <span className='text-ka7ouli underline underline-offset-8 sm:text-lg'>
-              Voir plus {'>'}
-            </span>
-          </div>
-          <div className='px-20 mt-6'>
-            <Podcast
-              podcastId="asdsd"
-              img={{
-                data: img4.toString('base64'),
-                contentType: "image/png"
-              }}
-              creator={"Elhiwar Ettounsi"}
-              title={"asdasdasds"}
-              duration={200}
-              description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quis consectetur fuga recusandae odit iste fugit soluta nisi iusto amet impedit velit dolor obcaecati tenetur ratione, earum ea. Aliquid, quam!Lorem ipsum dolor sit amet consectetur adipisicing elit.Doloremque consectetur illum, enim veritatis laborum reprehenderit laudantium optio nisi.Nihil laborum ex ea veniam dolores neque doloribus eos ducimus odio illum."} status={"actif"} guest={"guest name"}
-              listens={100}
-              number={1}
-              w={"w-full"} h={"sm:h-96"} />
-          </div>
 
-          <div className='px-20 mt-24 flex justify-between'>
+
+          <div className='px-20 mt-56 flex justify-between'>
             <span className='text-4xl'>
               Podcasts
             </span>
-            <span className='text-ka7ouli underline underline-offset-8 sm:text-lg'>
+            <span className='text-ka7ouli underline underline-offset-8 sm:text-lg invisible'>
               Voir plus {'>'}
             </span>
           </div>
