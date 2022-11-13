@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import play_2 from '../assets/svgs/play_2.svg'
+import person from '../assets/svgs/person.svg'
+
 import { useAudio } from '../store/store'
 import axios from 'axios'
 
@@ -97,7 +99,9 @@ export const RecentEp = ({
                 </div>
                 <div className='flex justify-between mt-4'>
                     <div className='flex items-start space-x-3'>
-                        <span className='h-12 w-12 bg-gris border border-black rounded-full'></span>
+                        <span className='h-12 w-12 bg-gris border border-black rounded-full flex items-center justify-center'>
+                            <img src={person} alt="" className='h-8 w-8' />
+                        </span>
                         <span>{channelName}</span>
                     </div>
                     <div className='text-gris3'>{formatDate(createdAt)}</div>

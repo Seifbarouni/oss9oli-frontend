@@ -41,7 +41,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
             setShowEps(true)
             // get episodes by podcastId
             try {
-                const resp = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${podcastId}`)
+                const resp = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/chan/${podcastId}`)
                 console.log(resp.data.data)
                 setEpisodes(resp.data.data)
             } catch (err) {
@@ -57,6 +57,9 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
             // remove episode from episodes
             const newEpisodes = episodes.filter(episode => episode._id !== episodeId)
             setEpisodes(newEpisodes)
+            localStorage.removeItem("myPods")
+            localStorage.removeItem("myEps")
+            window.location.reload()
         } catch (err) {
             console.log(err)
         }
@@ -147,7 +150,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                 >
                                                 </div>
                                                 <div className='text-black text-lg'>
-                                                    {ep.title}
+                                                    {ep.title} {ep.status !== "actif" && <span className='text-orange-600'><span className='text-black'>-</span> {`(${ep.status})`}</span>}
                                                 </div>
                                             </div>
                                             <div className='flex space-x-2'>
