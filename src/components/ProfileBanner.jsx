@@ -5,7 +5,7 @@ import axios from 'axios'
 import spark from '../assets/svgs/spark2.svg'
 import foucha from '../assets/svgs/foucha.svg'
 import { decode } from '../jwt/jwt'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const ProfileBanner = ({ name, desc }) => {
     const [edit, setEdit] = useState(false)
@@ -14,6 +14,7 @@ export const ProfileBanner = ({ name, desc }) => {
     const [inputDescription, setInputDescription] = useState(desc || "")
     const [cookies, setCookie] = useCookies(["oss9oli"])
     const { customSeed, pack } = decode(cookies.oss9oli)
+    const navigate = useNavigate()
     const updateUserData = async () => {
         const config = {
             headers: {
@@ -39,10 +40,10 @@ export const ProfileBanner = ({ name, desc }) => {
 
     return (
         <div className={`border border-black border-l-0 border-t-0 ${pack === "producer_pack" ? "bg-orng4" : ""} ${pack === "community_pack" ? "bg-green-100" : ""} ${pack === "free" ? "bg-red-50" : ""} flex md:flex-row flex-col items-center md:items-start`}>
-            {!edit && <div className='md:hidden flex items-center   cursor-pointer w-full p-2' onClick={() => setEdit(true)}>
+            {!edit && <div className='md:hidden flex items-center w-full p-2' onClick={() => setEdit(true)}>
                 <img src={foucha} alt="" />
             </div>}
-            {edit && <div className='md:hidden flex items-center   cursor-pointer w-full p-2' >
+            {edit && <div className='md:hidden flex items-center w-full p-2' >
                 <XIcon className='h-8 w-8' onClick={() => setEdit(false)} />
             </div>}
 
@@ -92,11 +93,11 @@ export const ProfileBanner = ({ name, desc }) => {
                         className='flex mt-1 z-50'
 
                     >
-                        <Link
-                            to="/mychannel"
+                        <div
+                            onClick={() => navigate("/mychannel")}
                         >
                             <div
-                                className="text-white text-xl bg-orng5 rounded-full px-2  text-center cursor-pointer border border-black z-30 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                className="text-white text-xl bg-orng5 rounded-full px-2  text-center border border-black z-30 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                             >
                                 <span>Ma chaine</span>
                             </div>
@@ -105,7 +106,7 @@ export const ProfileBanner = ({ name, desc }) => {
                             >
                                 <span className="">Ma chaine</span>
                             </div>
-                        </Link>
+                        </div>
                     </div>
 
                 }
@@ -125,16 +126,16 @@ export const ProfileBanner = ({ name, desc }) => {
                     p-6 placeholder:text-gray-400 focus:outline-none`} placeholder='Décrivez-vous au monde..' value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} />}
                 </div> */}
             </div>
-            {!edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2 cursor-pointer' onClick={() => setEdit(true)}>
+            {!edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2 ' onClick={() => setEdit(true)}>
                 <img src={foucha} alt="" />
             </div>}
             {edit && <div className='md:flex hidden justify-end flex-1 pr-6 pt-2' >
                 <div className='flex flex-col justify-end items-end space-y-2'>
-                    <XIcon className='h-8 w-8 cursor-pointer' onClick={() => setEdit(false)} />
+                    <XIcon className='h-8 w-8 ' onClick={() => setEdit(false)} />
                     {loading === false && <div className={`${pack === "producer_pack" ? "bg-orng" : ""}
                     ${pack === "community_pack" ? "bg-akhdher" : ""}
                     ${pack === "free" ? "bg-a7mer" : ""}
-                    text-white border border-black rounded-xl p-2 cursor-pointer`} onClick={() => updateUserData()}>
+                    text-white border border-black rounded-xl p-2 `} onClick={() => updateUserData()}>
                         Sauvegarder
                     </div>}
                     {loading === true &&
@@ -149,7 +150,7 @@ export const ProfileBanner = ({ name, desc }) => {
                 ${pack === "producer_pack" ? "bg-orng" : ""}
                     ${pack === "community_pack" ? "bg-akhdher" : ""}
                     ${pack === "free" ? "bg-a7mer" : ""}
-                text-white border border-black rounded-xl p-2 cursor-pointer mb-4 md:hidden flex`} onClick={() => updateUserData()}>
+                text-white border border-black rounded-xl p-2 mb-4 md:hidden flex`} onClick={() => updateUserData()}>
                     Sauvegarder
                 </div>
             }

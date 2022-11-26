@@ -130,7 +130,7 @@ export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => 
                     </div>
                 </div>
                 <div>
-                    <div onClick={showComms} className="cursor-pointer">
+                    <div onClick={showComms} className="">
                         {showComm ? <p>hide comments</p> : <p>see comments </p>}
                     </div>
                     {

@@ -1,34 +1,43 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {
+    Link, useNavigate
+} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { decode } from '../../jwt/jwt'
 
 export const Sidebar = ({ selected }) => {
     const [cookies] = useCookies(['oss9oli']);
     const { pack } = decode(cookies.oss9oli)
+    const navigate = useNavigate()
     return (
         <div className='h-full z-40 font-semibold sticky w-80 top-0'>
             <div className='bg-azreg3 border border-black rounded-r-3xl'>
                 <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12'>
-                    <Link to={"/accueil"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
-                    </Link>
-                    {pack !== "free" && pack !== "consumer_pack" && <Link to={"/community"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
-                    </Link>}
+                    <div
+                        onClick={() => navigate("/accueil")}
+                    >
+                        <span className={`hover:underline underline-offset-8  ${selected === "accueil" ? " underline" : ""}`}>ACCUEIL</span>
+                    </div>
+                    {pack !== "free" && pack !== "consumer_pack" && <div
+                        onClick={() => navigate("/community")}
+                    >
+                        <span className={`hover:underline underline-offset-8  ${selected === "community" ? " underline" : ""}`}>O9 COMMUNITY</span>
+                    </div>}
 
-                    {pack === "producer_pack" && <a href={"/mychannel"}>
-                        <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "edit" ? " underline" : ""}`}>MA CHAINE</span>
-                    </a>}
+                    {pack === "producer_pack" && <div
+                        onClick={() => navigate("/mychannel")}
+                    >
+                        <span className={`hover:underline underline-offset-8  ${selected === "edit" ? " underline" : ""}`}>MA CHAINE</span>
+                    </div>}
 
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
+                    <span className={`hover:underline underline-offset-8  ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
+                    <span className={`hover:underline underline-offset-8  ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
                 </div>
-                <Link
-                    to={"/profile"}
+                <div
+                    onClick={() => navigate("/profile")}
                     className='flex flex-col space-y-12 mt-32 pl-12 text-white text-2xl mb-12'>
-                    <span className={`hover:underline underline-offset-8 cursor-pointer ${selected === "profile" ? " underline" : ""}`}>PROFILE</span>
-                </Link>
+                    <span className={`hover:underline underline-offset-8 ${selected === "profile" ? " underline" : ""}`}>PROFILE</span>
+                </div>
             </div>
             <div className=' border border-black rounded-r-3xl absolute top-1 -right-1 -z-10 bg-white w-full'>
                 <div className='mt-28 flex flex-col space-y-12 text-white text-2xl pl-12 invisible'>

@@ -9,7 +9,7 @@ export const Tags = () => {
                     <img src={red_heart} alt="" />
                 </div>
                 <div className='absolute bottom-4 right-8'>
-                    <span className='text-xl text-gray-400 underline underline-offset-8 hover:text-gray-600 cursor-pointer'>Voir tous les tags {'>'}  </span>
+                    <span className='text-xl text-gray-400 underline underline-offset-8 hover:text-gray-600'>Voir tous les tags {'>'}  </span>
                 </div>
 
                 <span className='text-4xl'>Tags suivis</span>

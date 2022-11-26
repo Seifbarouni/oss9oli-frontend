@@ -7,15 +7,15 @@ import { JoinButton } from './buttons/JoinButton'
 export const Pack = ({ children, color, price, buttonText, title, desc, more, pack }) => {
     const [cookies, setCookie] = useCookies(['oss9oli']);
     const payload = decode(cookies.oss9oli)
-    const updateUser = ()=>{
+    const updateUser = () => {
         console.log(pack)
-        axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${payload.userId}`, {pack: pack}, {
+        axios.post(`${process.env.REACT_APP_AUTH_SERVER_URI}/api/v1/${payload.userId}`, { pack: pack }, {
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
-        }).then(res=>{
+        }).then(res => {
             console.log(res.data)
-            if(res.data.success){
+            if (res.data.success) {
                 setCookie("oss9oli", res.data.data)
             }
         })
@@ -44,7 +44,7 @@ export const Pack = ({ children, color, price, buttonText, title, desc, more, pa
                 <div className='pb-12'>
                     <JoinButton
                         cd1={"relative z-40"}
-                        cd2={`text-white ${color} rounded-full py-2 px-12 text-center cursor-pointer border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 sm:text-3xl text-xl -z-20`}
+                        cd2={`text-white ${color} rounded-full py-2 px-12 text-center border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 sm:text-3xl text-xl -z-20`}
                         cd3={"border border-black rounded-full py-2 px-12 absolute right-1 top-1 -z-30 w-full sm:text-3xl text-xl"}
                         data={buttonText}
                         to={`/auth?pack=${pack}`}

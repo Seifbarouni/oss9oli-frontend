@@ -4,7 +4,6 @@ import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Post } from '../components/Post'
-import { Seperator } from '../components/Seperator'
 import { Sujet } from '../components/Sujet'
 import { Vote } from '../components/Vote'
 import { useOpen } from '../store/store'
@@ -73,7 +72,7 @@ export const CommunityPage = () => {
                     <div className={`flex justify-center items-center space-x-4 ${!open ? "md:px-44" : ""}`}>
 
                         <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("pensee") }}>
-                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee" ? "bg-gray-400" : "bg-akhdher")}>
+                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee" ? "bg-gray-400" : "bg-akhdher")}>
                                 Pensée
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
@@ -82,7 +81,7 @@ export const CommunityPage = () => {
                         </button>
 
                         <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("vote") }}>
-                            <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "vote" ? "bg-gray-400" : "bg-orng")}>
+                            <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "vote" ? "bg-gray-400" : "bg-orng")}>
                                 Vote
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>

@@ -51,7 +51,8 @@ export const RecentEp = ({
                 creator: channelName,
                 duration: episodeDuration,
                 podcastId: episodeId,
-                channelId: podcastId.channelId
+                channelId: podcastId.channelId,
+                p: podcastId._id,
             }
         )
     }
@@ -109,7 +110,7 @@ export const RecentEp = ({
                 <div className='flex mt-4'>
                     <div className="z-50 relative" onClick={() => newAudio()}>
                         <div
-                            className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                            className="text-white text-2xl bg-orng2 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >
                             <span>{convertDurationToString()}</span>
                             <span>
@@ -130,7 +131,7 @@ export const RecentEp = ({
                     <div className='flex sm:space-x-2 sm:space-y-0 sm:flex-row flex-col space-y-2 items-center'>
                         {allTags?.map((tag, index) => {
                             return (
-                                <span key={index} className='bg-gris rounded-3xl border border-black cursor-pointer px-4 p-1'>{tag}</span>
+                                <span key={index} className='bg-gris rounded-3xl border border-black px-4 p-1'>{tag}</span>
                             )
                         })}
                     </div>

@@ -34,7 +34,7 @@ export const SmallPost = ({ img, duration, title, creator, description }) => {
                     <div>Par <span className='text-orange-300'>{creator}</span></div>
                     <div className="z-50 relative" onClick={() => newAudio()}>
                         <div
-                            className="text-white text-sm bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                            className="text-white text-sm bg-orng2 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >
                             <span>{duration}</span>
                             <span>

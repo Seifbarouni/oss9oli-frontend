@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import { useAudio } from '../store/store'
 import axios from 'axios'
@@ -8,6 +8,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
     let t = tags !== undefined ? tags[0].split(",") : []
     t.shift()
     const [allTags, setAllTags] = useState(t)
+    const navigate = useNavigate()
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -28,7 +29,8 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                 creator,
                 duration,
                 podcastId: episodeId,
-                channelId: podcastId.channelId
+                channelId: podcastId.channelId,
+                p: podcastId._id,
             }
         )
         //   }
@@ -67,17 +69,17 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                 <div>
                     <div className='flex justify-between'>
                         <span>Episode {number}</span>
-                        <Link
-                            to={`/episode/${podcastId?._id}`}
+                        <div
+                            onClick={() => navigate(`/episode/${podcastId?._id}`)}
                         >
                             <span className='text-gray-500'>{creator}</span>
-                        </Link>
+                        </div>
                     </div>
-                    <a
-                        href={`/episode/${podcastId?._id}`}
+                    <div
+                        onClick={() => navigate(`/episode/${podcastId?._id}`)}
                     >
-                        <div className='xl:text-3xl text-xl cursor-pointer hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest}` : title}</div>
-                    </a>
+                        <div className='xl:text-3xl text-xl hover:underline'>{creator !== "" && title !== "" && guest !== "" ? `${title} avec ${guest}` : title}</div>
+                    </div>
 
                 </div>
                 <div className='flex sm:flex-row flex-col justify-between items-center mt-4'>
@@ -86,17 +88,17 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                             Par
                         </span>
                         <span>
-                            <a
-                                href={`/channel/${podcastId?.channelId}`}
+                            <div
+                                onClick={() => navigate(`/channel/${podcastId.channelId}`)}
                             >
-                                <span className='text-orange-300 hover:underline cursor-pointer'>{channelName}</span>
-                            </a>
+                                <span className='text-orange-300 hover:underline'>{channelName}</span>
+                            </div>
                         </span>
 
                     </div>
                     <div className="z-40 relative" onClick={() => newAudio()} >
                         <div
-                            className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                            className="text-white text-2xl bg-orng2 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                         >
                             <span>{convertDurationToString()}</span>
                             <span>
@@ -127,7 +129,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                     <div className='flex space-x-2'>
                         {allTags.map((tag, index) => {
                             return (
-                                <span key={index} className='bg-gris rounded-3xl border border-black cursor-pointer px-4 p-1'>{tag}</span>
+                                <span key={index} className='bg-gris rounded-3xl border border-black px-4 p-1'>{tag}</span>
                             )
                         })}
                     </div>

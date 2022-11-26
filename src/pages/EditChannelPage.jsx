@@ -6,7 +6,7 @@ import { useOpen } from '../store/store'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { decode } from '../jwt/jwt'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ChannelBannerWithEdit } from '../components/ChannelBannerWithEdit'
 import { PodBanner } from '../components/PodBanner'
 import { Podcast } from '../components/Podcast'
@@ -96,7 +96,6 @@ export const EditChannelPage = () => {
     return (
         <div className='flex flex-col'>
             <AuthenticatedNavbar />
-            {/* <Seperator mt={0} /> */}
             <div className='flex'>
                 <div>
                     {open && <div className='lg:flex hidden sticky top-24 z-40'>
@@ -117,16 +116,16 @@ export const EditChannelPage = () => {
                             desc={description}
                             img={file} />
                         <div className='mt-64 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
-                            <span className={`underline-offset-8 hover:underline cursor-pointer ${focus === "mes_sons" ? "underline font-bold" : ""}`}
+                            <span className={`underline-offset-8 hover:underline  ${focus === "mes_sons" ? "underline font-bold" : ""}`}
                                 onClick={() => myEps()}
                             >TOUS MES SONS</span>
                             <span
-                                className={`underline-offset-8 hover:underline cursor-pointer ${focus === "mes_pods" ? "underline font-bold" : ""}`}
+                                className={`underline-offset-8 hover:underline  ${focus === "mes_pods" ? "underline font-bold" : ""}`}
                                 onClick={() => myPods()}
 
                             >MES PODCASTS</span>
                             <span
-                                className={`underline-offset-8 hover:underline cursor-pointer ${focus === "fd" ? "underline font-bold" : ""}`}
+                                className={`underline-offset-8 hover:underline  ${focus === "fd" ? "underline font-bold" : ""}`}
                                 onClick={() => setFocus("fd")}
 
                             >FILE D'ATTENTE</span>
@@ -146,13 +145,13 @@ export const EditChannelPage = () => {
                                         )
                                     })}
 
-                                    <Link
-                                        to={`/addpod`}
+                                    <div
+                                        onClick={() => navigate("/addpod")}
                                     >
                                         <div className='w-full p-12 bg-white flex justify-center items-center rounded-3xl border border-black hover:border-2'>
                                             <img src={plus} alt="" />
                                         </div>
-                                    </Link>
+                                    </div>
 
                                 </div>
                             }

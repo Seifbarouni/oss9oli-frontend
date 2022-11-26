@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import star_pod from '../assets/svgs/star_pod.svg'
 import { useAudio } from '../store/store'
@@ -12,6 +12,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
     const [showEps, setShowEps] = useState(false)
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
+    const navigate = useNavigate()
 
     const convertDurationToString = (d) => {
         let quotient = Math.floor(d / 60) > 10 ? Math.floor(d / 60) : "0" + Math.floor(d / 60);
@@ -30,7 +31,8 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                 creator,
                 duration,
                 podcastId: episodeId,
-                channelId: podcastId.channelId
+                channelId: podcastId.channelId,
+                p: podcastId._id,
             }
         )
     }
@@ -79,11 +81,11 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
 
                 <div className='flex flex-col space-y-2 z-30'>
                     <span className='text-lg'>8 épisodes</span>
-                    <Link
-                        to={`/episode/${podcastId}`}
+                    <div
+                        onClick={() => navigate(`/episode/${podcastId}`)}
                     >
                         <span className='font-bold text-4xl hover:underline'>{name}</span>
-                    </Link>
+                    </div>
                 </div>
                 <span className='text-lg z-30 h-44 overflow-y-scroll'>
                     {desc}
@@ -92,7 +94,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                 <div className='flex sm:flex-row flex-col items-center sm:space-x-8 sm:space-y-0 space-y-2 z-40'>
                     <div className="z-50 relative" >
                         <div
-                            className="text-white text-2xl bg-orng2 rounded-full px-12 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 py-2"
+                            className="text-white text-2xl bg-orng2 rounded-full px-12 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 py-2"
                         >
                             <span>Ecouter</span>
                             <span>
@@ -105,7 +107,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                             <span className="invisible"> Ecouter </span>
                         </div>
                     </div>
-                    <div className='cursor-pointer'>
+                    <div className=''>
                         <img src={star_pod} alt="" />
                     </div>
                 </div>
@@ -114,7 +116,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
 
 
                 <span
-                    className='text-akhdher2 font-bold text-xl cursor-pointer'
+                    className='text-akhdher2 font-bold text-xl'
                     onClick={() => {
                         if (showEps === false) {
                             showData()
@@ -124,12 +126,12 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                         }
                     }}
                 >
-                    {listEps === false && showEps === false ? <Link
-                        to={`/episode/${podcastId}`}
+                    {listEps === false && showEps === false ? <div
+                        onClick={() => navigate(`/episode/${podcastId}`)}
                     >
                         + Ecouter la playlist
 
-                    </Link> : 'Playlist'}
+                    </div> : 'Playlist'}
                 </span>
 
                 {showEps === true &&
@@ -158,7 +160,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                     ep.title, ep.guest, ep.podcastId, ep.episodeNumber, ep.podcastId.name, img, ep.length, ep._id
                                                 )} >
                                                     <div
-                                                        className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                                        className="text-white text-2xl bg-orng2 rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                                                     >
                                                         <span>{convertDurationToString(ep.length)}</span>
                                                         <span>
@@ -175,7 +177,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                     onClick={() => deleteEpisode(ep._id)}
                                                 >
                                                     <div
-                                                        className="text-white text-2xl bg-gris rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                                        className="text-white text-2xl bg-gris rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                                                     >
                                                         X
                                                     </div>
@@ -211,12 +213,12 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                 </div>
                                             </div>
                                             <div className='flex space-x-2'>
-                                                <Link
-                                                    to={"/addep/" + podcastId}
+                                                <div
+                                                    onClick={() => navigate("/addep/" + podcastId)}
                                                 >
                                                     <div className="z-40 relative">
                                                         <div
-                                                            className="text-white text-2xl bg-ka7ouli rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                                            className="text-white text-2xl bg-ka7ouli rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                                                         >
                                                             <span>Ajouter episode</span>
                                                         </div>
@@ -228,7 +230,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +238,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                             </div>
                         </div>
                         <div onClick={() => setShowEps(false)}
-                            className="text-akhdher2 font-bold text-xl cursor-pointer hover:underline"
+                            className="text-akhdher2 font-bold text-xl  hover:underline"
                         >
                             Fermer
                         </div>

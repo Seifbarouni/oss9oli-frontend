@@ -3,13 +3,11 @@ import React, { useState } from 'react'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
-import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import axios from "axios"
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { PodcastList } from '../components/PodcastList'
 
@@ -54,10 +52,10 @@ export const MyChannelPage = () => {
                 <div className='flex flex-col z-40 w-full p-12'>
                     <div className={`flex mt-4 justify-between items-end ${!open ? "md:px-44" : ""}`}>
                         <span className='text-orng2 text-5xl'>MES PODCASTS</span>
-                        <span className='text-ka7ouli h-16 w-16 rounded-full p-2 hover:bg-gray-200 cursor-pointer transition ease-in-out duration-300 invisible' title='Ajouter podcast'>
-                            <Link to={"/addpod"}>
+                        <span className='text-ka7ouli h-16 w-16 rounded-full p-2 hover:bg-gray-200  transition ease-in-out duration-300 invisible' title='Ajouter podcast'>
+                            <div onClick={() => navigate("/addpod")}>
                                 <PlusIcon className='' />
-                            </Link>
+                            </div>
                         </span>
 
                     </div>

@@ -14,7 +14,7 @@ export const Search = (props) => {
   return <div className={`relative w-full`}>
     <div className={`flex justify-between items-center bg-white border border-black rounded-full p-2 w-full`}>
       <input type="text" onKeyDown={validate} onChange={e => setSearch(e.target.value)} placeholder="Chercher un podcast" className="focus:outline-none w-full placeholder:text-gray-300 mx-4 text-lg p-2" />
-      <div className="flex items-center p-2  px-4 cursor-pointer" onClick={() => props.search(search)}>
+      <div className="flex items-center p-2  px-4" onClick={() => props.search(search)}>
         <SearchIcon className="h-8 w-8 ml-4 text-ka7ouli2" />
       </div>
     </div>

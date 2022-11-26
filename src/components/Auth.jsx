@@ -15,10 +15,10 @@ export const Auth = () => {
     return (
         <div className='relative flex justify-center'>
             <div className='p-12 bg-white rounded-[50px] border border-black flex flex-col justify-center items-center relative'>
-                <div className='absolute -bottom-32 -right-32 cursor-pointer md:flex hidden'>
+                <div className='absolute -bottom-32 -right-32 md:flex hidden'>
                     <img src={authArrow} alt="" />
                 </div>
-                <div className='absolute top-4 left-5 cursor-pointer' onClick={() => navigate("/")}>
+                <div className='absolute top-4 left-5' onClick={() => navigate("/")}>
                     <XIcon className='text-ka7ouli h-8 w-8' />
                 </div>
                 <div className='absolute -top-20 -left-20 md:flex hidden'>
@@ -75,7 +75,7 @@ export const Auth = () => {
                 </div>
                 <div className='mt-16 flex justify-center items-center text-center w-2/3'>
                     <span>
-                        En continuant, vous acceptez <span className='font-bold cursor-pointer'>les termes et conditions</span> de Oss9oli.
+                        En continuant, vous acceptez <span className='font-bold '>les termes et conditions</span> de Oss9oli.
                     </span>
                 </div>
                 <div className='mt-4'>
@@ -121,7 +121,7 @@ export const Auth = () => {
                     </div>
                     <div className='mt-32 flex justify-center items-center text-center w-2/3'>
                         <span>
-                            En continuant, vous acceptez <span className='font-bold cursor-pointer'>les termes et conditions</span> de Oss9oli.
+                            En continuant, vous acceptez <span className='font-bold'>les termes et conditions</span> de Oss9oli.
                         </span>
                     </div>
                     <div className='mt-6'>

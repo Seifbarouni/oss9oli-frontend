@@ -64,7 +64,7 @@ export const Contact = () => {
                             type='submit'
                         >
                             <div
-                                className="text-white text-2xl bg-orng3 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                className="text-white text-2xl bg-orng3 rounded-full px-6 py-2 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                             >
                                 <span>Envoyer</span>
 
@@ -111,7 +111,7 @@ export const Contact = () => {
                         </div>
                         <div className='relative z-30'>
                             <div
-                                className="text-white text-2xl bg-orng3 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                className="text-white text-2xl bg-orng3 rounded-full px-6 py-2 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                             >
                                 <span>Envoyer</span>
 

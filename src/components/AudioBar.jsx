@@ -6,7 +6,7 @@ import pause from '../assets/svgs/pause.svg'
 import { useAudio } from '../store/store'
 import { useCookies } from 'react-cookie';
 import { decode } from '../jwt/jwt'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 var interval = null;
@@ -16,6 +16,7 @@ export const AudioBar = () => {
     const audioData = useAudio((state) => state.audioData)
     const [currentTime, setCurrentTime] = useState("")
     const audioEl = useRef()
+    const navigate = useNavigate()
     const playPod = () => {
         audioEl.current.play()
     }
@@ -36,7 +37,7 @@ export const AudioBar = () => {
         setTimeout(() => {
             audioEl.current.play()
         }, 1000)
-
+        console.log(audioData)
         if (interval != null) clearInterval(interval)
 
         interval = setInterval(() => {
@@ -56,37 +57,37 @@ export const AudioBar = () => {
                 >
                 </div>
                 <div className='flex flex-col ml-2'>
-                    <Link
-                        to={`/episode/${audioData.podcastId}`}
+                    <div
+                        onClick={() => navigate(`/episode/${audioData.p}`)}
                     >
-                        <span className='xl:text-xl font-bold hover:underline cursor-pointer'>{audioData.title}</span>
-                    </Link>
+                        <span className='xl:text-xl font-bold hover:underline '>{audioData.title}</span>
+                    </div>
                     <div className='flex space-x-2'>
                         <span className='text-gray-600 cursor-default'>
                             par:
                         </span>
-                        <Link
-                            to={`/channel/${audioData.channelId}`}
+                        <div
+                            onClick={() => navigate(`/channel/${audioData.channelId}`)}
                         >
-                            <span className='text-orng2 cursor-pointer hover:underline'>
+                            <span className='text-orng2  hover:underline'>
                                 {audioData.creator}
                             </span>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
-                <span className='cursor-pointer'>
+                <span className=''>
                     <img src={fastb} alt="" onClick={() => { audioEl.current.currentTime -= 10 }} />
                 </span>
-                {audioEl.current?.paused ? <span className='cursor-pointer' onClick={() => playPod()}>
+                {audioEl.current?.paused ? <span className='' onClick={() => playPod()}>
                     <img src={play} alt="" />
                 </span> :
-                    <span className='cursor-pointer' onClick={() => pausePod()}>
+                    <span className='' onClick={() => pausePod()}>
                         <img src={pause} alt="" />
                     </span>
                 }
-                <span className='cursor-pointer'>
+                <span className=''>
                     <img src={fastf} alt="" onClick={() => { audioEl.current.currentTime += 10 }} />
                 </span>
             </div>

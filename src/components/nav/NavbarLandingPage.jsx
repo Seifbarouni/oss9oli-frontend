@@ -16,11 +16,11 @@ export const Navbar = () => {
                     <XIcon className='h-10 w-10 text-gray-700' />
                 </div>}
                 {isOpen && <div className='sm:flex hidden space-x-8'>
-                    <a href='#join' className="cursor-pointer hover:underline text-lg">REJOINDRE</a>
-                    <a href='#values' className="cursor-pointer hover:underline text-lg">NOS VALEURS</a>
+                    <a href='#join' className=" hover:underline text-lg">REJOINDRE</a>
+                    <a href='#values' className=" hover:underline text-lg">NOS VALEURS</a>
                 </div>}
             </div>
-            <a href="#footer" className="cursor-pointer hover:underline text-lg">CONTACT</a>
+            <a href="#footer" className=" hover:underline text-lg">CONTACT</a>
         </nav>
     )
 }

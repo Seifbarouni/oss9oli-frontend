@@ -69,7 +69,7 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                                 <div onClick={() => Voter(option.option)}>
                                     <JoinButton
                                         cd1={"relative z-50"}
-                                        cd2={"text-white sm:text-2xl text-lg bg-gris rounded-full py-3 px-16 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
+                                        cd2={"text-white sm:text-2xl text-lg bg-gris rounded-full py-3 px-16 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
                                         cd3={"border border-black rounded-full  py-3 px-16 absolute right-1 top-1 -z-20 w-full sm:text-2xl text-lg"}
                                         data={option.option}
                                     />

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Hamburger = () => {
     return (
-        <div className='cursor-pointer'>
+        <div className=''>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-10 w-10 "

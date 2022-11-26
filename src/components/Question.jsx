@@ -58,7 +58,7 @@ export const Question = () => {
                     (
                         <div className='mt-2'>
                             <div className="relative mb-6 z-50" >
-                                <div className='rounded-full bg-gris border border-black py-2 px-12 sm:text-xl z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
+                                <div className='rounded-full bg-gris border border-black py-2 px-12 sm:text-xl z-40 transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
                                     <input type="text" placeholder='Option' value={option} onChange={(e) => updateOption(e.target.value, index)}
                                         className='w-full text-2xl placeholder:text-gray-400 focus:outline-none bg-transparent' />
                                 </div>
@@ -71,7 +71,7 @@ export const Question = () => {
                     )
                     )}
                     <button className="relative mb-6 z-50" onClick={e => addOption(e)}>
-                        <div className=' rounded-full bg-gris border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
+                        <div className=' rounded-full bg-gris border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
                             +
                         </div>
                         <div className=' rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-3 left-1 '>
@@ -83,7 +83,7 @@ export const Question = () => {
                 {/* submit button */}
                 <div className='flex justify-end items-center'>
                     <button className="relative mb-6 z-50" onClick={e => addQuestion(e)} >
-                        <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 cursor-pointer transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (verif() ? "bg-orng2" : "bg-orange-200")}>
+                        <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (verif() ? "bg-orng2" : "bg-orange-200")}>
                             Publier
                         </div>
                         <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>

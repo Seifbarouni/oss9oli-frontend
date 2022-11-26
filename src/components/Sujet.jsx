@@ -24,7 +24,7 @@ export const Sujet = () => {
                 <div className="z-50 sm:pb-6 sm:pr-28 pb-4 pr-20 flex justify-end">
                     <JoinButton
                         cd1={"relative z-50"}
-                        cd2={"text-white font-bold text-2xl bg-asfer rounded-full py-3 px-12 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
+                        cd2={"text-white font-bold text-2xl bg-asfer rounded-full py-3 px-12 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1"}
                         cd3={"border border-black rounded-full  py-3 px-12 absolute right-1 top-1 -z-20 w-full text-2xl"}
                         data={"Contribuer"}
                         to={"/auth"}

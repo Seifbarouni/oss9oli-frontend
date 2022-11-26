@@ -3,7 +3,7 @@ import React from 'react'
 export const InfoCard = ({ bg, img, children }) => {
     return (
         <div
-            className={`flex items-center justify-evenly p-3 ${bg} rounded-3xl cursor-pointer`}
+            className={`flex items-center justify-evenly p-3 ${bg} rounded-3xl `}
         >
             <div className=" flex justify-center h-20 w-20">
                 <img src={img} alt="" />

@@ -73,7 +73,7 @@ export const ChannelBannerWithEdit = ({ name, img, desc }) => {
             </div>
             {!edit && <div className='absolute top-12 right-12 z-50' onClick={() => setEdit(true)}>
                 <div
-                    className="text-white text-2xl bg-orng5 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                    className="text-white text-2xl bg-orng5 rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                 >
                     <span>Personaliser</span>
                 </div>
@@ -90,7 +90,7 @@ export const ChannelBannerWithEdit = ({ name, img, desc }) => {
                 onClick={() => cancel()}
             >
                 <div
-                    className="text-white text-2xl bg-red-500 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                    className="text-white text-2xl bg-red-500 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                 >
                     <span>Annuler</span>
 
@@ -106,7 +106,7 @@ export const ChannelBannerWithEdit = ({ name, img, desc }) => {
                 className='absolute top-12 right-12 z-50'
             >
                 <div
-                    className="text-white text-2xl bg-orng5 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                    className="text-white text-2xl bg-orng5 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                 >
                     <span>Sauvegarder</span>
 

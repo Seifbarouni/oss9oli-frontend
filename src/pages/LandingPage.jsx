@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { JoinButton } from '../components/buttons/JoinButton'
 import { InfoCard } from '../components/cards/InfoCard'
 import { Contributors } from '../components/Contributors'
@@ -36,6 +36,7 @@ import orange_headphones from '../assets/svgs/orange_headphones.svg'
 import green_face from '../assets/svgs/green_face.svg'
 
 export const LandingPage = () => {
+    const navigate = useNavigate()
     const [openNumber, setOpenNumber] = useState(1)
     return (
         <div
@@ -141,7 +142,7 @@ export const LandingPage = () => {
                         </div>
                         <JoinButton
                             cd1={"mt-6 relative z-20"}
-                            cd2={"bg-gris2 rounded-full py-2 px-5 text-center cursor-pointer border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 text-black w-full sm:text-base text-sm"}
+                            cd2={"bg-gris2 rounded-full py-2 px-5 text-center  border border-black transition duration-150 hover:-translate-x-1 hover:translate-y-1 text-black w-full sm:text-base text-sm"}
                             cd3={"border border-black rounded-full py-2 px-5 absolute right-1 top-1 bg-white -z-10 w-full sm:text-base text-sm"}
                             data={"En-apprendre plus"
                             }
@@ -163,7 +164,7 @@ export const LandingPage = () => {
                         <div className=" text-white lg:w-1/2 w-4/5 sm:ml-8 pb-8 ml-6">
                             <JoinButton
                                 cd1={"relative "}
-                                cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center cursor-pointer border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 lg:text-base sm:text-sm text-xs"}
+                                cd2={"text-white font-bold bg-orange-500 rounded-full py-3 px-6 text-center  border border-black z-50 transition duration-150 hover:-translate-x-1 hover:translate-y-1 lg:text-base sm:text-sm text-xs"}
                                 cd3={"border border-black rounded-full py-3 px-6 absolute right-1 top-1 -z-10 w-full lg:text-base sm:text-sm text-xs"}
                                 data={"JE REJOINS LA COMMUNAUTE"}
                                 to={"/auth?pack=community_pack"}
@@ -200,12 +201,12 @@ export const LandingPage = () => {
                                         Vous avez longuement désiré avoir un média qui vous respecte ? Vous vous ennuyez souvent en consommant le média tunisien ? Vous aimez passer votre temps à écouter des podcasts, sans vous soucier du temps ou du lieu ? Vous avez un sujet dans la tête et vous voulez savoir ce que les autres en ont à dire ? Vous voulez mieux comprendre votre position par rapport aux faits de la société ? OU vous êtes simplement curieux ou curieuse ?
                                     </div>
                                 </div>
-                                <Link
-                                    to={"/auth?pack=free"}
+                                <div
+                                    onClick={() => navigate("/auth?pack=free")}
                                 >
                                     <div className='relative flex items-center justify-end mt-4'>
                                         <div
-                                            className="text-white text-2xl bg-orng2 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                            className="text-white text-2xl bg-orng2 rounded-full px-6 py-2 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                         >
                                             <span>S'inscrire</span>
                                         </div>
@@ -215,7 +216,7 @@ export const LandingPage = () => {
                                             <span className="invisible"> S'inscrire </span>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                             <div className='flex flex-col  rounded-3xl bg-orng2 h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
                                 <div className='flex space-x-8 invisible'>
@@ -228,7 +229,7 @@ export const LandingPage = () => {
                                 </div>
                                 <div className='relative flex items-center justify-end mt-4 invisible'>
                                     <div
-                                        className="text-white text-2xl bg-orng2 rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        className="text-white text-2xl bg-orng2 rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                     >
                                         <span>S'inscrire</span>
                                     </div>
@@ -265,12 +266,12 @@ export const LandingPage = () => {
                                         Vous avez toujours rêvé de participer dans votre podcast préféré ? De faire partie de la conversation ? D'avoir votre voix sonner fort ? D'appartenir à une communauté qui fait écho ? De partager votre expérience personnelle et ce vous en avez appris avec le monde ? De demander l'avis des autres sur les confusions qui vous êtes arrivées ? Vous avez toujours rêvé de changer le monde ? Votre voix peut le faire.
                                     </div>
                                 </div>
-                                <Link
-                                    to={"/auth?pack=community_pack"}
+                                <div
+                                    onClick={() => navigate("/auth?pack=community_pack")}
                                 >
                                     <div className='relative flex items-center justify-end mt-4'>
                                         <div
-                                            className="text-white text-2xl bg-akhdher rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                            className="text-white text-2xl bg-akhdher rounded-full px-6 py-2 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                         >
                                             <span>Rejoindre</span>
                                         </div>
@@ -280,7 +281,7 @@ export const LandingPage = () => {
                                             <span className="invisible"> Rejoindre </span>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                             <div className='flex flex-col  rounded-3xl bg-akhdher h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
                                 <div className='flex space-x-8 invisible'>
@@ -293,7 +294,7 @@ export const LandingPage = () => {
                                 </div>
                                 <div className='relative flex items-center justify-end mt-4 invisible'>
                                     <div
-                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                     >
                                         <span>Rejoindre</span>
                                     </div>
@@ -329,11 +330,11 @@ export const LandingPage = () => {
                                         Vous avez toujours voulu avoir un espace pour vous-même ? Vous avez toujours pensé que vous avez beaucoup à partager avec le monde ? Vous avez toujours rêvé de devenir un créateur de contenu ? D'enregistrer le premier épisode du podcast que vous avez dans la tête ? Vous ne savez pas où commencer ?
                                     </div>
                                 </div>
-                                <Link
-                                    to={"/auth?pack=producer_pack"}>
+                                <div
+                                    onClick={() => navigate("/auth?pack=producer_pack")}>
                                     <div className='relative flex items-center justify-end mt-4'>
                                         <div
-                                            className="text-white text-2xl bg-asfer2 rounded-full px-6 py-2 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                            className="text-white text-2xl bg-asfer2 rounded-full px-6 py-2 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                         >
                                             <span>Commencez</span>
                                         </div>
@@ -343,7 +344,7 @@ export const LandingPage = () => {
                                             <span className="invisible"> Commencez </span>
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                             <div className='flex flex-col  rounded-3xl bg-asfer2 h-full px-8 pt-12 absolute right-1 top-1 -z-10 border border-black'>
                                 <div className='flex space-x-8 invisible'>
@@ -356,7 +357,7 @@ export const LandingPage = () => {
                                 </div>
                                 <div className='relative flex items-center justify-end mt-4 invisible'>
                                     <div
-                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center cursor-pointer border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
+                                        className="text-white text-2xl bg-akhdher rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 "
                                     >
                                         <span>Commencez</span>
                                     </div>
@@ -387,11 +388,13 @@ export const LandingPage = () => {
                         <span className="">Ou bien commencez à écoutez nos podcasts</span>
                         <span className="text-3xl font-bold">GRATUITEMENT!</span>
                     </div>
-                    <Link to={'auth'}>
+                    <div
+                        onClick={() => navigate("/auth")}
+                    >
                         <div className='transition ease-in-out hover:scale-110 duration-150 delay-75  ml-4'>
                             <img src={orng_play_button} alt="" />
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
 
