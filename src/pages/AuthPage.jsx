@@ -8,7 +8,6 @@ export const AuthPage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
     useEffect(() => {
-
         if (Object.entries(cookies).length !== 0) {
             navigate("/accueil")
         }

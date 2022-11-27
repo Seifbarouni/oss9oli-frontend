@@ -13,7 +13,6 @@ import { CommunityPage } from "./pages/CommunityPage";
 import { EditChannelPage } from "./pages/EditChannelPage";
 import { HomePage } from "./pages/HomePage";
 import { LandingPage } from "./pages/LandingPage";
-import { MyChannelPage } from "./pages/MyChannelPage";
 import { PacksPage } from "./pages/PacksPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { AddPodcastPage } from "./pages/AddPodcastPage";
@@ -27,6 +26,7 @@ import { AudioBar } from "./components/AudioBar";
 import { ChannelPage } from "./pages/ChannelPage";
 import { EpisodePage } from "./pages/EpisodePage";
 import { AddEpisodePage } from "./pages/AddEpisodePage";
+import { OpenMicPage } from "./pages/OpenMicPage";
 
 function App() {
   const close = useOpen((state) => state.close);
@@ -175,6 +175,14 @@ function App() {
             element={
               <div className="bg-gris2 -z-50">
                 <EpisodePage />
+              </div>
+            }
+          />
+          <Route
+            path="/openmic"
+            element={
+              <div className="bg-gris2 -z-50">
+                <OpenMicPage />
               </div>
             }
           />

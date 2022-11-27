@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Events } from '../components/Events'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
@@ -10,7 +10,6 @@ import { useOpen } from '../store/store'
 import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
-import { useState } from 'react'
 import axios from 'axios'
 import { Question } from '../components/Question'
 import { Pensee } from '../components/Pensee'
@@ -63,7 +62,7 @@ export const CommunityPage = () => {
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>{name}</span>
                     </div>
-                    {type == "pensee" ?
+                    {type === "pensee" ?
                         <Pensee />
                         :
                         <Question />
@@ -72,7 +71,7 @@ export const CommunityPage = () => {
                     <div className={`flex justify-center items-center space-x-4 ${!open ? "md:px-44" : ""}`}>
 
                         <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("pensee") }}>
-                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "pensee" ? "bg-gray-400" : "bg-akhdher")}>
+                            <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type === "pensee" ? "bg-gray-400" : "bg-akhdher")}>
                                 Pensée
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
@@ -81,7 +80,7 @@ export const CommunityPage = () => {
                         </button>
 
                         <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("vote") }}>
-                            <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type == "vote" ? "bg-gray-400" : "bg-orng")}>
+                            <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type === "vote" ? "bg-gray-400" : "bg-orng")}>
                                 Vote
                             </div>
                             <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>
@@ -112,7 +111,7 @@ export const CommunityPage = () => {
                     }
 
                     {posts.map((post) =>
-                        post.__t == "Vote" ?
+                        post.__t === "Vote" ?
                             <div className='mt-12'>
                                 <Vote name={post.userId.name} question={post.question} options={post.options} img={post.userId.customSeed} userId={decode(cookies.oss9oli).userId} postId={post._id} />
                                 <div className='border-b border-black mt-12'></div>

@@ -30,7 +30,10 @@ export const Sidebar = ({ selected }) => {
                         <span className={`hover:underline underline-offset-8  ${selected === "edit" ? " underline" : ""}`}>MA CHAINE</span>
                     </div>}
 
-                    <span className={`hover:underline underline-offset-8  ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</span>
+                    {pack !== "free" && pack !== "consumer_pack" &&
+                        <div
+                            onClick={() => navigate("/openmic")}
+                            className={`hover:underline underline-offset-8  ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</div>}
                     <span className={`hover:underline underline-offset-8  ${selected === "studio" ? " underline" : ""}`}>STUDIO OSS9OLI</span>
                 </div>
                 <div

@@ -3,6 +3,10 @@ import fastf from '../assets/svgs/fastf.svg'
 import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
+import archive_ep from '../assets/svgs/archive_ep.svg'
+import like_ep from '../assets/svgs/like_ep.svg'
+import share_ep from '../assets/svgs/share_ep.svg'
+import more_eps from '../assets/svgs/more_eps.svg'
 import { useAudio } from '../store/store'
 import { useCookies } from 'react-cookie';
 import { decode } from '../jwt/jwt'
@@ -93,6 +97,18 @@ export const AudioBar = () => {
             </div>
             <div className='w-1/3 flex justify-end xl:mr-4'>
                 <span className='xl:text-xl'>{convertDurationToString(currentTime)}/{convertDurationToString(audioData.duration)}</span>
+            </div>
+            <div className='flex space-x-2'>
+                <span>
+                    <img src={like_ep} />
+                </span>
+                <span>
+                    <img src={archive_ep} />
+                </span> <span>
+                    <img src={share_ep} />
+                </span> <span>
+                    <img src={more_eps} />
+                </span>
             </div>
         </div>
     )
