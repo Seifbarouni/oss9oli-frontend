@@ -1,24 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import fastf from '../assets/svgs/fastf.svg'
 import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import archive_ep from '../assets/svgs/archive_ep.svg'
 import like_ep from '../assets/svgs/like_ep.svg'
+import like_ep_full from '../assets/svgs/like_ep_full.svg'
 import share_ep from '../assets/svgs/share_ep.svg'
 import more_eps from '../assets/svgs/more_eps.svg'
 import { useAudio } from '../store/store'
 import { useCookies } from 'react-cookie';
 import { decode } from '../jwt/jwt'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 
 var interval = null;
 export const AudioBar = () => {
     const [cookies] = useCookies(['oss9oli']);
-    const { userId } = decode(cookies.oss9oli)
-    const audioData = useAudio((state) => state.audioData)
-    const [currentTime, setCurrentTime] = useState("")
+    const { userId } = decode(cookies.oss9oli);
+    const audioData = useAudio((state) => state.audioData);
+    const [currentTime, setCurrentTime] = useState("");
+    const [liked, setLiked] = useState(false);
+    const [later, setLater] = useState(false);
     const audioEl = useRef()
     const navigate = useNavigate()
     const playPod = () => {
@@ -36,8 +40,46 @@ export const AudioBar = () => {
         return quotient + ":" + remainder
     }
 
+    const likeEps = ()=>{
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/like`, {
+            episodeId: audioData.podcastId
+        }, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.sucess){
+                setLater(res.data.exist)
+            }
+        })
+    }
 
+    const laterEps = ()=>{
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/later`, {
+            episodeId: audioData.podcastId
+        }, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.sucess){
+                setLiked(res.data.exist)
+            }
+        })
+    }
     useEffect(() => {
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/check?episodeId=${audioData.podcastId}`,{
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            console.log(res.data)
+            if(res.data.sucess){
+                console.log(res.data)
+                setLiked(res.data.liked);
+                setLater(res.data.later)
+            }
+        })
         setTimeout(() => {
             audioEl.current.play()
         }, 1000)
@@ -100,10 +142,10 @@ export const AudioBar = () => {
             </div>
             <div className='flex space-x-2'>
                 <span>
-                    <img src={like_ep} />
+                    <img onClick={likeEps} src={liked?like_ep_full: like_ep} />
                 </span>
                 <span>
-                    <img src={archive_ep} />
+                    <img onClick={laterEps} src={later?archive_ep:archive_ep} />
                 </span> <span>
                     <img src={share_ep} />
                 </span> <span>

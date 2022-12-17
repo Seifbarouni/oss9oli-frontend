@@ -17,6 +17,7 @@ import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
+import axios from 'axios'
 
 export const ProfilePage = () => {
     const open = useOpen((state) => state.open)
@@ -29,6 +30,13 @@ export const ProfilePage = () => {
             navigate("/auth")
         }
         window.scrollTo(0, 0)
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/liked`,{
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            console.log(res.data)
+        })
     }, [])
 
     return (
