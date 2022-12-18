@@ -67,28 +67,48 @@ export const AudioBar = () => {
             }
         })
     }
+
+    const UnfinishedEps = ()=>{
+        if(audioData.duration == currentTime)
+        return;
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/unfinished`, {
+            episodeId: audioData.podcastId,
+            stoppedAt: currentTime
+        }, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.sucess){
+                console.log(res.data)
+            }
+        })
+    }
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/check?episodeId=${audioData.podcastId}`,{
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }).then(res=>{
-            console.log(res.data)
-            if(res.data.sucess){
-                console.log(res.data)
+            if(res.data.success){
                 setLiked(res.data.liked);
-                setLater(res.data.later)
+                setLater(res.data.later);
+                if(res.data.unfinished){
+                    audioEl.current.currentTime = res.data.unfinished.stoppedAt
+                }
             }
         })
         setTimeout(() => {
             audioEl.current.play()
         }, 1000)
-        console.log(audioData)
         if (interval != null) clearInterval(interval)
 
         interval = setInterval(() => {
             setCurrentTime(audioEl?.current?.currentTime)
         }, 1000)
+        return ()=>{
+            UnfinishedEps()
+        }
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4 p-2 z-50 border-t border-b border-black flex items-center justify-between px-4'>

@@ -62,6 +62,7 @@ export const ProfilePage = () => {
         }).then(res=>{
             if (res.data.success)
             setPodcasts(res.data.data)
+            console.log(res.data.data)
         })
     }
 
