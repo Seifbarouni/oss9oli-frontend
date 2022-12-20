@@ -1,5 +1,5 @@
 import React from 'react'
-import valeurs from '../assets/images/valeurs.png'
+import valeurs from '../assets/svgs/values.svg'
 import green_blob from '../assets/svgs/green_blob.svg'
 import spark from '../assets/svgs/spark.svg'
 

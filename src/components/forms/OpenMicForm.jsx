@@ -9,9 +9,14 @@ export const OpenMicForm = () => {
         console.log("submitted")
         setStep(2)
     }
+    const submit2 = (e) => {
+        e.preventDefault()
+        console.log("submitted")
+        setStep(3)
+    }
     return (
         <>
-            {step === 1 && <form className='flex  flex-col   w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30 mb-36'
+            {step === 1 && <form className='flex flex-col w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30 mb-44'
                 onSubmit={onSubmit}
             >
 
@@ -22,12 +27,12 @@ export const OpenMicForm = () => {
                         <div className='flex flex-col space-y-1'>
                             <span className=''>Votre sexe*</span>
                             <span className='text-gray-500 text-sm'>Choisissez le sexe dont vous identifiez</span>
-                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Nom du podcast' />
+                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Sexe' />
                         </div>
                         <div className='flex flex-col space-y-1'>
                             <span className=''>Origine*</span>
                             <span className='text-gray-500 text-sm'>Vous venez de quelle région de la Tunisie</span>
-                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Nom du podcast' />
+                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='région' />
                         </div>
                         <div className='flex flex-col mt-6 space-y-1'>
                             <span className=''>C'est pour notre prochain sujet?*</span>
@@ -72,12 +77,12 @@ export const OpenMicForm = () => {
                             >
                                 Quel est votre age?
                             </span>
-                            <input type="number" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Numéro de l'épisode" />
+                            <input type="number" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Age" />
                         </div>
                         <div className='flex flex-col mt-6 space-y-1'>
                             <span className=''>Occupation*</span>
                             <span className='text-gray-500 text-sm'>Qu'est-ce que vous faites dans la vie</span>
-                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Nom de l'invité" />
+                            <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder="Occupation" />
                         </div>
 
                         <div className='flex justify-between items-center mt-6'>
@@ -112,7 +117,9 @@ export const OpenMicForm = () => {
             </form>}
             {
                 step === 2 &&
-                <form className='flex  flex-col w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30 mb-24 px-44'>
+                <form className='flex  flex-col w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30 mb-44 px-44'
+                    onSubmit={submit2}
+                >
                     <div className='flex xl:flex-row flex-col md:space-y-0 space-y-2 md:space-x-24 w-full'>
                         <div className='flex flex-col space-y-10 w-full'>
                             <div className='flex flex-col'>
@@ -137,8 +144,24 @@ export const OpenMicForm = () => {
                         </div>
                     </button>
                 </form>
+            }
 
+            {
+                step === 3 &&
+                <form className='flex  flex-col w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30 mb-44 px-44'
+                >
+                    <div className='flex xl:flex-row flex-col md:space-y-0 space-y-2 md:space-x-24 w-full'>
 
+                    </div>
+                    <button className='relative mb-6 z-50 flex mt-12' type='submit'>
+                        <div className='text-white rounded-full bg-asfer border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 '>
+                            Contribuer
+                        </div>
+                        <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute top-1 left-1 -z-10 '>
+                            Contribuer
+                        </div>
+                    </button>
+                </form>
             }
         </>
     )

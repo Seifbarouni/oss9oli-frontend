@@ -67,7 +67,7 @@ export const LandingPage = () => {
                     <span className="header sm:text-2xl">
                         Avez-vous déjà été réduit au silence?
                     </span>
-                    <span className="sm:text-lg mt-2">
+                    <span className="sm:text-xl mt-2">
                         Vous a-t-on dit de vous taire ? que votre avis n'avait pas
                         d'importance ? ou votre voix ne sonne pas aussi fort? que votre
                         histoire ne valait pas la peine d'être racontée ? ou que votre point
@@ -94,7 +94,7 @@ export const LandingPage = () => {
                     </span>
 
                     <span className="header sm:text-2xl mt-2"> Faites entendre votre voix ! </span>
-                    <span className="tsm:ext-lg mt-2">
+                    <span className="sm:text-xl mt-2">
                         Nous avons besoin de votre histoire ! le monde a besoin que votre
                         histoire soit racontée à haute voix ! Rejoignez notre communauté et
                         plongez dans le paradoxe de la société tunisienne ! écoutez comme

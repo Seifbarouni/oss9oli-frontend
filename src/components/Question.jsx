@@ -44,7 +44,7 @@ export const Question = () => {
     }
 
     return (
-        <div className='flex flex-col mt-24'>
+        <div className='flex flex-col mt-12'>
 
             <form
                 className='border-2 border-dashed border-gray-800 mx-6 p-12 rounded-[50px] '
@@ -83,7 +83,7 @@ export const Question = () => {
                 {/* submit button */}
                 <div className='flex justify-end items-center'>
                     <button className="relative mb-6 z-50" onClick={e => addQuestion(e)} >
-                        <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (verif() ? "bg-orng2" : "bg-orange-200")}>
+                        <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (verif() ? "bg-orng2" : "bg-orng2")}>
                             Publier
                         </div>
                         <div className='text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold absolute -z-10 top-1 left-1'>

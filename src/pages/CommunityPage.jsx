@@ -62,15 +62,9 @@ export const CommunityPage = () => {
                         <span className='header text-5xl'>Bonjour!</span>
                         <span className='text-3xl'>{name}</span>
                     </div>
-                    {type === "pensee" ?
-                        <Pensee />
-                        :
-                        <Question />
-                    }
-
                     <div className={`flex justify-center items-center space-x-4 ${!open ? "md:px-44" : ""}`}>
 
-                        <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("pensee") }}>
+                        <button className="relative z-50" onClick={() => { setType("pensee") }}>
                             <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type === "pensee" ? "bg-gray-400" : "bg-akhdher")}>
                                 Pensée
                             </div>
@@ -79,7 +73,7 @@ export const CommunityPage = () => {
                             </div>
                         </button>
 
-                        <button className="relative mb-6 z-50 mt-16" onClick={() => { setType("vote") }}>
+                        <button className="relative z-50 " onClick={() => { setType("vote") }}>
                             <div className={'text-white rounded-full  border border-black py-2 px-12 sm:text-xl font-bold z-40  transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (type === "vote" ? "bg-gray-400" : "bg-orng")}>
                                 Vote
                             </div>
@@ -88,6 +82,13 @@ export const CommunityPage = () => {
                             </div>
                         </button>
                     </div>
+                    {type === "pensee" ?
+                        <Pensee />
+                        :
+                        <Question />
+                    }
+
+
                     {/**/}
                     <div className='flex flex-col mt-24'>
                         <span className='text-3xl font-semibold'>Evènements à venir</span>

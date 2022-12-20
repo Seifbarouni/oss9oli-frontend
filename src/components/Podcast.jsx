@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
+import playlist from '../assets/svgs/playlist.svg'
 import { useAudio } from '../store/store'
 import axios from 'axios'
 
@@ -72,7 +73,6 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                         <div
                             onClick={() => navigate(`/episode/${podcastId?._id}`)}
                         >
-                            <span className='text-gray-500'>{creator}</span>
                         </div>
                     </div>
                     <div
@@ -96,19 +96,25 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                         </span>
 
                     </div>
-                    <div className="z-40 relative" onClick={() => newAudio()} >
-                        <div
-                            className="text-white text-2xl bg-orng2 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
-                        >
-                            <span>{convertDurationToString()}</span>
-                            <span>
-                                <img src={play_2} alt="" />
-                            </span>
+                    <div className='flex space-x-2'>
+                        <div>
+                            <img src={playlist} alt="" />
                         </div>
-                        <div
-                            className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
-                        >
-                            <span className="invisible"> {convertDurationToString()} </span>
+
+                        <div className="z-40 relative" onClick={() => newAudio()} >
+                            <div
+                                className="text-white text-2xl bg-orng2 rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                            >
+                                <span>{convertDurationToString()}</span>
+                                <span>
+                                    <img src={play_2} alt="" />
+                                </span>
+                            </div>
+                            <div
+                                className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
+                            >
+                                <span className="invisible"> {convertDurationToString()} </span>
+                            </div>
                         </div>
                     </div>
                 </div>
