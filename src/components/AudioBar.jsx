@@ -48,8 +48,8 @@ export const AudioBar = () => {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }).then(res=>{
-            if(res.data.sucess){
-                setLater(res.data.exist)
+            if(res.data.success){
+                setLiked(res.data.exist)
             }
         })
     }
@@ -62,8 +62,8 @@ export const AudioBar = () => {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }).then(res=>{
-            if(res.data.sucess){
-                setLiked(res.data.exist)
+            if(res.data.success){
+                setLater(res.data.exist)
             }
         })
     }
@@ -79,7 +79,7 @@ export const AudioBar = () => {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }).then(res=>{
-            if(res.data.sucess){
+            if(res.data.success){
                 console.log(res.data)
             }
         })

@@ -3,16 +3,20 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import play_2 from '../assets/svgs/play_2.svg'
 import star_pod from '../assets/svgs/star_pod.svg'
+import star_pod_hover from '../assets/svgs/star_pod_hover.svg'
+import star_pod_actif from '../assets/svgs/star_pod_actif.svg'
 import { useAudio } from '../store/store'
+import { useCookies } from 'react-cookie'
 
 
 
-export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
+export const PodBanner = ({ img, name, desc, podcastId, listEps, liked }) => {
     const [episodes, setEpisodes] = useState([])
     const [showEps, setShowEps] = useState(false)
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
     const navigate = useNavigate()
+    const [cookies] = useCookies(['oss9oli']);
 
     const convertDurationToString = (d) => {
         let quotient = Math.floor(d / 60) > 10 ? Math.floor(d / 60) : "0" + Math.floor(d / 60);
@@ -67,6 +71,19 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
         }
     }
 
+    const manageFavoritePodcast = ()=>{
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/podcast`, {
+            podcastId
+        }, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.success){
+                console.log(res.data)
+            }
+        })
+    }
     return (
         <div className='flex flex-col rounded-3xl bg-white border border-black relative'>
             <div className='bg-akhdher w-full h-96 absolute opacity-30 rounded-3xl z-20'></div>
@@ -108,7 +125,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                         </div>
                     </div>
                     <div className=''>
-                        <img src={star_pod} alt="" />
+                        <img onClick={manageFavoritePodcast}  src={liked? star_pod_actif: star_pod} alt="" onMouseOver={(e)=> {if(liked) return; e.target.src = star_pod_hover}} onMouseOut={(e)=> {if(liked) return; e.target.src = star_pod}}/>
                     </div>
                 </div>
             </div>
