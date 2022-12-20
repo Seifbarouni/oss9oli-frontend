@@ -82,8 +82,6 @@ export const Form = () => {
         <>
             {!loading && <div className='w-full flex flex-col pb-[700px]'>
                 <div className='flex flex-col space-y-2'>
-                
-                    <span>Avancement</span>
                     <span className='border border-black  w-full flex bg-white'>
                     <div class="w-full bg-white h-6 dark:bg-white border border-black">
                     <div class="bg-orng2 h-full" style={{width: ((getProgress()/4)*100)+"%", transition: "width 1.5s"}}></div>
