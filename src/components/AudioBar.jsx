@@ -4,6 +4,7 @@ import fastb from '../assets/svgs/fastb.svg'
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import archive_ep from '../assets/svgs/archive_ep.svg'
+import archive_ep_full from '../assets/svgs/archive_ep_full.svg'
 import like_ep from '../assets/svgs/like_ep.svg'
 import like_ep_full from '../assets/svgs/like_ep_full.svg'
 import share_ep from '../assets/svgs/share_ep.svg'
@@ -85,7 +86,7 @@ export const AudioBar = () => {
         })
     }
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/check?episodeId=${audioData.podcastId}`,{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/checkEpisode?episodeId=${audioData.podcastId}`,{
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
@@ -165,7 +166,7 @@ export const AudioBar = () => {
                     <img onClick={likeEps} src={liked?like_ep_full: like_ep} />
                 </span>
                 <span>
-                    <img onClick={laterEps} src={later?archive_ep:archive_ep} />
+                    <img onClick={laterEps} src={later?archive_ep_full:archive_ep} />
                 </span> <span>
                     <img src={share_ep} />
                 </span> <span>

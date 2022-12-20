@@ -7,16 +7,32 @@ import star_pod_hover from '../assets/svgs/star_pod_hover.svg'
 import star_pod_actif from '../assets/svgs/star_pod_actif.svg'
 import { useAudio } from '../store/store'
 import { useCookies } from 'react-cookie'
+import { useEffect } from 'react'
 
 
 
-export const PodBanner = ({ img, name, desc, podcastId, listEps, liked }) => {
+export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
     const [episodes, setEpisodes] = useState([])
     const [showEps, setShowEps] = useState(false)
+    const [liked, setLiked] = useState(false)
     const setAudioData = useAudio((state) => state.setAudioData)
     const openAudio = useAudio((state) => state.openAudio)
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
+
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/checkPodcast?podcastId=${podcastId}`,{
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.success){
+                setLiked(res.data.liked)
+            }
+    }, [])
+}, [])
+
+
 
     const convertDurationToString = (d) => {
         let quotient = Math.floor(d / 60) > 10 ? Math.floor(d / 60) : "0" + Math.floor(d / 60);
@@ -80,7 +96,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, liked }) => {
             }
         }).then(res=>{
             if(res.data.success){
-                console.log(res.data)
+                setLiked(res.data.exist)
             }
         })
     }

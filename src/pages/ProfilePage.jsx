@@ -79,7 +79,6 @@ export const ProfilePage = () => {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
         }).then(res=>{
-            console.log(res.data)
             if (res.data.success)
             setPodcasts(res.data.data)
         })
@@ -90,7 +89,7 @@ export const ProfilePage = () => {
             navigate("/auth")
         }
         window.scrollTo(0, 0)
-        getLiked();
+        getPodcasts();
     }, [])
 
     return (
@@ -140,8 +139,8 @@ export const ProfilePage = () => {
 
                             >A ECOUTER PLUS TARD</span>
                         </div>
+                        <div className='px-32 mt-12'>
                         <div className='flex flex-col mt-8'>
-
                             {episodes.map((podcast) => (
                                 <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
                                     <Podcast
@@ -171,7 +170,7 @@ export const ProfilePage = () => {
                                             />
                                         )
                             })}
-
+</div>
                         </div>
                     <div className='mt-16 flex xl:flex-row flex-col p-6 flex-wrap justify-center items-center'>
                         <div className='p-5'>
