@@ -19,7 +19,6 @@ export const Hero = () => {
             </div>
             <div className="flex flex-col sm:justify-start justify-center items-center">
                 <div className="mt-28 w-full md:flex hidden items-center justify-center transition ease-in-out hover:scale-125 duration-300">
-                    <PlayButton h={116} w={110} />
                 </div>
                 <div className="md:text-2xl mt-44 xl:w-96 xl:px-0 px-11">
                     Nous sommes un espace d'expressions libre par et pour tout le monde,

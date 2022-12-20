@@ -70,7 +70,7 @@ export const Form = () => {
     }
 
     const getProgress = () => {
-        let points = 1
+        let points = 0
         if (name) points++;
         if (description) points++;
         if (tags) points++;
@@ -82,19 +82,10 @@ export const Form = () => {
         <>
             {!loading && <div className='w-full flex flex-col pb-[700px]'>
                 <div className='flex flex-col space-y-2'>
-                    <span>Avancement</span>
                     <span className='border border-black  w-full flex bg-white'>
-                        {
-                            getProgress() < 5 ?
-                                <>
-                                    <span className={'w-' + getProgress() + '/5 bg-orng2 p-1.5'}></span>
-                                    <span className={'w-' + (5 - getProgress()) + '/5 bg-white p-1.5'}></span>
-                                </>
-                                :
-                                <span className={'w-full bg-orng2 p-1.5'}></span>
-
-                        }
-
+                    <div class="w-full bg-white h-6 dark:bg-white border border-black">
+                    <div class="bg-orng2 h-full" style={{width: ((getProgress()/4)*100)+"%", transition: "width 1.5s"}}></div>
+                    </div>
                     </span>
                 </div>
                 <form className='rounded-3xl border border-black  bg-white flex flex-col  w-full justify-center items-center p-4 mt-12 relative lg:px-24' onSubmit={onSubmit}>

@@ -49,7 +49,7 @@ export const EditChannelPage = () => {
         }
         )
     }, [])
-
+    
     const myEps = () => {
 
         const getEpisodes = async () => {
@@ -141,6 +141,7 @@ export const EditChannelPage = () => {
                                                 img={pod.image}
                                                 desc={pod.description}
                                                 listEps={true}
+                                                liked={true}
                                             />
                                         )
                                     })}
