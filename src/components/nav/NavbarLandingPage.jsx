@@ -6,7 +6,7 @@ export const Navbar = () => {
     //const [isOpen, setIsOpen] = useState(false)
     return (
         <nav
-            className="flex items-center justify-between p-4 z-50 w-full xl:px-12"
+            className="flex items-center justify-between p-6 z-50 w-full xl:px-12"
         >
             <div className='flex items-center space-x-8'>
                 {/* {!isOpen && <div onClick={() => setIsOpen(true)}>

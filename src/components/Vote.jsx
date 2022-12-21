@@ -49,7 +49,7 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                         a publié un vote
                     </span>
                 </span>
-                <span className='lg:text-4xl sm:text-xl text-lg p-4 flex justify-center'>
+                <span className='lg:text-3xl sm:text-xl text-lg p-4 flex justify-center'>
                     <span>
                         {question}
                     </span>

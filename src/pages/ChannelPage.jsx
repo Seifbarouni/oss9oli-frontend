@@ -15,6 +15,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { decode } from '../jwt/jwt'
 import { PodBanner } from '../components/PodBanner'
 import axios from 'axios'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 
 export const ChannelPage = () => {
@@ -25,6 +27,7 @@ export const ChannelPage = () => {
   const { id } = useParams()
   const [cookies] = useCookies(['oss9oli']);
   const user = decode(cookies.oss9oli)
+  const { props, a } = useAnimation();
   useEffect(() => {
     if (Object.entries(cookies).length === 0) {
       navigate("/auth")
@@ -74,7 +77,9 @@ export const ChannelPage = () => {
         {open && <div className='flex lg:hidden absolute top-0 z-50'>
           <SmallScreenNav selected={"channel"} />
         </div>}
-        <div className=' flex flex-col  w-full'>
+        <a.div
+          style={props}
+          className=' flex flex-col  w-full'>
           <ChannelBanner name={channel.name} img={channel.image} desc={channel.description} />
 
 
@@ -138,7 +143,7 @@ export const ChannelPage = () => {
               <img src={two_green_stars} alt="" />
             </div>
           </div>
-        </div>
+        </a.div>
       </div>
 
 

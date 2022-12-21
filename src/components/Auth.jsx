@@ -18,7 +18,7 @@ export const Auth = () => {
                 <div className='absolute -bottom-32 -right-32 md:flex hidden'>
                     <img src={authArrow} alt="" />
                 </div>
-                <div className='absolute top-4 left-5' onClick={() => navigate("/")}>
+                <div className='absolute top-4 left-5 cursor-pointer p-2' onClick={() => navigate("/")}>
                     <XIcon className='text-ka7ouli h-8 w-8' />
                 </div>
                 <div className='absolute -top-20 -left-20 md:flex hidden'>

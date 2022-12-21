@@ -1,6 +1,8 @@
 import React from 'react'
 import { Pack } from '../components/Pack'
 import { Seperator } from '../components/Seperator'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 import head from '../assets/svgs/head.svg'
 import headphones from '../assets/svgs/headphones.svg'
@@ -9,8 +11,11 @@ import orange_blob from '../assets/svgs/orange_blob2.svg'
 import spark2 from '../assets/svgs/spark2.svg'
 
 export const PacksPage = () => {
+    const { props, a } = useAnimation();
     return (
-        <div className='flex flex-col relative'>
+        <a.div
+            style={props}
+            className='flex flex-col relative'>
             <div className='absolute z-10 bottom-0'>
                 <img src={orange_blob} alt="" />
             </div>
@@ -106,6 +111,6 @@ export const PacksPage = () => {
                     **Si vous achetez le pack Createur, vous seriez automatiquement COMMUNITY.
                 </span>
             </div>
-        </div>
+        </a.div>
     )
 }

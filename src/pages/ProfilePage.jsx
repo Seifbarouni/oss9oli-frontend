@@ -18,6 +18,7 @@ import { decode } from '../jwt/jwt'
 import axios from 'axios'
 import { Podcast } from '../components/Podcast'
 import { PodBanner } from '../components/PodBanner'
+import { useAnimation } from '../hooks/useAnimation'
 
 export const ProfilePage = () => {
     const open = useOpen((state) => state.open)
@@ -27,60 +28,61 @@ export const ProfilePage = () => {
     const [focus, setFocus] = useState("pods")
     const [podcasts, setPodcasts] = useState([])
     const [episodes, setEpisodes] = useState([])
+    const { props, a } = useAnimation();
 
-    const getLiked = ()=>{
+    const getLiked = () => {
         setFocus("liked")
         setEpisodes([])
         setPodcasts([])
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/liked`,{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/liked`, {
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
-        }).then(res=>{
+        }).then(res => {
             if (res.data.success)
-            setEpisodes(res.data.data)
+                setEpisodes(res.data.data)
         })
     }
 
-    const getLater = ()=>{
+    const getLater = () => {
         setFocus("later")
         setEpisodes([])
         setPodcasts([])
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/later`,{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/later`, {
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
-        }).then(res=>{
+        }).then(res => {
             if (res.data.success)
-            setEpisodes(res.data.data)
+                setEpisodes(res.data.data)
         })
     }
 
-    const getUnfinished = ()=>{
+    const getUnfinished = () => {
         setFocus("unfinished")
         setEpisodes([])
         setPodcasts([])
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/unfinished`,{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/unfinished`, {
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
-        }).then(res=>{
+        }).then(res => {
             if (res.data.success)
-            setEpisodes(res.data.data)
+                setEpisodes(res.data.data)
         })
     }
 
-    const getPodcasts = ()=>{
+    const getPodcasts = () => {
         setFocus("pods")
         setEpisodes([])
         setPodcasts([])
-        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/podcast`,{
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/podcast`, {
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
             }
-        }).then(res=>{
+        }).then(res => {
             if (res.data.success)
-            setPodcasts(res.data.data)
+                setPodcasts(res.data.data)
         })
     }
 
@@ -112,7 +114,9 @@ export const ProfilePage = () => {
                 {open && <div className='flex lg:hidden absolute top-0 z-50'>
                     <SmallScreenNav selected={"profile"} />
                 </div>}
-                <div className='flex flex-col flex-grow -z-20 pb-44'>
+                <a.div
+                    style={props}
+                    className='flex flex-col flex-grow -z-20 pb-44'>
                     <div className=' flex flex-col'>
                         <ProfileBanner name={user.name} desc={user.description} />
                     </div>
@@ -122,24 +126,24 @@ export const ProfilePage = () => {
                         <Channels />
                     </div> */}
                     <div className='mt-64 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
-                    <span className={`underline-offset-8 hover:underline  ${focus === "pods" ? "underline font-bold" : ""}`}
-                                onClick={() => getPodcasts()}
-                            >PODCASTS SUIVIS</span>
-                            <span className={`underline-offset-8 hover:underline  ${focus === "liked" ? "underline font-bold" : ""}`}
-                                onClick={() => getLiked()}
-                            >SONS ADORES</span>
-                            <span
-                                className={`underline-offset-8 hover:underline  ${focus === "unfinished" ? "underline font-bold" : ""}`}
-                                onClick={() => getUnfinished()}
+                        <span className={`underline-offset-8 hover:underline  ${focus === "pods" ? "underline font-bold" : ""}`}
+                            onClick={() => getPodcasts()}
+                        >PODCASTS SUIVIS</span>
+                        <span className={`underline-offset-8 hover:underline  ${focus === "liked" ? "underline font-bold" : ""}`}
+                            onClick={() => getLiked()}
+                        >SONS ADORES</span>
+                        <span
+                            className={`underline-offset-8 hover:underline  ${focus === "unfinished" ? "underline font-bold" : ""}`}
+                            onClick={() => getUnfinished()}
 
-                            >CONTINUER L'ECOUTE</span>
-                            <span
-                                className={`underline-offset-8 hover:underline  ${focus === "later" ? "underline font-bold" : ""}`}
-                                onClick={() => getLater()}
+                        >CONTINUER L'ECOUTE</span>
+                        <span
+                            className={`underline-offset-8 hover:underline  ${focus === "later" ? "underline font-bold" : ""}`}
+                            onClick={() => getLater()}
 
-                            >A ECOUTER PLUS TARD</span>
-                        </div>
-                        <div className='px-32 mt-12'>
+                        >A ECOUTER PLUS TARD</span>
+                    </div>
+                    <div className='px-32 mt-12'>
                         <div className='flex flex-col mt-8'>
                             {episodes.map((podcast) => (
                                 <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
@@ -159,19 +163,19 @@ export const ProfilePage = () => {
                             ))}
 
                             {podcasts.map(pod => {
-                                        return (
-                                            <PodBanner
-                                                podcastId={pod._id}
-                                                name={pod.name}
-                                                img={pod.image}
-                                                desc={pod.description}
-                                                listEps={true}
-                                                liked={true}
-                                            />
-                                        )
+                                return (
+                                    <PodBanner
+                                        podcastId={pod._id}
+                                        name={pod.name}
+                                        img={pod.image}
+                                        desc={pod.description}
+                                        listEps={true}
+                                        liked={true}
+                                    />
+                                )
                             })}
-</div>
                         </div>
+                    </div>
                     <div className='mt-16 flex xl:flex-row flex-col p-6 flex-wrap justify-center items-center'>
                         <div className='p-5'>
                             <SmallPost
@@ -194,7 +198,7 @@ export const ProfilePage = () => {
                             />
                         </div>
                     </div>
-                </div>
+                </a.div>
             </div>
 
         </div>

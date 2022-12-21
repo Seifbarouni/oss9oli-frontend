@@ -130,8 +130,12 @@ export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => 
                     </div>
                 </div>
                 <div>
-                    <div onClick={showComms} className="">
-                        {showComm ? <p>hide comments</p> : <p>see comments </p>}
+
+                    <div className='flex justify-between'>
+                        <div className='invisible'>invisible</div>
+                        <div onClick={showComms} className="mt-2">
+                            {showComm ? <p>cacher les commentaires</p> : <p>voir les commentaires</p>}
+                        </div>
                     </div>
                     {
                         coms.map((comment) => (

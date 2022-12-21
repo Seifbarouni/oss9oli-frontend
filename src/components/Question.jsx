@@ -47,10 +47,10 @@ export const Question = () => {
         <div className='flex flex-col mt-12'>
 
             <form
-                className='border-2 border-dashed border-gray-800 mx-6 p-12 rounded-[50px] '
+                className='border-2 border-dashed border-gray-800 p-6 rounded-[50px] '
             >
                 <input type="text" placeholder='Demandez une question..' value={question} onChange={(e) => setQuestion(e.target.value)} className=' 
-            w-full text-2xl placeholder:text-gray-800 focus:outline-none bg-transparent' />
+            w-full text-2xl placeholder:text-gray-800 focus:outline-none bg-transparent mx-12' />
 
                 {/* options list */}
                 <div className='flex justify-center  space-x-2 sm:flex-row flex-col'>

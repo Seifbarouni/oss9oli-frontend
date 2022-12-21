@@ -8,6 +8,7 @@ import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import axios from 'axios'
+import { useAnimation } from '../hooks/useAnimation'
 
 
 export const AddEpisodePage = () => {
@@ -22,6 +23,7 @@ export const AddEpisodePage = () => {
     const [tags, setTags] = useState("")
     const [episodeNumber, setEpisodeNumber] = useState(1)
     const [type, setType] = useState("Monologue")
+    const { props, a } = useAnimation();
 
 
     const open = useOpen((state) => state.open)
@@ -95,7 +97,9 @@ export const AddEpisodePage = () => {
                         <SmallScreenNav selected={"addep"} />
                     </div>
                 </div>}
-                <div className='pb-[700px] h-full  pt-16'>
+                <a.div
+                    style={props}
+                    className='pb-[700px] h-full  pt-16'>
                     <form className='flex  flex-col   w-full rounded-3xl border border-black  bg-white justify-center items-center p-16 relative lg:mx-24 z-30'
                         onSubmit={onSubmit}
                     >
@@ -210,7 +214,7 @@ export const AddEpisodePage = () => {
                             </div>
                         </button>
                     </form>
-                </div>
+                </a.div>
             </div>
         </div>
     )

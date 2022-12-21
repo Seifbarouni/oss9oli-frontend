@@ -7,11 +7,14 @@ import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
 import { decode } from '../jwt/jwt'
 import { useNavigate } from 'react-router-dom'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 export const AddPodcastPage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
     const open = useOpen((state) => state.open)
+    const { props, a } = useAnimation();
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
@@ -38,11 +41,13 @@ export const AddPodcastPage = () => {
                         <SmallScreenNav selected={"addpod"} />
                     </div>
                 </div>}
-                <div className='flex flex-col z-40 w-full xl:p-12 p-6'>
+                <a.div
+                    style={props}
+                    className='flex flex-col z-40 w-full xl:p-12 p-6'>
                     <div className={`flex mt-4 justify-between items-end ${!open ? "xl:px-44" : ""}`}>
                         <Form />
                     </div>
-                </div>
+                </a.div>
             </div>
         </div>
     )

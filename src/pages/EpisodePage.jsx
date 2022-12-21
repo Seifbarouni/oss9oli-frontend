@@ -13,6 +13,8 @@ import green_blob from '../assets/svgs/green_blob.svg'
 import { RecentEp } from '../components/RecentEp'
 import { Podcast } from '../components/Podcast'
 import axios from 'axios'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 let tags = ["Féminité", "Culture", "Art", "Economie", "Société"]
 
@@ -27,6 +29,7 @@ export const EpisodePage = () => {
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
     const user = decode(cookies.oss9oli)
+    const { props, a } = useAnimation();
 
     const setActif = (index) => {
         var temp = [...actifs]
@@ -84,7 +87,9 @@ export const EpisodePage = () => {
                     <SmallScreenNav selected={"channel"} />
                 </div>}
 
-                <div className='flex flex-col z-40 w-full p-4 mb-96'>
+                <a.div
+                    style={props}
+                    className='flex flex-col z-40 w-full p-4 mb-96'>
                     <div className={`mt-4 ${!open ? "md:px-44" : ""}`}>
                         <Search />
                     </div>
@@ -152,7 +157,7 @@ export const EpisodePage = () => {
                     <div className='mt-4 xl:px-24 w-2/3 text-lg'>
                         Les manifestations débutent le 17 décembre 2010, après l'immolation par le feu d'un jeune vendeur ambulant de fruits et légumes à Sidi Bouzid, Mohamed Bouazizi, dont la marchandise avait été confisquée par les autorités10 et à la suite d'une agression physique subie de la part d'une policière, Fadia Hamdi.11
                     </div>
-                </div>
+                </a.div>
 
 
 

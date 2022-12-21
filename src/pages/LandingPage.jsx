@@ -10,6 +10,8 @@ import { Navbar } from '../components/nav/NavbarLandingPage'
 import { Seperator } from '../components/Seperator'
 import { Values } from '../components/Values'
 import { Contact } from '../components/Contact'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 import koli from '../assets/images/9oli.png'
 import lp from '../assets/images/lp.png'
@@ -38,8 +40,10 @@ import green_face from '../assets/svgs/green_face.svg'
 export const LandingPage = () => {
     const navigate = useNavigate()
     const [openNumber, setOpenNumber] = useState(1)
+    const { props, a } = useAnimation()
     return (
-        <div
+        <a.div
+            style={props}
             className='flex flex-col '
         >
             <div className="flex flex-col realtive">
@@ -484,6 +488,6 @@ export const LandingPage = () => {
             <Footer />
             <Seperator mt={0} />
 
-        </div>
+        </a.div>
     )
 }

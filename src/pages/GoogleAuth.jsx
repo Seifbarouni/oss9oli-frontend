@@ -5,11 +5,14 @@ import { useCookies } from 'react-cookie';
 import aslema_line from "../assets/svgs/aslema_line.svg"
 import aslema_stars from "../assets/svgs/aslema_stars.svg"
 import aslema_bg from "../assets/svgs/aslema_bg.svg"
+import { useAnimation } from '../hooks/useAnimation'
+
 
 export const GoogleAuth = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate()
     const [cookies, setCookie] = useCookies(['oss9oli']);
+    const { props, a } = useAnimation();
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_AUTH_SERVER_URI}/auth/google?code=${searchParams.get("code")}`).then(res => {
@@ -26,13 +29,15 @@ export const GoogleAuth = () => {
         })
     }, [])
     return (
-        <div
+        <a.div
             className="flex justify-center items-center min-h-screen  z-50"
             style={{
                 background: `url(${aslema_bg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundRepeat: "no-repeat"
+                backgroundRepeat: "no-repeat",
+                props
+
             }}
         >
             <p className="header text-9xl z-50">
@@ -44,6 +49,6 @@ export const GoogleAuth = () => {
                 </div>
                 ASLEMA
             </p>
-        </div>
+        </a.div>
     )
 } 

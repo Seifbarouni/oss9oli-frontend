@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import off from '../../assets/svgs/off.svg'
+import on from '../../assets/svgs/on.svg'
 
 export const OpenMicForm = () => {
     const [suj, setSuj] = useState(true)
+    const [nomApp, setNomApp] = useState(false)
+    const [voix, setVoix] = useState(false)
     const [step, setStep] = useState(1)
     const onSubmit = (e) => {
         e.preventDefault()
@@ -90,7 +93,9 @@ export const OpenMicForm = () => {
                                 <span>Nom apparent*</span>
                                 <span className='text-gray-500 text-sm '>Cochez la case si vous voulez poster anonymement</span>
                             </div>
-                            <img src={off} alt="" />
+                            <div onClick={() => setNomApp(!nomApp)}>
+                                {!nomApp ? <img src={off} alt="" /> : <img src={on} alt="" />}
+                            </div>
                         </div>
 
                         <div className='flex justify-between items-center mt-6'>
@@ -98,7 +103,9 @@ export const OpenMicForm = () => {
                                 <span>Voix*</span>
                                 <span className='text-gray-500 text-sm '>Cochez la case si vous voulez changez votre voix</span>
                             </div>
-                            <img src={off} alt="" />
+                            <div onClick={() => setVoix(!voix)}>
+                                {!voix ? <img src={off} alt="" /> : <img src={on} alt="" />}
+                            </div>
                         </div>
 
 

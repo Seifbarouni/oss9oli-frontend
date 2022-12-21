@@ -11,6 +11,8 @@ import { ChannelBannerWithEdit } from '../components/ChannelBannerWithEdit'
 import { PodBanner } from '../components/PodBanner'
 import { Podcast } from '../components/Podcast'
 import plus from '../assets/svgs/+.svg'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 export const EditChannelPage = () => {
     const [name, setName] = useState("")
@@ -25,6 +27,7 @@ export const EditChannelPage = () => {
     const [cookies] = useCookies(['oss9oli']);
     const open = useOpen((state) => state.open)
     const navigate = useNavigate()
+    const { props, a } = useAnimation();
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
             navigate("/auth")
@@ -49,7 +52,7 @@ export const EditChannelPage = () => {
         }
         )
     }, [])
-    
+
     const myEps = () => {
 
         const getEpisodes = async () => {
@@ -110,7 +113,9 @@ export const EditChannelPage = () => {
 
                 {!loading &&
 
-                    <div className='flex flex-col w-full pb-72'>
+                    <a.div
+                        style={props}
+                        className='flex flex-col w-full pb-72'>
                         <ChannelBannerWithEdit
                             name={name}
                             desc={description}
@@ -183,7 +188,7 @@ export const EditChannelPage = () => {
 
 
                         </div>
-                    </div>
+                    </a.div>
                 }
                 {loading && <div className='pb-[900px]'></div>}
             </div>

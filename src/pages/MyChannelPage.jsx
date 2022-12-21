@@ -10,6 +10,8 @@ import axios from "axios"
 import { useCookies } from 'react-cookie';
 import { decode } from '../jwt/jwt'
 import { PodcastList } from '../components/PodcastList'
+import { useAnimation } from '../hooks/useAnimation'
+
 
 export const MyChannelPage = () => {
     const open = useOpen((state) => state.open)
@@ -17,6 +19,7 @@ export const MyChannelPage = () => {
     const [myPodcasts, setMyPodcasts] = useState([])
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const { props, a } = useAnimation();
 
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
@@ -49,7 +52,9 @@ export const MyChannelPage = () => {
                         <SmallScreenNav selected={"mypods"} />
                     </div>
                 </div>}
-                <div className='flex flex-col z-40 w-full p-12'>
+                <a.div
+                    style={props}
+                    className='flex flex-col z-40 w-full p-12'>
                     <div className={`flex mt-4 justify-between items-end ${!open ? "md:px-44" : ""}`}>
                         <span className='text-orng2 text-5xl'>MES PODCASTS</span>
                         <span className='text-ka7ouli h-16 w-16 rounded-full p-2 hover:bg-gray-200  transition ease-in-out duration-300 invisible' title='Ajouter podcast'>
@@ -74,7 +79,7 @@ export const MyChannelPage = () => {
                         <div className='pb-[665px]'>
                         </div>}
 
-                </div>
+                </a.div>
             </div>
         </div>
     )

@@ -20,6 +20,7 @@ import { useOpen } from '../store/store'
 import axios from 'axios'
 import { useCookies } from "react-cookie"
 import { useNavigate } from 'react-router-dom'
+import { useAnimation } from '../hooks/useAnimation'
 let tags = ["Féminité", "Culture", "Art", "Economie", "Société"]
 
 export const HomePage = () => {
@@ -29,6 +30,7 @@ export const HomePage = () => {
     const [podcasts, setPodcasts] = useState([])
     const [loading, setLoading] = useState(false)
     const [cookies] = useCookies(['oss9oli']);
+    const { props, a } = useAnimation();
 
     useEffect(() => {
         if (Object.entries(cookies).length === 0) {
@@ -81,7 +83,9 @@ export const HomePage = () => {
                         <SmallScreenNav selected={"accueil"} />
                     </div>
                 </div>}
-                <div className='flex flex-col z-40 w-full p-4 xl:px-24'>
+                <a.div
+                    style={props}
+                    className='flex flex-col z-40 w-full p-4 xl:px-24'>
                     <div className={`mt-4 ${!open ? "md:px-44" : ""}`}>
                         <Search search={getPodcastsBySearch} />
                     </div>
@@ -177,7 +181,7 @@ export const HomePage = () => {
                             />
                         </div>
                     </div>
-                </div>
+                </a.div>
             </div>
         </div>
     )

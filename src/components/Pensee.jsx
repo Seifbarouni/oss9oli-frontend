@@ -24,10 +24,10 @@ export const Pensee = () => {
     return <div>
         <div className='flex flex-col mt-12'>
             <form
-                className='border-2 border-dashed border-gray-800  p-12 rounded-[50px] flex'
+                className='border-2 border-dashed border-gray-800  p-6 rounded-[50px] flex'
             >
                 <textarea type="text" value={post} onChange={e => setPost(e.target.value)}
-                    className='bg-transparent placeholder:text-grey-500 focus:outline-none pl-5 resize-none w-full h-full text-lg' placeholder='Ecrit quelque chose...' required />
+                    className='bg-transparent placeholder:text-grey-500 focus:outline-none pl-5 resize-none w-full h-full text-lg p-4' placeholder='Ecrit quelque chose...' required />
                 <div className={`flex justify-end items-center mt-12 ${!open ? "md:px-44" : ""}`}>
                     <button className="relative mb-6 z-50 mt-16" onClick={(e) => publish(e)} >
                         <div className={'text-white rounded-full border border-black py-2 px-12 sm:text-xl font-bold z-40 transition duration-150 hover:translate-x-1 hover:translate-y-1 ' + (post === "" ? "bg-orng2" : "bg-orng2")}>
