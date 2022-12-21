@@ -148,6 +148,8 @@ export const EditChannelPage = () => {
                                                 listEps={true}
                                                 liked={true}
                                                 myPodcast={true}
+                                                creator={name}
+                                                channelId={channelId}
                                             />
                                         )
                                     })}

@@ -21,6 +21,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
     const [cookies] = useCookies(['oss9oli']);
 
     useEffect(()=>{
+        
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/checkPodcast?podcastId=${podcastId}`,{
             headers: {
                 Authorization: `Bearer ${cookies.oss9oli}`
@@ -29,7 +30,11 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
             if(res.data.success){
                 setLiked(res.data.liked)
             }
-    }, [])
+        })
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/chan/${podcastId}`).then(res=>{
+                setEpisodes(res.data.data)
+        })
+                
 }, [])
 
 
@@ -63,9 +68,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
             setShowEps(true)
             // get episodes by podcastId
             try {
-                const resp = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/chan/${podcastId}`)
-                console.log(resp.data.data)
-                setEpisodes(resp.data.data)
+                
             } catch (err) {
                 console.log(err)
             }
@@ -100,6 +103,22 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
             }
         })
     }
+
+    const AddPodcastLater = ()=>{
+            axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/later`, {
+                podcastId: podcastId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${cookies.oss9oli}`
+                }
+            }).then(res=>{
+                if(res.data.success){
+                    newAudio(
+                        episodes[0].title, episodes[0].guest, episodes[0].podcastId, episodes[0].episodeNumber, episodes[0].podcastId.name, img, episodes[0].length, episodes[0]._id
+                    )
+                }
+            })
+    }
     return (
         <div className='flex flex-col rounded-3xl bg-white border border-black relative'>
             <div className='bg-akhdher w-full h-96 absolute opacity-30 rounded-3xl z-20'></div>
@@ -127,6 +146,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
                 <div className='flex sm:flex-row flex-col items-center sm:space-x-8 sm:space-y-0 space-y-2 z-40'>
                     <div className="z-50 relative" >
                         <div
+                            onClick={AddPodcastLater}
                             className="text-white text-2xl bg-orng2 rounded-full px-12 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2 py-2"
                         >
                             <span>Ecouter</span>

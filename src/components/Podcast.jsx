@@ -4,12 +4,15 @@ import play_2 from '../assets/svgs/play_2.svg'
 import playlist from '../assets/svgs/playlist.svg'
 import { useAudio } from '../store/store'
 import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, description, w, h, guest, listens, number, tags, status }) => {
     let t = tags !== undefined ? tags[0].split(",") : []
     t.shift()
     const [allTags, setAllTags] = useState(t)
     const navigate = useNavigate()
+    const [cookies] = useCookies(['oss9oli']);
+
     const convertDurationToString = () => {
         let quotient = Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : "0" + Math.floor(duration / 60);
 
@@ -35,6 +38,20 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
             }
         )
         //   }
+    }
+
+    const AddPlaylist = ()=>{
+        axios.put(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/later`, {
+            episodeId: episodeId
+        }, {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.success){
+                console.log("success")
+            }
+        })
     }
     useEffect(() => {
 
@@ -98,7 +115,7 @@ export const Podcast = ({ podcastId, episodeId, img, title, creator, duration, d
                     </div>
                     <div className='flex space-x-2'>
                         <div>
-                            <img src={playlist} alt="" />
+                            <img src={playlist} alt="" onClick={AddPlaylist}/>
                         </div>
 
                         <div className="z-40 relative" onClick={() => newAudio()} >

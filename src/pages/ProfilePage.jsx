@@ -54,6 +54,7 @@ export const ProfilePage = () => {
             }
         }).then(res => {
             if (res.data.success)
+            console.table(res.data.data)
                 setEpisodes(res.data.data)
         })
     }

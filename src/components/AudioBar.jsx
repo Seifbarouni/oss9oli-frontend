@@ -21,11 +21,13 @@ export const AudioBar = () => {
     const [cookies] = useCookies(['oss9oli']);
     const { userId } = decode(cookies.oss9oli);
     const audioData = useAudio((state) => state.audioData);
+    const setAudioData = useAudio((state) => state.setAudioData)
     const [currentTime, setCurrentTime] = useState("");
     const [liked, setLiked] = useState(false);
     const [later, setLater] = useState(false);
     const audioEl = useRef()
     const navigate = useNavigate()
+    
     const playPod = () => {
         audioEl.current.play()
     }
@@ -85,6 +87,30 @@ export const AudioBar = () => {
             }
         })
     }
+
+    const changeAudio = (action)=>{
+        
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/episode?episodeId=${audioData.podcastId}&action=${action}`,{
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }).then(res=>{
+            if(res.data.success && res.data.data.episode){
+                let episode = res.data.data.episode
+                setAudioData(
+                    {
+                        title: `${episode.title} avec ${episode.guest} : ${episode.podcastId.name}(${episode.episodeNumber}) - ${episode.podcastId.creator}`,
+                        img: episode.podcastId.image,
+                        creator: episode.podcastId.name,
+                        duration: episode.length,
+                        podcastId: episode._id,
+                        channelId: episode.podcastId.channelId,
+                        p: episode._id,
+                    }
+                )
+            }
+        })
+    }
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/playlist/checkEpisode?episodeId=${audioData.podcastId}`,{
             headers: {
@@ -95,7 +121,7 @@ export const AudioBar = () => {
                 setLiked(res.data.liked);
                 setLater(res.data.later);
                 if(res.data.unfinished){
-                    audioEl.current.currentTime = res.data.unfinished.stoppedAt
+                   // audioEl.current.currentTime = res.data.unfinished.stoppedAt
                 }
             }
         })
@@ -106,6 +132,9 @@ export const AudioBar = () => {
 
         interval = setInterval(() => {
             setCurrentTime(audioEl?.current?.currentTime)
+            if(audioEl?.current?.currentTime == audioData.duration){
+                changeAudio("next")
+            }
         }, 1000)
         return ()=>{
             UnfinishedEps()
@@ -113,8 +142,8 @@ export const AudioBar = () => {
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4  z-50 border-t border-b border-black '>
-            <div class="w-full bg-white h-2 dark:bg-white ">
-                    <div class="bg-a7mer h-full" style={{width: ((currentTime/audioData.duration)*100)+"%", transition: "width 1.5s"}}></div>
+            <div class="w-full bg-white h-2 dark:bg-white " onClick={e=>{audioEl.current.currentTime = (e.clientX/window.innerWidth)*audioData.duration ;}}>
+                    <div class="bg-a7mer h-full" style={{width: ((currentTime/audioData.duration)*100)+"%", transition: "width .5s"}}></div>
                     </div>
             <div className='flex items-center justify-between px-4 p-2'>
             <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}/${userId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
@@ -149,7 +178,7 @@ export const AudioBar = () => {
             </div>
             <div className='flex items-center space-x-4 w-1/3 justify-center'>
                 <span className=''>
-                    <img src={fastb} alt="" onClick={() => { audioEl.current.currentTime -= 10 }} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
+                    <img src={fastb} alt="" onClick={()=>changeAudio("previous")} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
                 </span>
                 {audioEl.current?.paused ? <span className='' onClick={() => playPod()}>
                     <img src={play} alt="" onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
@@ -159,7 +188,7 @@ export const AudioBar = () => {
                     </span>
                 }
                 <span className=''>
-                    <img src={fastf} alt="" onClick={() => { audioEl.current.currentTime += 10 }} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
+                    <img src={fastf} alt="" onClick={()=>changeAudio("next")} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
                 </span>
             </div>
             <div className='w-1/3 flex justify-end xl:mr-4'>
