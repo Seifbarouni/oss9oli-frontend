@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 
 
 
-export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
+export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) => {
     const [episodes, setEpisodes] = useState([])
     const [showEps, setShowEps] = useState(false)
     const [liked, setLiked] = useState(false)
@@ -206,26 +206,31 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                         <span className="invisible"> {convertDurationToString(ep.duration)} </span>
                                                     </div>
                                                 </div>
+                                                {myPodcast?
                                                 <div className="z-40 relative"
-                                                    onClick={() => deleteEpisode(ep._id)}
+                                                onClick={() => deleteEpisode(ep._id)}
+                                            >
+                                              
+                                                <div
+                                                    className="text-white text-2xl bg-gris rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
                                                 >
-                                                    <div
-                                                        className="text-white text-2xl bg-gris rounded-full px-6 text-center  border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
-                                                    >
-                                                        X
-                                                    </div>
-                                                    <div
-                                                        className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
-                                                    >
-                                                        X
-                                                    </div>
+                                                    X
                                                 </div>
+                                                <div
+                                                    className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
+                                                >
+                                                    X
+                                                </div>
+                                            </div>: <></>
+                                                    }
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         ))}
+                        {myPodcast?
                         <div className=''>
                             <div>
                                 <div className='flex flex-col space-y-2 mt-1'>
@@ -249,20 +254,22 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                                 <div
                                                     onClick={() => navigate("/addep/" + podcastId)}
                                                 >
+                                                    
                                                     <div className="z-40 relative">
-                                                        <div
-                                                            className="text-white text-2xl bg-ka7ouli rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
-                                                        >
-                                                            <span>Ajouter episode</span>
-                                                        </div>
-                                                        <div
-                                                            className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
-                                                        >
-                                                            <span className="invisible">
-                                                                Ajouter episode
-                                                            </span>
-                                                        </div>
+                                                    <div
+                                                        className="text-white text-2xl bg-ka7ouli rounded-full px-6 text-center border border-black z-40 transition duration-150 hover:-translate-x-1 hover:translate-y-1 flex items-center space-x-2"
+                                                    >
+                                                        <span>Ajouter episode</span>
                                                     </div>
+                                                    <div
+                                                        className="border border-black rounded-full   px-6 absolute right-1 top-1 -z-20 w-full text-2xl"
+                                                    >
+                                                        <span className="invisible">
+                                                            Ajouter episode
+                                                        </span>
+                                                    </div>
+                                                </div>:
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -270,6 +277,8 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps }) => {
                                 </div>
                             </div>
                         </div>
+                        :<></>
+                        }
                         <div onClick={() => setShowEps(false)}
                             className="text-akhdher2 font-bold text-xl  hover:underline"
                         >

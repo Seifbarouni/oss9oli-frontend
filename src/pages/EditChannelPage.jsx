@@ -147,6 +147,7 @@ export const EditChannelPage = () => {
                                                 desc={pod.description}
                                                 listEps={true}
                                                 liked={true}
+                                                myPodcast={true}
                                             />
                                         )
                                     })}

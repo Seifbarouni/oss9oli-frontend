@@ -171,6 +171,7 @@ export const ProfilePage = () => {
                                         desc={pod.description}
                                         listEps={true}
                                         liked={true}
+                                        myPodcast={false}
                                     />
                                 )
                             })}
