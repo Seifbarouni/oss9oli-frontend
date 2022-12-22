@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import logo_ar_fr from '../assets/images/logo_ar_fr.png'
 
@@ -8,14 +9,18 @@ export const Contact = () => {
 
     const submit = (e) => {
         e.preventDefault()
-        console.log(
-            {
-                name,
-                email,
-                message
+        axios.post(`${process.env.REACT_APP_CONTACT_SERVICE}/api/v1/contact`, {
+            name,
+            email,
+            message
+        }).then(res=>{
+            if(res.data.success){
+                window.alert("message sent")
+                setEmail("");
+                setName("");
+                setMessage("");
             }
-        )
-        // send meesage request
+        })
     }
 
     return (
