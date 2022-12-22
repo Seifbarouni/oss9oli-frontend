@@ -140,9 +140,10 @@ export const EditChannelPage = () => {
                         <div className='px-32 mt-12'>
                             {focus === "mes_pods" &&
                                 <div className='flex flex-col space-y-8'>
-                                    {podcasts.map(pod => {
+                                    {podcasts.map((pod, index) => {
                                         return (
                                             <PodBanner
+                                                key={"pod-"+index}
                                                 podcastId={pod._id}
                                                 name={pod.name}
                                                 img={pod.image}
@@ -168,9 +169,10 @@ export const EditChannelPage = () => {
                             }
                             {focus === "mes_sons" &&
                                 <div className='flex flex-col space-y-8'>
-                                    {episodes.map(episode => {
+                                    {episodes.map((episode, index) => {
                                         return (
                                             <Podcast
+                                                key={"ep-"+index}
                                                 episodeId={episode._id}
                                                 podcastId={episode.podcastId}
                                                 img={episode.podcastId.image}

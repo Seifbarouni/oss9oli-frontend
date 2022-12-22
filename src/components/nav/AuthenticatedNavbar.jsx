@@ -52,7 +52,7 @@ export const AuthenticatedNavbar = () => {
                     onClick={() => navigate("/profile")}
                 >
                     <div className='h-16 w-16 border border-black rounded-full bg-white'>
-                        <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" referrerpolicy="no-referrer" className='rounded-full' />
+                        <img src={`https://avatars.dicebear.com/api/croodles/${customSeed}.svg`} alt="" referrerPolicy="no-referrer" className='rounded-full' />
                     </div>
                 </div>
             </div>

@@ -22,8 +22,6 @@ export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => 
     const { userId, customSeed } = (decode(cookies.oss9oli))
 
     useEffect(() => {
-        console.log(likes)
-        console.log(dislikes)
         let tempLikes = likes.filter((id) => {
             return id === userId
         })
@@ -118,15 +116,15 @@ export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => 
                 </span>
                 <div className='flex items-center space-x-4'>
                     <div className='flex items-center space-x-1'>
-                        <img src={liked ? likeActifPNG : likePNG} onClick={like} />
+                        <img src={liked ? likeActifPNG : likePNG} onClick={like} alt="" />
                         <span>{likess.length}</span>
                     </div>
                     <div className='flex items-center space-x-1'>
-                        <img src={disliked ? dislikeActifPNG : dislikePNG} onClick={dislike} />
+                        <img src={disliked ? dislikeActifPNG : dislikePNG} onClick={dislike} alt=""/>
                         <span>{dislikess.length}</span>
                     </div>
                     <div className='flex items-center space-x-1'>
-                        <img src={commentPNG} /> <span>{comments.length}</span>
+                        <img src={commentPNG} alt="" /> <span>{comments.length}</span>
                     </div>
                 </div>
                 <div>
@@ -138,8 +136,8 @@ export const Post = ({ postId, name, data, img, likes, dislikes, comments }) => 
                         </div>
                     </div>
                     {
-                        coms.map((comment) => (
-                            <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2'>
+                        coms.map((comment, index) => (
+                            <div className='flex items-center w-full p-1 rounded-3xl border border-black bg-white mt-2' key={"comment-"+(comment._id).substring(0,5)+index}>
                                 <div className='h-12 w-12 border border-black rounded-full bg-white flex items-center justify-center'>
                                     <img src={`https://avatars.dicebear.com/api/croodles/${comment.userId.customSeed}.svg`} alt="" className='rounded-full' />
                                 </div>

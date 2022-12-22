@@ -56,9 +56,9 @@ export const Vote = ({ name, question, options, img, userId, postId }) => {
                 </span>
                 {
                     result.length > 0 ?
-                        <div class="mx-16 h-6 rounded-[300px] flex border-t border-b border-l border-black" style={{ height: "50px" }}>
+                        <div className="mx-16 h-6 rounded-[300px] flex border-t border-b border-l border-black" style={{ height: "50px" }}>
                             {result.map((option, index) => (option.users.length * 100 / totalUsers) > 1 ?
-                                <div class={`h-6 bg-${randomColor()} rounded-[300px] border-r border-black p-2 text-white text-center font-medium`} style={{ width: (option.users.length * 100 / totalUsers) + "%", height: "48px" }}>{Math.round(option.users.length * 100 / totalUsers)}% {option.option}</div>
+                                <div className={`h-6 bg-${randomColor()} rounded-[300px] border-r border-black p-2 text-white text-center font-medium`} style={{ width: (option.users.length * 100 / totalUsers) + "%", height: "48px" }}>{Math.round(option.users.length * 100 / totalUsers)}% {option.option}</div>
                                 : <></>
                             )}
                         </div>

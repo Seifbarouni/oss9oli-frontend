@@ -190,11 +190,11 @@ export const AddEpisodePage = () => {
                                     <span className='text-gray-500 text-sm'>Le fichier ne doit pas dépassez 100Mo</span>
                                     <div className='border border-black p-4 bg-gris rounded-3xl flex flex-col justify-center items-center w-56 overflow-x-scroll'>
                                         <img src={audio} alt="" className='' />
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="file-upload" class="relative  rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none ">
+                                        <div className="flex text-sm text-gray-600">
+                                            <label for="file-upload" className="relative  rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none ">
                                                 <span>Upload a file</span>
                                                 {file && <div className='text-black'>{file.name}</div>}
-                                                <input onChange={(e) => setFile(e.target.files[0])} id="file-upload" name="file-upload" type="file" class="sr-only"
+                                                <input onChange={(e) => setFile(e.target.files[0])} id="file-upload" name="file-upload" type="file" className="sr-only"
                                                     required
                                                     accept='audio/*' />
                                             </label>

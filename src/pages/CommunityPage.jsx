@@ -118,19 +118,19 @@ export const CommunityPage = () => {
                         </div>
                     }
 
-                    {posts.map((post) =>
+                    {posts.map((post, index) =>
                         post.__t === "Vote" ?
-                            <div className='mt-12'>
+                            <div className='mt-12' key={"vote-"+index}>
                                 <Vote name={post.userId.name} question={post.question} options={post.options} img={post.userId.customSeed} userId={decode(cookies.oss9oli).userId} postId={post._id} />
                                 <div className='border-b border-black mt-12'></div>
                             </div>
                             :
-                            <>
-                                <div className='mt-12'>
+                            <div key={"post-"+index}>
+                                <div className='mt-12' >
                                     <Post postId={post._id} name={post.userId.name} data={post.content} img={post.userId.customSeed} likes={post.likes} dislikes={post.dislikes} comments={post.comments} />
                                 </div>
                                 <div className='border-b border-black mt-12'></div>
-                            </>
+                            </div>
                     )}
                 </a.div>
             </div>

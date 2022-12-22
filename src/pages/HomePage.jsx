@@ -91,7 +91,7 @@ export const HomePage = () => {
                     </div>
                     <div className={`flex mt-8 overflow-x-scroll space-x-2 space-y-1 justify-center flex-wrap ${!open ? "md:px-44" : ""}`}>
                         {tags.map((tag, index) => (
-                            <Tag title={tag} actif={actifs[index]} setActif={() => setActif(index)} />
+                            <Tag key={"tag-"+index}title={tag} actif={actifs[index]} setActif={() => setActif(index)} />
                         ))}
                     </div>
                     <div className={`flex mt-24 justify-between items-end ${!open ? "md:px-44" : ""}`}>
@@ -105,8 +105,8 @@ export const HomePage = () => {
                     </div>
                         : <div className='flex flex-col mt-8'>
 
-                            {podcasts.map((podcast) => (
-                                <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
+                            {podcasts.map((podcast, index) => (
+                                <div key={"episode-"+index} className={`mt-3 ${!open ? "md:px-44" : ""}`}>
                                     <Podcast
                                         episodeId={podcast._id}
                                         podcastId={podcast.podcastId}

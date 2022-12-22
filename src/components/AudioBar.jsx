@@ -142,8 +142,8 @@ export const AudioBar = () => {
     }, [audioData.podcastId])
     return (
         <div className='sticky bottom-0 bg-gris4  z-50 border-t border-b border-black '>
-            <div class="w-full bg-white h-2 dark:bg-white " onClick={e=>{audioEl.current.currentTime = (e.clientX/window.innerWidth)*audioData.duration ;}}>
-                    <div class="bg-a7mer h-full" style={{width: ((currentTime/audioData.duration)*100)+"%", transition: "width .5s"}}></div>
+            <div className="w-full bg-white h-2 dark:bg-white " onClick={e=>{audioEl.current.currentTime = (e.clientX/window.innerWidth)*audioData.duration ;}}>
+                    <div className="bg-a7mer h-full" style={{width: ((currentTime/audioData.duration)*100)+"%", transition: "width .5s"}}></div>
                     </div>
             <div className='flex items-center justify-between px-4 p-2'>
             <audio src={`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${audioData.podcastId}/${userId}`} ref={audioEl} className=" border-2 border-red-500"></audio>
@@ -196,14 +196,14 @@ export const AudioBar = () => {
             </div>
             <div className='flex space-x-2'>
                 <span>
-                    <img onClick={likeEps} src={liked?like_ep_full: like_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"} />
+                    <img alt="" onClick={likeEps} src={liked?like_ep_full: like_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"} />
                 </span>
                 <span>
-                    <img onClick={laterEps} src={later?archive_ep_full:archive_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
+                    <img alt="" onClick={laterEps} src={later?archive_ep_full:archive_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
                 </span> <span>
-                    <img src={share_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
+                    <img alt="" src={share_ep} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
                 </span> <span>
-                    <img src={more_eps} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
+                    <img alt="" src={more_eps} onMouseOver={(e)=> e.target.style = "transform: scale(0.9)"} onMouseOut={(e)=> e.target.style = "transform: scale(1)"}/>
                 </span>
             </div>
             </div>

@@ -10,7 +10,6 @@ import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { ProfileBanner } from '../components/ProfileBanner'
 import { SmallPost } from '../components/SmallPost'
-import { Tags } from '../components/Tags'
 import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
@@ -54,7 +53,6 @@ export const ProfilePage = () => {
             }
         }).then(res => {
             if (res.data.success)
-            console.table(res.data.data)
                 setEpisodes(res.data.data)
         })
     }
@@ -146,8 +144,8 @@ export const ProfilePage = () => {
                     </div>
                     <div className='px-32 mt-12'>
                         <div className='flex flex-col mt-8'>
-                            {episodes.map((podcast) => (
-                                <div className={`mt-3 ${!open ? "md:px-44" : ""}`}>
+                            {episodes.map((podcast, index) => (
+                                <div key={"ep-"+index} className={`mt-3 ${!open ? "md:px-44" : ""}`}>
                                     <Podcast
                                         episodeId={podcast._id}
                                         podcastId={podcast.podcastId}
@@ -163,9 +161,10 @@ export const ProfilePage = () => {
                                 </div>
                             ))}
 
-                            {podcasts.map(pod => {
+                            {podcasts.map((pod, index) => {
                                 return (
                                     <PodBanner
+                                        key={"pod-"+index} 
                                         podcastId={pod._id}
                                         name={pod.name}
                                         img={pod.image}

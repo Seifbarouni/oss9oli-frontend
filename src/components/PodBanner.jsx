@@ -77,7 +77,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
 
     const deleteEpisode = async (episodeId) => {
         try {
-            const resp = await axios.delete(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${episodeId}`)
+            await axios.delete(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${episodeId}`)
             // remove episode from episodes
             const newEpisodes = episodes.filter(episode => episode._id !== episodeId)
             setEpisodes(newEpisodes)
@@ -186,8 +186,8 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
 
                 {showEps === true &&
                     <div className='flex flex-col space-y-2 mt-1'>
-                        {episodes.map((ep) => (
-                            <div>
+                        {episodes.map((ep, index) => (
+                            <div key={"episode-"+index}>
                                 <div className='flex flex-col space-y-2 mt-1'>
                                     <div
                                     >

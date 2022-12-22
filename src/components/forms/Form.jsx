@@ -83,8 +83,8 @@ export const Form = () => {
             {!loading && <div className='w-full flex flex-col pb-[700px]'>
                 <div className='flex flex-col space-y-2'>
                     <span className='border border-black  w-full flex bg-white'>
-                    <div class="w-full bg-white h-6 dark:bg-white border border-black">
-                    <div class="bg-orng2 h-full" style={{width: ((getProgress()/4)*100)+"%", transition: "width 1.5s"}}></div>
+                    <div className="w-full bg-white h-6 dark:bg-white border border-black">
+                    <div className="bg-orng2 h-full" style={{width: ((getProgress()/4)*100)+"%", transition: "width 1.5s"}}></div>
                     </div>
                     </span>
                 </div>
@@ -108,11 +108,11 @@ export const Form = () => {
                                     >
                                     <div className='border border-black p-4 bg-gris rounded-3xl flex flex-col justify-center items-center w-1/2'>
                                         <img src={camera} alt="" className='' />
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="img-upload" class="relative   rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none">
+                                        <div className="flex text-sm text-gray-600">
+                                            <label for="img-upload" className="relative   rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none">
                                                 <span>Upload an image</span>
                                                 {imageFile && <div className='text-black'>{imageFile.name}</div>}
-                                                <input onChange={(e) => setImageFile(e.target.files[0])} id="img-upload" name="img-upload" type="file" class="sr-only"
+                                                <input onChange={(e) => setImageFile(e.target.files[0])} id="img-upload" name="img-upload" type="file" className="sr-only"
                                                     required
                                                     accept='image/*' />
                                             </label>
@@ -228,11 +228,11 @@ export const Form = () => {
                                     <span className='text-gray-500 text-sm'>Le fichier ne doit pas dépassez 100Mo</span>
                                     <div className='border border-black p-4 bg-gris rounded-3xl flex flex-col justify-center items-center w-1/2'>
                                         <img src={audio} alt="" className='' />
-                                        <div class="flex text-sm text-gray-600">
-                                            <label for="file-upload" class="relative  rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none">
+                                        <div className="flex text-sm text-gray-600">
+                                            <label for="file-upload" className="relative  rounded-md font-medium text-gray-600 hover:text-ray-500 focus-within:outline-none">
                                                 <span>Upload a file</span>
                                                 {file && <div className='text-black'>{file.name}</div>}
-                                                <input onChange={(e) => setFile(e.target.files[0])} id="file-upload" name="file-upload" type="file" class="sr-only"
+                                                <input onChange={(e) => setFile(e.target.files[0])} id="file-upload" name="file-upload" type="file" className="sr-only"
                                                     required
                                                     accept='audio/*' />
                                             </label>

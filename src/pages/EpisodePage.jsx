@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { decode } from '../jwt/jwt'
 import { useCookies } from 'react-cookie'
 import { useOpen } from '../store/store'
-import { Seperator } from '../components/Seperator'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { Sidebar } from '../components/nav/Sidebar'
 import { Search } from '../components/Search'
@@ -28,7 +26,6 @@ export const EpisodePage = () => {
 
     const navigate = useNavigate()
     const [cookies] = useCookies(['oss9oli']);
-    const user = decode(cookies.oss9oli)
     const { props, a } = useAnimation();
 
     const setActif = (index) => {

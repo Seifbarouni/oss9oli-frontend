@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import img6 from '../assets/images/7.png'
-import img4 from '../assets/images/4.png'
 import red_blob from '../assets/svgs/red_blob.svg'
 import two_green_stars from '../assets/svgs/two_green_stars.svg'
 import { AuthenticatedNavbar } from '../components/nav/AuthenticatedNavbar'
 import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import { ChannelBanner } from '../components/ChannelBanner'
-import { Podcast } from '../components/Podcast'
-import { Seperator } from '../components/Seperator'
 import { useOpen } from '../store/store'
 import { useCookies } from 'react-cookie'
 import { useNavigate, useParams } from 'react-router-dom'
-import { decode } from '../jwt/jwt'
 import { PodBanner } from '../components/PodBanner'
 import axios from 'axios'
 import { useAnimation } from '../hooks/useAnimation'
@@ -26,7 +21,6 @@ export const ChannelPage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [cookies] = useCookies(['oss9oli']);
-  const user = decode(cookies.oss9oli)
   const { props, a } = useAnimation();
   useEffect(() => {
     if (Object.entries(cookies).length === 0) {
