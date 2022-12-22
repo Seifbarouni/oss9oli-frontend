@@ -78,7 +78,6 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
     const deleteEpisode = async (episodeId) => {
         try {
             const resp = await axios.delete(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/${episodeId}`)
-            console.log(resp.data.data)
             // remove episode from episodes
             const newEpisodes = episodes.filter(episode => episode._id !== episodeId)
             setEpisodes(newEpisodes)
@@ -132,7 +131,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
             >
 
                 <div className='flex flex-col space-y-2 z-30'>
-                    <span className='text-lg'>8 épisodes</span>
+                    <span className='text-lg'>{episodes.length} épisodes</span>
                     <div
                         onClick={() => navigate(`/episode/${podcastId}`)}
                     >
@@ -179,9 +178,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
                         }
                     }}
                 >
-                    {listEps === false && showEps === false ? <div
-                        onClick={() => navigate(`/episode/${podcastId}`)}
-                    >
+                    {listEps === false && showEps === false ? <div>
                         + Ecouter la playlist
 
                     </div> : 'Playlist'}
@@ -195,7 +192,7 @@ export const PodBanner = ({ img, name, desc, podcastId, listEps, myPodcast }) =>
                                     <div
                                     >
                                         <div className='flex space-x-4 justify-between'>
-                                            <div className='flex space-x-2'>
+                                            <div className='flex space-x-2' onClick={()=> {if(ep.status){navigate(`/episode/${podcastId}`)}}}>
                                                 <div className='xl:flex hidden h-20 w-20 rounded-lg border border-black bg-cover bg-center'
                                                     style={
                                                         {

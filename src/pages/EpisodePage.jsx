@@ -49,8 +49,7 @@ export const EpisodePage = () => {
             const getEpisodes = async () => {
                 try {
                     setLoading(true)
-                    const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`
-                    )
+                    const res = await axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/podcast/find/${id}`)
                     setEpisodes(res.data.data)
                     // check if array is empty
                     if (res.data.data.length === 0) {

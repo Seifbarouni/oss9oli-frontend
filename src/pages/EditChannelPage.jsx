@@ -119,7 +119,9 @@ export const EditChannelPage = () => {
                         <ChannelBannerWithEdit
                             name={name}
                             desc={description}
-                            img={file} />
+                            img={file} 
+                            episodes={episodes}
+                            />
                         <div className='mt-64 flex sm:flex-row flex-col space-x-8  sm:text-2xl sm:space-y-1 space-y-8  lg:justify-evenly justify-center px-6 relative '>
                             <span className={`underline-offset-8 hover:underline  ${focus === "mes_sons" ? "underline font-bold" : ""}`}
                                 onClick={() => myEps()}

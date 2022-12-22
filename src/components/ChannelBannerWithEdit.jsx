@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie'
 import { decode } from '../jwt/jwt'
 import axios from 'axios'
 
-export const ChannelBannerWithEdit = ({ name, img, desc }) => {
+export const ChannelBannerWithEdit = ({ name, img, desc, episodes}) => {
     const [channel_name, setName] = useState(name)
     const [description, setDescription] = useState(desc)
     const [file, setFile] = useState(img)
@@ -134,7 +134,7 @@ export const ChannelBannerWithEdit = ({ name, img, desc }) => {
                         value={channel_name}
                         onChange={(e) => setName(e.target.value)}
                     />}
-                    <span className='text-lg '>1 podcasts - 8 sons </span>
+                    <span className='text-lg '>{[new Set(episodes.map(eps=>eps.podcastId))].length} podcasts - {episodes.length} sons </span>
                     {!edit && <span className='w-5/6 overflow-y-scroll h-44'>
                         {desc}
                     </span>}
