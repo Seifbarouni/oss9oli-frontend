@@ -25,12 +25,13 @@ export const OpenMicForm = () => {
         //add more interactif features here
         if(step != 0 && step != 1 && step != 2) return;
         if(step == 0){
-            if(!file && !message) return;
+            if(!file || !message) return;
             setStep(step+1)
         }else if(step == 1){
             if(!sexe || !age || !origine || !occupation ) return;
             setStep(step+1)
         }else if(step == 2){
+            if(!motivation) return;
             const formData = new FormData()
             formData.append("file", file)
             formData.append("message", message)
