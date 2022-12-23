@@ -1,8 +1,11 @@
 import { XIcon } from '@heroicons/react/outline'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Hamburger } from '../buttons/Hamburger'
+import black_logo from '../../assets/svgs/black_logo.svg'
 
 export const Navbar = () => {
+    const navigate = useNavigate()
     //const [isOpen, setIsOpen] = useState(false)
     return (
         <nav
@@ -18,6 +21,13 @@ export const Navbar = () => {
                 <div className='sm:flex hidden space-x-8'>
                     <a href='#join' className=" hover:underline text-lg">REJOINDRE</a>
                     <a href='#values' className=" hover:underline text-lg">NOS VALEURS</a>
+                </div>
+            </div>
+            <div className='flex justify-center'>
+                <div
+                    onClick={() => navigate('/')}
+                >
+                    <img src={black_logo} alt="" />
                 </div>
             </div>
             <a href="#footer" className=" hover:underline text-lg">CONTACT</a>

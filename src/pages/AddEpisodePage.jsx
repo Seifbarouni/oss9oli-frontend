@@ -9,6 +9,7 @@ import { Sidebar } from '../components/nav/Sidebar'
 import { SmallScreenNav } from '../components/nav/SmallScreenNav'
 import axios from 'axios'
 import { useAnimation } from '../hooks/useAnimation'
+import { MiniTag } from '../components/MiniTag'
 
 
 export const AddEpisodePage = () => {
@@ -20,7 +21,8 @@ export const AddEpisodePage = () => {
     const [explicit, setExplicit] = useState(false)
     const [guest, setGuest] = useState("")
     const [file, setFile] = useState("")
-    const [tags, setTags] = useState("")
+    const [tag, setTag] = useState("")
+    const [tags, setTags] = useState(["tags"])
     const [episodeNumber, setEpisodeNumber] = useState(1)
     const [type, setType] = useState("Monologue")
     const { props, a } = useAnimation();
@@ -49,8 +51,7 @@ export const AddEpisodePage = () => {
         //setLoading(true)
         const formData = new FormData()
         formData.append("explicit", explicit)
-        const tagArray = tags.split("#")
-        formData.append("tags", tagArray)
+        formData.append("tags", tags)
         formData.append("file", file)
         formData.append("episodeNumber", episodeNumber)
         formData.append("title", epName)
@@ -82,7 +83,24 @@ export const AddEpisodePage = () => {
             )
         }
     }
+    const deleteTag = (index)=>{
+        let tempTags = [...tags]
+        tempTags.splice(index, 1)
+        setTags(tempTags)
 
+    }
+    const addTags = (e)=>{
+        if(!/\s/.test(e.target.value))
+            setTag(e.target.value)
+        else{
+            let tempTags = e.target.value.split(" ");
+            //filter
+            tempTags = tempTags.filter(tg=> tg != "")
+            setTags([...tags, ...tempTags])
+            setTag("")
+        }
+    }
+    
     return (
         <div className='flex flex-col '>
             <AuthenticatedNavbar />
@@ -119,7 +137,10 @@ export const AddEpisodePage = () => {
                                 <div className='flex flex-col mt-6 space-y-1'>
                                     <span className=''>Tags</span>
                                     <span className='text-gray-500 text-sm'>Ajoutez des tags pour que nos auditeurs puissent trouver votre podcast</span>
-                                    <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Tags:#exemple#féminisme#violence' value={tags} onChange={(e) => setTags(e.target.value)} />
+                                    <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black placeholder:text-sm' placeholder='Tags:#exemple#féminisme#violence' value={tag} onChange={addTags} />
+                                    {tags.map((tg, index)=>(
+                                        <MiniTag key={"tag-"+index} title={tg} actif={true} deleteTag={() => deleteTag(index)}/>
+                                    ))}
                                 </div>
                                 <div className='flex flex-col mt-6 space-y-1'>
                                     <span className=''>Type*</span>

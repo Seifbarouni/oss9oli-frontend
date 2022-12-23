@@ -21,11 +21,11 @@ import axios from 'axios'
 import { useCookies } from "react-cookie"
 import { useNavigate } from 'react-router-dom'
 import { useAnimation } from '../hooks/useAnimation'
-let tags = ["Féminité", "Culture", "Art", "Economie", "Société"]
 
 export const HomePage = () => {
     const navigate = useNavigate();
     const open = useOpen((state) => state.open)
+    const [tags, setTags] = useState([])
     const [actifs, setActifs] = useState(new Array(tags.length).fill(false))
     const [podcasts, setPodcasts] = useState([])
     const [loading, setLoading] = useState(false)
@@ -37,6 +37,16 @@ export const HomePage = () => {
             navigate("/auth")
         }
         setLoading(true)
+        axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes/tags`,
+        {
+            headers: {
+                Authorization: `Bearer ${cookies.oss9oli}`
+            }
+        }
+        ).then(res => {
+            setTags(res.data.data)
+        }).catch(err => console.log(err))
+
         axios.get(`${process.env.REACT_APP_PODCAST_SERVICE}/api/v1/episodes`,
             {
                 headers: {
