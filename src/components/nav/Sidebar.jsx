@@ -47,11 +47,16 @@ export const Sidebar = ({ selected }) => {
                     <span>ACCUEIL</span>
                     {pack !== "free" && pack !== "consumer_pack" && <span>O9 COMMUNITY</span>}
                     {pack === "producer_pack" && <span>MA CHAINE</span>}
-                    <span>OPEN MIC</span>
+                    {pack !== "free" && pack !== "consumer_pack" &&
+                        <div
+                            onClick={() => navigate("/openmic")}
+                            className={`hover:underline underline-offset-8  ${selected === "openmic" ? " underline" : ""}`}>OPEN MIC</div>}
                     <span>STUDIO OSS9OLI</span>
                 </div>
-                <div className='flex flex-col space-y-12 mt-32 pl-12 text-white text-2xl  mb-12 invisible'>
-                    <span>PARAMETRES</span>
+                <div
+                    onClick={() => navigate("/profile")}
+                    className='flex flex-col space-y-12 mt-32 pl-12 text-white text-2xl mb-12'>
+                    <span className={`hover:underline underline-offset-8 ${selected === "profile" ? " underline" : ""}`}>PROFILE</span>
                 </div>
             </div>
         </div>
