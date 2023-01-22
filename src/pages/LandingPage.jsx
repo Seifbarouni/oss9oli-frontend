@@ -47,11 +47,10 @@ export const LandingPage = () => {
             className='flex flex-col '
         >
             <div className="flex flex-col realtive">
-                <div className="absolute md:left-72 top-0">
+                <div className="absolute md:left-72 top-20">
                     <img src={bg} alt="" srcSet="" />
                 </div>
                 <Navbar />
-                <div className="border-b border-black z-50 w-full"></div>
                 <Hero />
             </div>
 
@@ -404,7 +403,7 @@ export const LandingPage = () => {
 
             <Values />
 
-            <div className="flex flex-col mt-28 lg:px-32 items-center">
+            {/*<div className="flex flex-col mt-28 lg:px-32 items-center">
                 <div className="relative">
                     <div className="absolute bottom-5 -right-9 sm:flex hidden">
                         <img src={spark2} alt="" />
@@ -455,7 +454,7 @@ export const LandingPage = () => {
                 <span className=''>
                     Oss9oli est fait pour la communauté, et ne survira que par elle. Nous encourageons toute forme de contribution.
                 </span>
-            </div>
+            </div>*/}
             <Seperator mt={28} />
             <div className="flex flex-col mt-28 lg:px-32 items-center">
                 <div className="relative z-50">
@@ -484,8 +483,13 @@ export const LandingPage = () => {
                 </div>
 
             </div>
+            <div className='flex flex-col text-center w-full pt-20 text-2xl'>
+            Tous droits réservés à Oss9oli 2023
+            </div>
             <Seperator mt={28} />
-            <Footer />
+            
+           {// <Footer />
+           }
             <Seperator mt={0} />
 
         </a.div>

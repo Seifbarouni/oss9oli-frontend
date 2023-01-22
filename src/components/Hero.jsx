@@ -9,7 +9,7 @@ export const Hero = () => {
     const navigate = useNavigate()
     return (
         <div
-            className="z-30 flex lg:flex-row flex-col justify-evenly items-center mt-16  relative"
+            className="z-30 flex lg:flex-row flex-col justify-evenly items-center mt-32  relative"
         >
             <div className="header md:text-[150px] sm:text-8xl text-6xl flex flex-col items-start">
                 <span>Faites</span>

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import logo_ar_fr from '../assets/images/logo_ar_fr.png'
-
+import insta from '../assets/images/insta.png'
+import mail from '../assets/images/mail.png'
 export const Contact = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -31,10 +32,9 @@ export const Contact = () => {
             >
                 <div className='flex flex-col'>
                     <div className='flex w-full space-x-24 items-center'>
-                        <div className='w-1/2'>
-                            <img src={logo_ar_fr} alt="" />
-                        </div>
-                        <div className='flex flex-col w-2/3 space-y-8'>
+                        <div className='flex flex-col w-full space-y-8'>
+                        <div className='pl-8'></div>
+
                             <div className='flex flex-col space-y-1'>
                                 <span className=''>Votre nom complet</span>
                                 <input type="text" className='rounded-full py-3 bg-gris placeholder:text-white focus:outline-none pl-5 border border-black'
@@ -62,8 +62,8 @@ export const Contact = () => {
                     </div>
                     <div className='mt-8 flex justify-between items-center px-8'>
                         <div className='flex flex-col'>
-                            <span>oss9oli.com@gmail.com</span>
-                            <span>Tunis, Tunisie</span>
+                            <span className='flex pb-2'><img src={mail} className="pr-2" />oss9oli.com@gmail.com</span>
+                            <span className='flex'><img src={insta} className="pr-2" />@oss9oli</span>
                         </div>
                         <button className='relative z-30'
                             type='submit'

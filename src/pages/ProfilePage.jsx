@@ -131,11 +131,11 @@ export const ProfilePage = () => {
                         <span className={`underline-offset-8 hover:underline  ${focus === "liked" ? "underline font-bold" : ""}`}
                             onClick={() => getLiked()}
                         >SONS ADORES</span>
-                        <span
+                        {/*<span
                             className={`underline-offset-8 hover:underline  ${focus === "unfinished" ? "underline font-bold" : ""}`}
                             onClick={() => getUnfinished()}
 
-                        >CONTINUER L'ECOUTE</span>
+                        >CONTINUER L'ECOUTE</span>*/}
                         <span
                             className={`underline-offset-8 hover:underline  ${focus === "later" ? "underline font-bold" : ""}`}
                             onClick={() => getLater()}

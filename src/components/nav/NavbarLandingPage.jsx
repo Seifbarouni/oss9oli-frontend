@@ -8,8 +8,16 @@ export const Navbar = () => {
     const navigate = useNavigate()
     //const [isOpen, setIsOpen] = useState(false)
     return (
+        <div style={{
+            position: "fixed",
+            top: 0,
+            width: "100%",
+            backgroundColor: "white",
+            zIndex: 100
+        }}>
         <nav
             className="flex items-center justify-between p-6 z-50 w-full xl:px-12"
+            
         >
             <div className='flex items-center space-x-8'>
                 {/* {!isOpen && <div onClick={() => setIsOpen(true)}>
@@ -25,12 +33,15 @@ export const Navbar = () => {
             </div>
             <div className='flex justify-center'>
                 <div
-                    onClick={() => navigate('/')}
+                    onClick={() => window.scrollTo(0, 0)}
                 >
                     <img src={black_logo} alt="" />
                 </div>
             </div>
             <a href="#footer" className=" hover:underline text-lg">CONTACT</a>
         </nav>
+                        <div className="border-b border-black z-50 w-full"></div>
+        </div>
+
     )
 }
