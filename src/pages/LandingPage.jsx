@@ -483,7 +483,7 @@ export const LandingPage = () => {
                 </div>
 
             </div>
-            <div className='flex flex-col text-center w-full pt-20 text-2xl'>
+            <div className='flex flex-col text-center w-full pt-20 bottom-5'>
             Tous droits réservés à Oss9oli 2023
             </div>
             <Seperator mt={28} />
