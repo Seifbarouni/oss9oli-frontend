@@ -47,7 +47,7 @@ export const LandingPage = () => {
             className='flex flex-col '
         >
             <div className="flex flex-col realtive">
-                <div className="absolute md:left-72 top-20">
+                <div className="absolute md:left-72 top-32">
                     <img src={bg} alt="" srcSet="" />
                 </div>
                 <Navbar />

@@ -13,6 +13,7 @@ export const Values = () => {
                 <div className="absolute h-full w-full mt-96 left-1/3">
                     <img src={green_blob} alt="" />
                 </div>
+                <div className="header md:text-5xl sm:text-4xl text-3xl">Nos valeurs</div>
             </div>
             <div className="mt-12">
                 <img src={valeurs} alt="" />
